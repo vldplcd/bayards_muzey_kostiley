@@ -45,8 +45,16 @@ namespace BayardsSafetyApp
                     if (api.isPasswordCorrect(PasswordEntry.Text))
                     {
                         bool b;
-                        if (Application.Current.Properties.ContainsKey("LocAgr"))
-                            b = (bool)Application.Current.Properties["LocAgr"];
+                        try
+                        {
+                            if (Application.Current.Properties.ContainsKey("LocAgr"))
+                                b = (bool)Application.Current.Properties["LocAgr"];
+                        }
+                        catch(Exception ex)
+                        {
+
+                        }
+                        
                         if (Application.Current.Properties.ContainsKey("LocAgr") && (bool)Application.Current.Properties["LocAgr"])
                         {
                             AllSections.Contents = await LoadSections();                             
