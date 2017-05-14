@@ -5,8 +5,9 @@ namespace BayardsSafetyApp
 {
     public partial class App : Application
     {
-        public const string DATABASE_NAME = "bayards.db";
-        public static DbRepository database;
+        private static DataBaseUOW _database;
+        public static DataBaseUOW Database => _database ?? (_database = new DataBaseUOW());
+
         public static DbRepository Database
         {
             get
