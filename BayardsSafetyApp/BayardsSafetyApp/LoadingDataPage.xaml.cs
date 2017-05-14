@@ -61,9 +61,9 @@ namespace BayardsSafetyApp
                     {
                         ld.ToDatabase().Wait();
                     }
-                    catch(TaskCanceledException ex)
+                    catch(Exception ex)
                     {
-                        throw ex;
+                        DisplayAlert("Error", "A server does not respond", "OK");
                     }
                         
                 });
