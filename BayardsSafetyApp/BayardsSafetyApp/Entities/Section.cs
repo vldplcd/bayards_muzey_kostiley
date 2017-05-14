@@ -2,6 +2,7 @@
 
 namespace BayardsSafetyApp.Entities
 {
+
     [Table("section")]
     public class Section
     {

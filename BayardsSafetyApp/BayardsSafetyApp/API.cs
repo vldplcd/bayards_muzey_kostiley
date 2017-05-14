@@ -54,7 +54,14 @@ namespace BayardsSafetyApp
             return null;
 
         }
-
+        /// <summary>
+        /// Method that checks if it is needed to download data
+        /// </summary>
+        /// <returns>bool</returns>
+        public bool isUpdataNeeded(DateTime lastupdate)
+        {
+            return false;
+        }
 
         /// <summary>
         /// Method that gets the list of all risks and subsections from specified section by id and language

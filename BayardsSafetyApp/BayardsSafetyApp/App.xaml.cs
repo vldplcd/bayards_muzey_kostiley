@@ -8,18 +8,6 @@ namespace BayardsSafetyApp
         private static DataBaseUOW _database;
         public static DataBaseUOW Database => _database ?? (_database = new DataBaseUOW());
 
-        public static DbRepository Database
-        {
-            get
-            {
-                if (database == null)
-                {
-                    database = new DbRepository(DATABASE_NAME);
-                }
-                return database;
-            }
-        }
-
         public App()
         {
             InitializeComponent();

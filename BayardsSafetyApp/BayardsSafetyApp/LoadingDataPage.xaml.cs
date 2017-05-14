@@ -34,8 +34,9 @@ namespace BayardsSafetyApp
             {
                 Application.Current.Properties["UpdateTime"] = DateTime.Now;
                 Application.Current.SavePropertiesAsync().Wait();
-                Cont.Contents = ((List<Section>)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == "null"&&s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                //Cont.Contents = ((List<Section>)Application.Current.Properties["AllSections"]).
+                //    FindAll(s => s.Parent_s == "null"&&s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                Cont.Contents = App.Database.SectionDatabase.GetItems<Section>().ToList();
                 
             }
                 
@@ -60,13 +61,14 @@ namespace BayardsSafetyApp
                     try
                     {
                         ld.ToDatabase().Wait();
+                        ld.Process = 1;
                     }
                     catch(Exception ex)
                     {
                         DisplayAlert("Error", "A server does not respond", "OK");
                     }
-                        
                 });
+               
             }
             catch (TaskCanceledException)
             {
@@ -89,9 +91,13 @@ namespace BayardsSafetyApp
             if(ld.Process == 1)
             {
                 Application.Current.Properties["UpdateTime"] = DateTime.Now;
-                Application.Current.SavePropertiesAsync().Wait();
-                Cont.Contents = ((List<Section>)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == "null" && s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                //Application.Current.SavePropertiesAsync().Wait();
+                using (var context = App.Database)
+                {
+                    Cont.Contents = context.SectionDatabase.GetItems<Section>().ToList();
+                }                    
+                //Cont.Contents = ((List<Section>)Application.Current.Properties["AllSections"]).
+                //    FindAll(s => s.Parent_s == "null" && s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
                 Navigation.PushAsync(Cont);
                 return false;
             }

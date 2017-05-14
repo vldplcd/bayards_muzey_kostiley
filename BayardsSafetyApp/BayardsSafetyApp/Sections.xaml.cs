@@ -58,15 +58,6 @@ namespace BayardsSafetyApp
         {
             sectView.ItemsSource = _contents;
             sectView.SelectedItem = null;
-            try
-            {
-                var b = Application.Current.Properties["LocAgr"];
-            }
-            catch (Exception ex)
-            {
-
-            }
-
         }
 
 

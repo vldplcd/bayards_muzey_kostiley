@@ -16,6 +16,7 @@ namespace BayardsSafetyApp
             AInd.IsEnabled = false;
             AInd.IsRunning = false;
             BackgroundColor = Color.FromHex("#efefef");
+            
         }
 
         bool _isLoading;
@@ -111,8 +112,9 @@ namespace BayardsSafetyApp
             }
             else
             {
-                contents = ((List<Section>)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == "null" && s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                contents = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == "null"
+                                                                                        && s.Lang == AppResources.LangResources.Language).
+                                                                                        OrderBy(s => s.Name).ToList();
             }
             
                 //await App.Database.CreateTable<Media>();

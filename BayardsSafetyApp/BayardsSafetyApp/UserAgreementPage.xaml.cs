@@ -2,6 +2,7 @@
 using BayardsSafetyApp.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 //using Android.Media;
 using Xamarin.Forms;
@@ -72,7 +73,9 @@ namespace BayardsSafetyApp
             }
             else
             {
-                contents = (await App.Database.GetItemsAsync<Section>()).FindAll(s => s.Parent_s == "null");
+                contents = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == "null" 
+                                                                                        && s.Lang == LangResources.Language).
+                                                                                        OrderBy(s => s.Name).ToList();
             }
             API api = new API();
             bool flag = false;

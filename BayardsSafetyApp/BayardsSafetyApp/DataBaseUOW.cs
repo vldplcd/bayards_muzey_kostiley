@@ -28,9 +28,12 @@ namespace BayardsSafetyApp
             {
                 if (disposing)
                 {
-                    _riskRepository.Dispose();
-                    _sectionRepository.Dispose();
-                    _mediaRepository.Dispose();
+                    if (_riskRepository != null)
+                        _riskRepository.Dispose();
+                    if (_sectionRepository != null)
+                        _sectionRepository.Dispose();
+                    if(_mediaRepository != null)
+                        _mediaRepository.Dispose();
                 }
             }
             this.disposed = true;

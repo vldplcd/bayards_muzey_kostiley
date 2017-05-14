@@ -23,33 +23,34 @@ namespace BayardsSafetyApp.DBLoading
 
         private void UploadAll()
         {
+            try
+            {
+                using (var context = App.Database)
+                {
+                    if (_sections.Count != 0)
+                    {
+                        context.SectionDatabase.DeleteAll<Section>();
+                        context.SectionDatabase.InsertItems(_sections);
+                    }
+                    if (_risks.Count != 0)
+                    {
+                        context.RiskDatabase.DeleteAll<Risk>();
+                        context.RiskDatabase.InsertItems(_risks);
+                    }
+                    if(_mediaList.Count != 0)
+                    {
+                        context.MediaDatabase.DeleteAll<Media>();
+                        context.MediaDatabase.InsertItems(_mediaList);
+                    }
+                        
+                }
+            }
+            catch(Exception ex)
+            {
 
-            //using (var context = new SQLiteConnection(databasePath))
-            //{
-            //    context.CreateTable<Section>();
-            //    context.CreateTable<Risk>();
-            //    context.CreateTable<Media>();
-            //    try
-            //    {
-            //        if (sects.Count != 0)
-            //            context.InsertAll(sects, typeof(Section));
-            //        if (_risks.Count != 0)
-            //            context.InsertAll(_risks, typeof(Risk));
-            //        if (_mediaList.Count != 0)
-            //            context.InsertAll(_mediaList, typeof(Media));
-            //    }
-            //    catch(Exception ex)
-            //    {
-
-            //    }
-                
-            //} 
-            //App.Database.CreateTable<Section>().Wait();
-            //App.Database.InsertItemsAsync(sects).Wait();
-            Application.Current.Properties["AllSections"] = _sections;
-            Application.Current.Properties["AllRisks"] = _risks;
-            Application.Current.Properties["AllMedia"] = _mediaList;
-        }
+            }
+        } 
+        
         public async Task ToDatabase()
         {
             Process = 0;
@@ -85,10 +86,8 @@ namespace BayardsSafetyApp.DBLoading
                     OnProgressEvent?.Invoke(Process);
                 }
                     
-            }
-            Process = 1;
+            }            
             UploadAll ();
-            OnProgressEvent?.Invoke(Process);
         }
 
         private async Task AllSectionContent(string sectId)

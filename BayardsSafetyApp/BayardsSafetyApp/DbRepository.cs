@@ -28,19 +28,44 @@ namespace BayardsSafetyApp
                     break;
             }
         }
+        private string GetCurrentDb(string type)
+        {
 
+            switch (type)
+            {
+                case "Section":
+                    return DependencyService.Get<ISQLite>().GetDatabasePath("bayards_sections.db");
+                case "Risk":
+                    return DependencyService.Get<ISQLite>().GetDatabasePath("bayards_risks.db");
+                case "Media":
+                    return DependencyService.Get<ISQLite>().GetDatabasePath("bayards_media.db");
+                default:
+                    throw new ArgumentException("No db for such type");
+            }
+        }
+        public bool IsEmpty<T>() where T : new()
+        {
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
+            
+            return context.Table<T>().Count() == 0;
+        }
         public IEnumerable<T> GetItems<T>() where T : new()
         {
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
             return (from i in context.Table<T>() select i).ToList();
-
         }
         public T GetItem<T>(int id) where T : new()
         {
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
             return context.Get<T>(id);
         }
         public int DeleteItem<T>(T item)
         {
             return context.Delete(item);
+        }
+        public int DeleteAll<T> ()
+        {
+            return context.DeleteAll<T>();
         }
 
         public int InsertItem<T>(T item)
