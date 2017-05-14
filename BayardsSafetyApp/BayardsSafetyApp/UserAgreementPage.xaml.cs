@@ -18,11 +18,17 @@ namespace BayardsSafetyApp
             AgrmntLabel.Text = LangResources.AgrmntLabel;
             ContinueButton.Text = LangResources.ContinueButton;
         }
+        protected override Boolean OnBackButtonPressed()
+        {
+            base.OnBackButtonPressed();
+            return true;
+        }
         private async void ContinueButton_Clicked(object sender, EventArgs e)
         {
             Application.Current.Properties["LocAgr"] = true;
             AInd.IsEnabled = true;
             AInd.IsRunning = true;
+            var b = Application.Current.Properties["LocAgr"];
             ContinueButton.IsEnabled = false;
             var AllSections = new Sections();
             try
@@ -45,7 +51,10 @@ namespace BayardsSafetyApp
                 if (ex.Message.StartsWith("1"))
                     await Navigation.PushAsync(AllSections);
                 if (ex.Message.StartsWith("3"))
-                    await Navigation.PushAsync(new LoadingDataPage());
+                    if (await DisplayAlert("Warning",
+                    "The information has been updated. Now the app will use the internet connection to download new data. Please be aware that there may be a charge for data transfer over the mobile network.",
+                    "OK", "Cancel"))
+                        await Navigation.PushAsync(new LoadingDataPage());
             }
             AInd.IsEnabled = false;
             AInd.IsRunning = false;
@@ -58,7 +67,8 @@ namespace BayardsSafetyApp
             if (!Application.Current.Properties.ContainsKey("UpdateTime") || (Application.Current.Properties.ContainsKey("UpdateTime") &&
                 (DateTime)Application.Current.Properties["UpdateTime"] < DateTime.MaxValue))
             {
-                throw new Exception("3");
+                
+                    throw new Exception("3");
             }
             else
             {

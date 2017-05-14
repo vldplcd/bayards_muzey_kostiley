@@ -57,6 +57,16 @@ namespace BayardsSafetyApp
         private void Sections_OnAppearing(object sender, EventArgs e)
         {
             sectView.ItemsSource = _contents;
+            sectView.SelectedItem = null;
+            try
+            {
+                var b = Application.Current.Properties["LocAgr"];
+            }
+            catch (Exception ex)
+            {
+
+            }
+
         }
 
 

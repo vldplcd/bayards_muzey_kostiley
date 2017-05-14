@@ -1,6 +1,7 @@
 ﻿using BayardsSafetyApp.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,7 +22,7 @@ namespace BayardsSafetyApp
             
         }
 
-        SectionContents _contents;
+        SectionContents _contents = new SectionContents();
         public SectionContents Contents
         {
             get { return _contents; }
@@ -46,7 +47,7 @@ namespace BayardsSafetyApp
         private void RiskButton_Clicked(object sender, SelectedItemChangedEventArgs e)
         {
             IsLoading = true;
-            API api = new API();
+            //API api = new API();
             bool flag = false;
             IsLoading = true;
             while(!flag)
@@ -60,7 +61,11 @@ namespace BayardsSafetyApp
                     {
                         foreach (var r in _contents.Risks)
                         {
-                            var rToDisp = api.getRiskContent(r.Id_r, AppResources.LangResources.Language).Result;
+                            var rToDisp = r;
+                            var med = ((List<Media>)Application.Current.Properties["AllMedia"]).
+                                FindAll(s => s.Id_r == r.Id_r && s.Lang == AppResources.LangResources.Language).ToList().
+                                Select(s => s.Url).ToList();
+                            rToDisp.Media = med;
                             _risks.Add(new RiskDetails(rToDisp));
                         }
                     }
@@ -78,20 +83,32 @@ namespace BayardsSafetyApp
 
         private void Page_Appeared(object sender, EventArgs e)
         {
-            API api = new API();
+            //API api = new API();
             bool flag = false;
             while(!flag)
             {
                 try
                 {
-                    Contents = api.getSectionContent(_sId, AppResources.LangResources.Language).Result;
-                    sectView.ItemsSource = _contents.Subsections;
-                    riskView.ItemsSource = _contents.Risks;
+                    //Contents = api.getSectionContent(_sId, AppResources.LangResources.Language).Result;
+                    var d_risks = ((List<Risk>)Application.Current.Properties["AllRisks"]).
+                    FindAll(s => s.Parent_s == _sId && s.Lang == AppResources.LangResources.Language);
+                    if(d_risks != null)
+                        Contents.Risks = d_risks.OrderBy(r => r.Name).ToList();
+                        
+
+                    var d_sects = ((List<Section>)Application.Current.Properties["AllSections"]).
+                    FindAll(s => s.Parent_s == _sId && s.Lang == AppResources.LangResources.Language);
+                    if (d_sects != null)
+                        Contents.Subsections = d_sects.OrderBy(r => r.Name).ToList();
+
+                    sectView.ItemsSource = Contents.Subsections;
+                    riskView.ItemsSource = Contents.Risks;
+
                     flag = true;
                 }
                 catch (Exception ex)
                 {
-                    //DisplayAlert("Error", ex.Message, "Ok");
+
                 }
             }
             

@@ -17,8 +17,29 @@ namespace BayardsSafetyApp
         public LoadingDataPage()
         {
             InitializeComponent();
+            
         }
+
         DBLoading.LoadData ld = new DBLoading.LoadData();
+        Sections Cont = new Sections();
+        protected override Boolean OnBackButtonPressed()
+        {
+            base.OnBackButtonPressed();
+            return true;
+        }
+        private void SetProgress(double pr)
+        {
+            ProgressState = pr;
+            if(pr == 1)
+            {
+                Application.Current.Properties["UpdateTime"] = DateTime.Now;
+                Application.Current.SavePropertiesAsync().Wait();
+                Cont.Contents = ((List<Section>)Application.Current.Properties["AllSections"]).
+                    FindAll(s => s.Parent_s == "null"&&s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                
+            }
+                
+        }
         double _progressState;
         public double ProgressState
         {
@@ -30,26 +51,72 @@ namespace BayardsSafetyApp
             }
         }
 
-        private async void ContentPage_Appearing(object sender, EventArgs e)
+        private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            Device.StartTimer(new TimeSpan(0, 0, 2), () => { return OnTimerToLoad().Result; });
+            Device.StartTimer(new TimeSpan(0, 0, 1), OnTimerToComplete);
+            try
+            {
+                var load = Task.Run(() => {
+                    try
+                    {
+                        ld.ToDatabase().Wait();
+                    }
+                    catch(TaskCanceledException ex)
+                    {
+                        throw ex;
+                    }
+                        
+                });
+            }
+            catch (TaskCanceledException)
+            {
+                DisplayAlert("Error", "A server does not respond", "OK");
+            }
+            catch (Exception ex)
+            {
+                switch (ex.Message)
+                {
+                    default:
+                        DisplayAlert("Error", ex.Message, "OK");
+                        break;
+                }
+            }
+            
         }
 
-        private async Task<bool> OnTimerToLoad()
+        private bool OnTimerToComplete()
+        {
+            if(ld.Process == 1)
+            {
+                Application.Current.Properties["UpdateTime"] = DateTime.Now;
+                Application.Current.SavePropertiesAsync().Wait();
+                Cont.Contents = ((List<Section>)Application.Current.Properties["AllSections"]).
+                    FindAll(s => s.Parent_s == "null" && s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                Navigation.PushAsync(Cont);
+                return false;
+            }
+            return true;
+        }
+            private bool OnTimerToLoad()
         {
             try
             {
-                ld.ToDatabase().Wait();
-                var Cont = new Sections();
-                string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath("bayards.db");
-                List<Risk> a;
-                List<Media> b;
-                using (var context = new SQLiteConnection(databasePath))
-                {
-                    Cont.Contents = context.Table<Section>().ToList();
-                    a = context.Table<Risk>().ToList();
-                }
-                
+                var load = Task.Run(async () => {
+                    await ld.ToDatabase();
+                    
+                });
+                while (!load.IsCompleted) { }
+                Navigation.PushAsync(Cont);
+                //var Cont = new Sections();
+                //string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath("bayards.db");
+                //List<Risk> a;
+                //List<Media> b;
+                //using (var context = new SQLiteConnection(databasePath))
+                //{
+                //    Cont.Contents = context.Table<Section>().ToList();
+                //    a = context.Table<Risk>().ToList();
+                //}
+
                 //Cont.Contents = (List<Section>)Application.Current.Properties["AllSections"];
                 //await Navigation.PushAsync(Cont);
                 //while (load.Status == TaskStatus.Running || load.Status == TaskStatus.WaitingToRun || load.Status == TaskStatus.WaitingForActivation)
@@ -59,7 +126,12 @@ namespace BayardsSafetyApp
             }
             catch(Exception ex)
             {
-                DisplayAlert("Error", ex.Message, "OK");
+                switch (ex.Message)
+                {
+                    default:
+                        DisplayAlert("Error", ex.Message, "OK");
+                        break;
+                }
             }
             return false;
         }

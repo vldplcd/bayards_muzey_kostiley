@@ -40,6 +40,7 @@ namespace BayardsSafetyApp
 
         protected override void OnSleep()
         {
+            Application.Current.SavePropertiesAsync().Wait();
             // Handle when your app sleeps
         }
 

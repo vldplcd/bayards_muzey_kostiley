@@ -9,53 +9,58 @@ using Xamarin.Forms;
 
 namespace BayardsSafetyApp.DBLoading
 {
+    public delegate void ProgressDelegate(double progr);
     public class LoadData
     {
+        public ProgressDelegate OnProgressEvent;
         private API _api = new API();
         public double Process { get; set; }
         List<Risk> _risks;
         List<Section> _sections;
         List<Media> _mediaList;
         string[] _langs = new string[] { "eng", "nl" };
-        string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath("bayards.db");
+        //string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath("bayards.db");
 
-        private async void UploadSections(List<Section> sects)
+        private void UploadAll()
         {
 
-            using (var context = new SQLiteConnection(databasePath))
-            {
-                context.CreateTable<Section>();
-                context.CreateTable<Risk>();
-                context.CreateTable<Media>();
-                try
-                {
-                    if (sects.Count != 0)
-                        context.InsertAll(sects, typeof(Section));
-                    if (_risks.Count != 0)
-                        context.InsertAll(_risks, typeof(Risk));
-                    if (_mediaList.Count != 0)
-                        context.InsertAll(_mediaList, typeof(Media));
-                }
-                catch(Exception ex)
-                {
+            //using (var context = new SQLiteConnection(databasePath))
+            //{
+            //    context.CreateTable<Section>();
+            //    context.CreateTable<Risk>();
+            //    context.CreateTable<Media>();
+            //    try
+            //    {
+            //        if (sects.Count != 0)
+            //            context.InsertAll(sects, typeof(Section));
+            //        if (_risks.Count != 0)
+            //            context.InsertAll(_risks, typeof(Risk));
+            //        if (_mediaList.Count != 0)
+            //            context.InsertAll(_mediaList, typeof(Media));
+            //    }
+            //    catch(Exception ex)
+            //    {
 
-                }
+            //    }
                 
-            } 
+            //} 
             //App.Database.CreateTable<Section>().Wait();
             //App.Database.InsertItemsAsync(sects).Wait();
-            //Application.Current.Properties["AllSections"] = _sections;
+            Application.Current.Properties["AllSections"] = _sections;
+            Application.Current.Properties["AllRisks"] = _risks;
+            Application.Current.Properties["AllMedia"] = _mediaList;
         }
         public async Task ToDatabase()
         {
             Process = 0;
+            OnProgressEvent?.Invoke(Process);
             _risks = new List<Risk>();
             _sections = new List<Section>();
             _mediaList = new List<Media>();
             var sectIds = new List<string>();
             foreach (var lang in _langs)
             {
-                var temp_s = await _api.getCompleteSectionsList(lang);
+                var temp_s = _api.getCompleteSectionsList(lang).Result;
                 if (temp_s.Count != 0)
                 {
                     foreach (var s in temp_s)
@@ -69,19 +74,21 @@ namespace BayardsSafetyApp.DBLoading
                 }
             }
             Process = 0.1;
+            OnProgressEvent?.Invoke(Process);
             if (sectIds.Count > 0)
             {
                 var n = sectIds.Count;
                 foreach (var sId in sectIds)
                 {
                     AllSectionContent(sId).Wait();
-                    Process += 1/(n + 5);
+                    Process += 1/(double)(n + 5);
+                    OnProgressEvent?.Invoke(Process);
                 }
                     
             }
             Process = 1;
-
-            UploadSections(_sections);
+            UploadAll ();
+            OnProgressEvent?.Invoke(Process);
         }
 
         private async Task AllSectionContent(string sectId)

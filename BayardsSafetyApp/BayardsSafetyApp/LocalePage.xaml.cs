@@ -17,6 +17,11 @@ namespace BayardsSafetyApp
             EnButton.Text = LangResources.EnButton;
             NlButton.Text = LangResources.NlButton;
         }
+        protected override Boolean OnBackButtonPressed()
+        {
+            base.OnBackButtonPressed();
+            return true;
+        }
 
         private void EnButton_Clicked(object sender, EventArgs e)
         {
