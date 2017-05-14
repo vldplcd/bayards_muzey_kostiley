@@ -65,8 +65,8 @@ namespace BayardsSafetyApp
             using (var context = App.Database)
             {
                 //var a = context.RiskDatabase.GetItems<Risk>();
-                if (context.RiskDatabase.IsEmpty<Risk>() || context.SectionDatabase.IsEmpty<Section>())
-                    return true;
+                //if (context.RiskDatabase.IsEmpty<Risk>() || context.SectionDatabase.IsEmpty<Section>())
+                //    return true;
             }
             DateTime current;
             using (HttpClient hc = new HttpClient())
@@ -74,7 +74,7 @@ namespace BayardsSafetyApp
                 var responseMsg = hc.GetAsync(UriUpdateTime).Result;
                 var resultStr = await responseMsg.Content.ReadAsStringAsync();
                 var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Date = String.Empty });
-                if (res == null || res.Date == null || !DateTime.TryParseExact(res.Date, "yyyy-MM-dd tt:mm:ss", new CultureInfo("fr-FR"), DateTimeStyles.None, out current))
+                if (res == null || res.Date == null || !DateTime.TryParseExact(res.Date, "yyyy-MM-dd hh:mm:ss", new CultureInfo("fr-FR"), DateTimeStyles.None, out current))
                     throw new ArgumentException("Invalid returned date");
             }
             if (lastupdate < current)                

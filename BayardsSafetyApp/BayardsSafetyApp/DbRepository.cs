@@ -60,15 +60,18 @@ namespace BayardsSafetyApp
         }
         public int DeleteItem<T>(T item)
         {
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
             return context.Delete(item);
         }
         public int DeleteAll<T> ()
         {
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
             return context.DeleteAll<T>();
         }
 
         public int InsertItem<T>(T item)
         {
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
             if (context.Insert(item) != 0)
                 return context.Update(item);
             else
@@ -77,10 +80,8 @@ namespace BayardsSafetyApp
 
         public int InsertItems<T>(List<T> items)
         {
-            if (context.InsertAll(items) != 0)
-                return context.UpdateAll(items);
-            else
-                return 0;
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
+                return context.InsertAll(items);
         }
 
         #region DisposeRegion

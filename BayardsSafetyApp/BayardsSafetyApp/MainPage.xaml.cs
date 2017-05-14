@@ -105,15 +105,18 @@ namespace BayardsSafetyApp
             API api = new API();
             List<Section> contents = new List<Section>();
             if (!Application.Current.Properties.ContainsKey("UpdateTime") || 
+                !(Application.Current.Properties.ContainsKey("AllSections")&& Application.Current.Properties.ContainsKey("AllRisks"))||
                 api.isUpdataNeeded((DateTime)Application.Current.Properties["UpdateTime"]).Result)
             {
                     throw new Exception("3");
             }
             else
             {
-                contents = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == "null"
-                                                                                        && s.Lang == AppResources.LangResources.Language).
-                                                                                        OrderBy(s => s.Name).ToList();
+                //contents = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == "null"
+                //                                                                        && s.Lang == AppResources.LangResources.Language).
+                //                                                                        OrderBy(s => s.Name).ToList();
+                contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
+                    FindAll(s => s.Parent_s == "null" && s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
             }
 
             return contents;

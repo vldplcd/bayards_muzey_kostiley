@@ -25,24 +25,48 @@ namespace BayardsSafetyApp.DBLoading
         {
             try
             {
-                using (var context = App.Database)
+                //using (var context = App.Database.SectionDatabase)
+                //{
+                //    if (_sections.Count != 0)
+                //    {
+                ////        context.DeleteAll<Section>();
+                ////        context.InsertItems<Section>(_sections);
+                //    }
+                //}
+                //using (var context = App.Database.RiskDatabase)
+                //{
+                //    if (_risks.Count != 0)
+                //    {
+                //        context.DeleteAll<Risk>();
+                //        context.InsertItems<Risk>(_risks);
+                //    }
+                //}
+                //using (var context = App.Database.MediaDatabase)
+                //{
+                //    if (_mediaList.Count != 0)
+                //    {
+                //        context.DeleteAll<Media>();
+                //        context.InsertItems<Media>(_mediaList);
+                //    }
+
+                //}
+                //var context = App.Database;
+                //context.SectionDatabase.DeleteAll<Section>();
+                //context.RiskDatabase.DeleteAll<Risk>();
+                //context.MediaDatabase.DeleteAll<Media>();
+                //context.SectionDatabase.InsertItems<Section>(_sections);
+                //context.RiskDatabase.InsertItems<Risk>(_risks);
+                //context.MediaDatabase.InsertItems<Media>(_mediaList);
+                Application.Current.Properties["AllSections"] = Utils.SerializeToJson(_sections);
+                Application.Current.Properties["AllRisks"] = Utils.SerializeToJson(_risks);
+                Application.Current.Properties["AllMedia"] = Utils.SerializeToJson(_mediaList);
+                try
                 {
-                    if (_sections.Count != 0)
-                    {
-                        context.SectionDatabase.DeleteAll<Section>();
-                        context.SectionDatabase.InsertItems(_sections);
-                    }
-                    if (_risks.Count != 0)
-                    {
-                        context.RiskDatabase.DeleteAll<Risk>();
-                        context.RiskDatabase.InsertItems(_risks);
-                    }
-                    if(_mediaList.Count != 0)
-                    {
-                        context.MediaDatabase.DeleteAll<Media>();
-                        context.MediaDatabase.InsertItems(_mediaList);
-                    }
-                        
+                    Application.Current.SavePropertiesAsync().Wait();
+                }
+                catch(Exception ex)
+                {
+
                 }
             }
             catch(Exception ex)

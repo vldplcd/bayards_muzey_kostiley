@@ -18,8 +18,6 @@
                 <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
-            <Label Text="qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq" 
-                   HeightRequest="40" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" FontSize="Medium" TextColor="Black" LineBreakMode="WordWrap"></Label>
             <ActivityIndicator
                            IsVisible= "{Binding IsLoading}"
                            IsRunning="{Binding IsLoading}" Grid.Row ="1" Grid.Column ="1" HorizontalOptions="StartAndExpand"/>
