@@ -21,7 +21,7 @@
                                IsVisible="True"
                                IsRunning="True"
                            Grid.Row ="2" Color="Blue" HorizontalOptions="CenterAndExpand"/>
-            <ProgressBar MinimumHeightRequest="10" x:Name="PrBar" Grid.Row="3" Progress="{Binding ld.Process}"/>
+            <ProgressBar MinimumHeightRequest="10" x:Name="PrBar" Grid.Row="3"/>
         </Grid>
         
     </ContentPage.Content>

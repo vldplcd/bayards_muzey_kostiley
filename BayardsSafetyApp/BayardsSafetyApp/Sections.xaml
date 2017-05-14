@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="10*"/>
 
             </Grid.RowDefinitions>
@@ -18,6 +18,8 @@
                 <ColumnDefinition Width="9*"/>
                 <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
+            <Label Text="qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq" 
+                   HeightRequest="40" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" FontSize="Medium" TextColor="Black" LineBreakMode="WordWrap"></Label>
             <ActivityIndicator
                            IsVisible= "{Binding IsLoading}"
                            IsRunning="{Binding IsLoading}" Grid.Row ="1" Grid.Column ="1" HorizontalOptions="StartAndExpand"/>
@@ -27,7 +29,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Large" TextColor="Black"></Label>
+                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black" LineBreakMode="WordWrap"></Label>
                             </StackLayout>                            
                         </ViewCell>
                     </DataTemplate>

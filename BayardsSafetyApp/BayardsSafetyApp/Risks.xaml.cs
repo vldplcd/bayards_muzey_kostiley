@@ -47,7 +47,6 @@ namespace BayardsSafetyApp
         private void RiskButton_Clicked(object sender, SelectedItemChangedEventArgs e)
         {
             IsLoading = true;
-            //API api = new API();
             bool flag = false;
             IsLoading = true;
             while(!flag)
@@ -62,9 +61,9 @@ namespace BayardsSafetyApp
                         foreach (var r in _contents.Risks)
                         {
                             var rToDisp = r;
-                            var med = ((List<Media>)Application.Current.Properties["AllMedia"]).
-                                FindAll(s => s.Id_r == r.Id_r && s.Lang == AppResources.LangResources.Language).ToList().
-                                Select(s => s.Url).ToList();
+                            var med = App.Database.MediaDatabase.GetItems<Media>().ToList().FindAll(m => m.Id_r == r.Id_r && 
+                                                                                               m.Lang == AppResources.LangResources.Language).ToList().
+                                                                                                   Select(m => m.Url).ToList();
                             rToDisp.Media = med;
                             _risks.Add(new RiskDetails(rToDisp));
                         }
@@ -90,14 +89,14 @@ namespace BayardsSafetyApp
                 try
                 {
                     //Contents = api.getSectionContent(_sId, AppResources.LangResources.Language).Result;
-                    var d_risks = ((List<Risk>)Application.Current.Properties["AllRisks"]).
-                    FindAll(s => s.Parent_s == _sId && s.Lang == AppResources.LangResources.Language);
-                    if(d_risks != null)
+                    var d_risks = App.Database.RiskDatabase.GetItems<Risk>().ToList().FindAll(r => r.Parent_s == _sId
+                                                                                        && r.Lang == AppResources.LangResources.Language).ToList();
+                    if (d_risks != null)
                         Contents.Risks = d_risks.OrderBy(r => r.Name).ToList();
                         
 
-                    var d_sects = ((List<Section>)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == _sId && s.Lang == AppResources.LangResources.Language);
+                    var d_sects = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == _sId
+                                                                                        && s.Lang == AppResources.LangResources.Language).ToList();
                     if (d_sects != null)
                         Contents.Subsections = d_sects.OrderBy(r => r.Name).ToList();
 

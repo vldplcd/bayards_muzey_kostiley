@@ -37,59 +37,57 @@ namespace BayardsSafetyApp
             AInd.IsRunning = true;
             ContinueButton.IsEnabled = false;
             var AllSections = new Sections();
-            try
-            {                
-                await Task.Run(async () =>
+            API api = new API();
+            if (api.CheckInternetConnection())
+            {
+                try
+                {
+                    await Task.Run(async () =>
+                    {
+                        if (api.isPasswordCorrect(PasswordEntry.Text))
+                        {
+                            if (Application.Current.Properties.ContainsKey("LocAgr") && (bool)Application.Current.Properties["LocAgr"])
+                            {
+                                AllSections.Contents = await LoadSections();
+                                throw new Exception("1");
+                            }
+
+                            else
+                                throw new Exception("2");
+                        }
+                        else
+                        {
+                            throw new Exception("Incorrect");
+                        }
+                    });
+
+                }
+                catch (TaskCanceledException)
+                {
+                    await DisplayAlert("Warning", "The server doesn't respond", "OK");
+                }
+                catch (ArgumentException)
                 {
 
-                    var api = new API();
-                    if (api.isPasswordCorrect(PasswordEntry.Text))
-                    {
-                        bool b;
-                        try
-                        {
-                            if (Application.Current.Properties.ContainsKey("LocAgr"))
-                                b = (bool)Application.Current.Properties["LocAgr"];
-                        }
-                        catch(Exception ex)
-                        {
-
-                        }
-                        
-                        if (Application.Current.Properties.ContainsKey("LocAgr") && (bool)Application.Current.Properties["LocAgr"])
-                        {
-                            AllSections.Contents = await LoadSections();                             
-                            throw new Exception("1");
-                        }
-
-                        else
-                            throw new Exception("2");
-                    }
-                    else
-                    {
-                        throw new Exception("Incorrect");
-                    }
-                });
-                
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message.StartsWith("Incorrect"))
+                        await DisplayAlert("Warning", "The password is incorrect", "OK");
+                    if (ex.Message.StartsWith("1"))
+                        await Navigation.PushAsync(AllSections);
+                    if (ex.Message.StartsWith("2"))
+                        await Navigation.PushAsync(new LocalePage());
+                    if (ex.Message.StartsWith("3"))
+                        if (await DisplayAlert("Warning",
+                        AppResources.LangResources.DownloadWarn,
+                        "OK", "Cancel"))
+                            await Navigation.PushAsync(new LoadingDataPage());
+                }
             }
-            catch(TaskCanceledException)
+            else
             {
-                await DisplayAlert("Warning", "The server doesn't respond", "OK");
-            }
-            catch(Exception ex)
-            {
-                if(ex.Message.StartsWith("Incorrect"))
-                    await DisplayAlert("Warning", "The password is incorrect", "OK");
-                if (ex.Message.StartsWith("1"))
-                    await Navigation.PushAsync(AllSections);
-                if (ex.Message.StartsWith("2"))
-                    await Navigation.PushAsync(new LocalePage());
-                if (ex.Message.StartsWith("3"))
-                    if (await DisplayAlert("Warning",
-                    "The information has been updated. Now the app will use the internet connection to download new data. Please be aware that there may be a charge for data transfer over the mobile network.",
-                    "OK", "Cancel"))
-                        await Navigation.PushAsync(new LoadingDataPage());
-                //await DisplayAlert("Warning", ex.Message, "OK");
+                await DisplayAlert("Warning", "The app needs internet connection to check the password", "OK");
             }
             AInd.IsEnabled = false;
             AInd.IsRunning = false;
@@ -104,9 +102,10 @@ namespace BayardsSafetyApp
 
         private async Task<List<Section>> LoadSections()
         {
+            API api = new API();
             List<Section> contents = new List<Section>();
-            if (!Application.Current.Properties.ContainsKey("UpdateTime") || (Application.Current.Properties.ContainsKey("UpdateTime") &&
-                (DateTime)Application.Current.Properties["UpdateTime"] < DateTime.MaxValue))
+            if (!Application.Current.Properties.ContainsKey("UpdateTime") || 
+                api.isUpdataNeeded((DateTime)Application.Current.Properties["UpdateTime"]).Result)
             {
                     throw new Exception("3");
             }
@@ -116,16 +115,7 @@ namespace BayardsSafetyApp
                                                                                         && s.Lang == AppResources.LangResources.Language).
                                                                                         OrderBy(s => s.Name).ToList();
             }
-            
-                //await App.Database.CreateTable<Media>();
-                //await App.Database.CreateTable<Risk>();
-                //await App.Database.CreateTable<SafetyObject>();
-                //await App.Database.CreateTable<Section>();
-                //await App.Database.CreateTable<SectionContents>();
-                //foreach (var item in contents)
-                //{
-                //    await App.Database.InsertItemAsync(item);
-                //}
+
             return contents;
         }
 

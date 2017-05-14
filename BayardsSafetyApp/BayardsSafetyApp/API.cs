@@ -4,6 +4,7 @@ using BayardsSafetyApp.Entities;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace BayardsSafetyApp
 {
@@ -14,6 +15,7 @@ namespace BayardsSafetyApp
         const string UriSectionsListTemplate = "http://vhost29450.cpsite.ru/api/allSections?lang={0}";
         const string UriSectionContent = "http://vhost29450.cpsite.ru/api/section?sectionid={0}&lang={1}";
         const string UriRiskContent = "http://vhost29450.cpsite.ru/api/risk?riskid={0}&lang={1}";
+        const string UriUpdateTime = "http://vhost29450.cpsite.ru/api/getUpdateDate";
 
         //TODO: 
         //Добавить поисковые запросы в функционал API
@@ -57,9 +59,26 @@ namespace BayardsSafetyApp
         /// <summary>
         /// Method that checks if it is needed to download data
         /// </summary>
-        /// <returns>bool</returns>
-        public bool isUpdataNeeded(DateTime lastupdate)
+        /// <returns>Returns true if connection Update is needed else returns false</returns>
+        public async Task<bool> isUpdataNeeded(DateTime lastupdate)
         {
+            using (var context = App.Database)
+            {
+                //var a = context.RiskDatabase.GetItems<Risk>();
+                if (context.RiskDatabase.IsEmpty<Risk>() || context.SectionDatabase.IsEmpty<Section>())
+                    return true;
+            }
+            DateTime current;
+            using (HttpClient hc = new HttpClient())
+            {
+                var responseMsg = hc.GetAsync(UriUpdateTime).Result;
+                var resultStr = await responseMsg.Content.ReadAsStringAsync();
+                var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Date = String.Empty });
+                if (res == null || res.Date == null || !DateTime.TryParseExact(res.Date, "yyyy-MM-dd tt:mm:ss", new CultureInfo("fr-FR"), DateTimeStyles.None, out current))
+                    throw new ArgumentException("Invalid returned date");
+            }
+            if (lastupdate < current)                
+                return true;
             return false;
         }
 
@@ -149,6 +168,27 @@ namespace BayardsSafetyApp
                 }
             }
             return null;
+        }
+        /// <summary>
+        /// Method that gets checks internet connection
+        /// </summary>
+        /// <returns>Returns true if connection is set else returns false</returns>
+        public bool CheckInternetConnection()
+        {
+            string CheckUrl = "http://google.com";
+
+            try
+            {
+                using (HttpClient hc = new HttpClient())
+                {
+                    var responseMsg = hc.GetAsync(CheckUrl).Result;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

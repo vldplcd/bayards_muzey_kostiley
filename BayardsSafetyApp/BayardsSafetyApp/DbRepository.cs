@@ -45,8 +45,7 @@ namespace BayardsSafetyApp
         }
         public bool IsEmpty<T>() where T : new()
         {
-            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));
-            
+            context = new SQLiteConnection(GetCurrentDb(typeof(T).Name));            
             return context.Table<T>().Count() == 0;
         }
         public IEnumerable<T> GetItems<T>() where T : new()

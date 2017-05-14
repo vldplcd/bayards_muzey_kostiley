@@ -123,6 +123,9 @@
   <data name="ContinueButton" xml:space="preserve">
     <value>Ik ben het eens</value>
   </data>
+  <data name="DownloadWarn" xml:space="preserve">
+    <value>The information has been updated. Now the app will use the internet connection to download new data. Please be aware that there may be a charge for data transfer over the mobile network.</value>
+  </data>
   <data name="EnButton" xml:space="preserve">
     <value>Engels</value>
   </data>

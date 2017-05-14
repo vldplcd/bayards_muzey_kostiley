@@ -80,6 +80,15 @@ namespace BayardsSafetyApp.AppResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на The information has been updated. Now the app will use the internet connection to download new data. Please be aware that there may be a charge for data transfer over the mobile network..
+        /// </summary>
+        public static string DownloadWarn {
+            get {
+                return ResourceManager.GetString("DownloadWarn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на English.
         /// </summary>
         public static string EnButton {
