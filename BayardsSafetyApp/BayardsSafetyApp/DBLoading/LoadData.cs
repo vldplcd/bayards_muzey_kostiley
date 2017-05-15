@@ -71,7 +71,7 @@ namespace BayardsSafetyApp.DBLoading
             }
             catch(Exception ex)
             {
-
+                throw ex;
             }
         } 
         

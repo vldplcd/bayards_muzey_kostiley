@@ -55,6 +55,11 @@ namespace BayardsSafetyApp
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
             Device.StartTimer(new TimeSpan(0, 0, 1), OnTimerToComplete);
+            LoadData();
+            
+        }
+        public void LoadData()
+        {
             try
             {
                 var load = Task.Run(() => {
@@ -63,16 +68,17 @@ namespace BayardsSafetyApp
                         ld.ToDatabase().Wait();
                         ld.Process = 1;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         DisplayAlert("Error", "A server does not respond", "OK");
                     }
                 });
-               
+
             }
             catch (TaskCanceledException)
             {
                 DisplayAlert("Error", "A server does not respond", "OK");
+
             }
             catch (Exception ex)
             {
@@ -80,12 +86,12 @@ namespace BayardsSafetyApp
                 {
                     default:
                         DisplayAlert("Error", ex.Message, "OK");
+                        TryAgain_Button.IsEnabled = true;
+                        TryAgain_Button.IsVisible = true;
                         break;
                 }
             }
-            
         }
-
         private bool OnTimerToComplete()
         {
             PrBar.Progress = ld.Process;
@@ -106,43 +112,12 @@ namespace BayardsSafetyApp
             }
             return true;
         }
-            private bool OnTimerToLoad()
-        {
-            try
-            {
-                var load = Task.Run(async () => {
-                    await ld.ToDatabase();
-                    
-                });
-                while (!load.IsCompleted) { }
-                Navigation.PushAsync(Cont);
-                //var Cont = new Sections();
-                //string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath("bayards.db");
-                //List<Risk> a;
-                //List<Media> b;
-                //using (var context = new SQLiteConnection(databasePath))
-                //{
-                //    Cont.Contents = context.Table<Section>().ToList();
-                //    a = context.Table<Risk>().ToList();
-                //}
 
-                //Cont.Contents = (List<Section>)Application.Current.Properties["AllSections"];
-                //await Navigation.PushAsync(Cont);
-                //while (load.Status == TaskStatus.Running || load.Status == TaskStatus.WaitingToRun || load.Status == TaskStatus.WaitingForActivation)
-                //{
-                //    PrBar.Progress = ld.Process;
-                //}
-            }
-            catch(Exception ex)
-            {
-                switch (ex.Message)
-                {
-                    default:
-                        DisplayAlert("Error", ex.Message, "OK");
-                        break;
-                }
-            }
-            return false;
+        private void TryAgain_Button_Clicked(object sender, EventArgs e)
+        {
+            TryAgain_Button.IsEnabled = false;
+            TryAgain_Button.IsVisible = true;
+            LoadData();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BayardsSafetyApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,11 +10,13 @@ namespace BayardsSafetyApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchPage : ContentPage
     {
-        public SearchPage()
+        public SearchPage(Sections foundPage)
         {
             InitializeComponent();
             SearchCommand = new Command(() => { SearchCommandExecute(); });
+            found = foundPage;
         }
+        Sections found;
         public ICommand SearchCommand { get; set; }
         private string _searchedText;
         public string SearchedText
@@ -25,10 +28,10 @@ namespace BayardsSafetyApp
         List<Section> foundSections;
         private void SearchCommandExecute()
         {
-            foundRisks = new List<Risk> { new Risk { Name = "R1", Id_r = "r1" }, new Risk { Name = "R2", Id_r = "r1" }, new Risk { Name = "R3", Id_r = "r1" } };
-            foundSections = new List<Section> { new Section { Name = "S1", Id_s = "s1" }, new Section { Name = "S2", Id_s = "s1" }, new Section { Name = "S3", Id_s = "s1" } };
-            sectView.ItemsSource = foundSections.FindAll(i=>i.Name.ToLower().Contains(SearchedText.ToLower()));
-            riskView.ItemsSource = foundRisks.FindAll(i => i.Name.ToLower().Contains(SearchedText.ToLower()));
+            foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(i => i.Name.ToLower().Contains(SearchedText.ToLower()));
+            foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(i => i.Name.ToLower().Contains(SearchedText.ToLower()));
+            sectView.ItemsSource = foundSections;
+            riskView.ItemsSource = foundRisks;
         }
         bool _isLoading;
         public bool IsLoading
@@ -43,36 +46,17 @@ namespace BayardsSafetyApp
 
         private void RiskButton_Clicked(object sender, SelectedItemChangedEventArgs e)
         {
-            IsLoading = true;
+            if (e.SelectedItem == null)
+            {
+                return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
+            }
             API api = new API();
-            bool flag = false;
-            IsLoading = true;
-            //while (!flag)
-            //{
-            //    if (_risks == null)
-            //        _risks = new List<RiskDetails>();
-
-            //    try
-            //    {
-            //        if (_risks.Count == 0)
-            //        {
-            //            foreach (var r in _contents.Risks)
-            //            {
-            //                var rToDisp = api.getRiskContent(r.Id_r, AppResources.LangResources.Language).Result;
-            //                _risks.Add(new RiskDetails(rToDisp));
-            //            }
-            //        }
-            //        flag = true;
-            //        Navigation.PushAsync(new RisksCarousel(_risks, ((Risk)e.SelectedItem).Id_r, Title));
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        //DisplayAlert("Error", ex.Message, "Ok");
-            //    }
-            Navigation.PushAsync(new RiskDetails(((Risk)e.SelectedItem)));
-            //}
-
-
+            var rToDisp = api.getRiskContent(((Risk)e.SelectedItem).Id_r, AppResources.LangResources.Language).Result;
+            found.Found = new RiskDetails(rToDisp);
+            Device.BeginInvokeOnMainThread(() => {
+                Navigation.PopModalAsync();
+                //Navigation.PushAsync(new Risks(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name));
+            });
         }
         private void sectView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
@@ -81,16 +65,22 @@ namespace BayardsSafetyApp
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-            Navigation.PushAsync(new Risks(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name));
+            found.Found = new Risks(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name);
+            Device.BeginInvokeOnMainThread(() => {
+                Navigation.PopModalAsync();
+            });
+            
         }
 
         private void searchcustomer_TextChanged(object sender, TextChangedEventArgs e)
         {
-            foundRisks = new List<Risk> { new Risk { Name = "R1", Id_r = "r1" }, new Risk { Name = "R2", Id_r = "r1" }, new Risk { Name = "R3", Id_r = "r1" } };
-            foundSections = new List<Section> { new Section { Name = "S1", Id_s = "s1" }, new Section { Name = "S2", Id_s = "s1" }, new Section { Name = "S3", Id_s = "s1" } };
-            var a = foundSections.FindAll(i => i.Name.ToLower().Contains(searchcustomer.Text.ToLower()));
-            sectView.ItemsSource = foundSections.FindAll(i => i.Name.ToLower().Contains(searchcustomer.Text.ToLower()));
-            riskView.ItemsSource = foundRisks.FindAll(i => i.Name.ToLower().Contains(searchcustomer.Text.ToLower()));
+
+            foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppResources.LangResources.Language);
+            foundRisks = foundRisks.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
+            foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppResources.LangResources.Language);
+            foundSections = foundSections.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
+            sectView.ItemsSource = foundSections;
+            riskView.ItemsSource = foundRisks;
         }
     }
 }

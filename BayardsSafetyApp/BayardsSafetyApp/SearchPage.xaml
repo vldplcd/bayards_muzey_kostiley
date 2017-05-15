@@ -11,38 +11,35 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
+
             <ActivityIndicator x:Name="AInd"
                            Grid.Row ="2" Color="Blue" HorizontalOptions="CenterAndExpand"/>
             
 
-            <SearchBar x:Name="searchcustomer"  Placeholder="Search" Text="{Binding SearchedText, Mode=TwoWay}" SearchCommand="{Binding SearchCommand}" TextChanged="searchcustomer_TextChanged" Grid.Row="0"/>
+            <SearchBar x:Name="searchcustomer" HorizontalOptions="StartAndExpand" Placeholder="Search" Text="{Binding SearchedText, Mode=TwoWay}" SearchCommand="{Binding SearchCommand}" TextChanged="searchcustomer_TextChanged" Grid.Row="0"/>
 
 
-            <Label Grid.Row="1" Grid.Column="1">Subsections</Label>
+            <Label Grid.Row="1">Subsections</Label>
             <ListView x:Name ="sectView" HasUnevenRows="True" 
                        Grid.Row="2" ItemSelected="sectView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Large" TextColor="Black"></Label>
+                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black"></Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Label Grid.Row="3" Grid.Column="1">Risks</Label>
+            <Label Grid.Row="3">Risks</Label>
             <ListView x:Name ="riskView" HasUnevenRows="True" 
                        Grid.Row="4"  ItemSelected="RiskButton_Clicked">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Large" TextColor="Black"></Label>
+                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black"></Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

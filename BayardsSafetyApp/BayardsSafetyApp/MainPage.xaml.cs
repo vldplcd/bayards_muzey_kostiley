@@ -121,10 +121,5 @@ namespace BayardsSafetyApp
 
             return contents;
         }
-
-        private void SearchBar_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushModalAsync(new SearchPage());
-        }
     }
 }

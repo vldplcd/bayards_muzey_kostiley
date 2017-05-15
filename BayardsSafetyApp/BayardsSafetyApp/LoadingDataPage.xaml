@@ -11,7 +11,8 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition  Width="1*"/>
@@ -21,7 +22,8 @@
                                IsVisible="True"
                                IsRunning="True"
                            Grid.Row ="2" Color="Blue" HorizontalOptions="CenterAndExpand"/>
-            <ProgressBar MinimumHeightRequest="10" x:Name="PrBar" Grid.Row="3"/>
+            <ProgressBar MinimumHeightRequest="5" x:Name="PrBar" Grid.Row="3"/>
+            <Button x:Name="TryAgain_Button" Text="Try again" Grid.Row="4" Margin="40" IsEnabled="False" IsVisible="False" Clicked="TryAgain_Button_Clicked"/>
         </Grid>
         
     </ContentPage.Content>

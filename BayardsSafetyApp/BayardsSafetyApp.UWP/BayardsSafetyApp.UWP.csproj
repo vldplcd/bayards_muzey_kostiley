@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{C8ED08A0-513F-4B57-9232-060605FA5AFB}</ProjectGuid>
+    <ProjectGuid>{E0152B6E-C8BA-48F9-971A-28AFC3E87F7A}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BayardsSafetyApp.UWP</RootNamespace>
@@ -128,7 +128,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BayardsSafetyApp\BayardsSafetyApp\BayardsSafetyApp.csproj">
+    <ProjectReference Include="..\BayardsSafetyApp\BayardsSafetyApp.csproj">
       <Project>{47e1f82e-3b1b-4a04-a27a-3dc1ba398a91}</Project>
       <Name>BayardsSafetyApp</Name>
     </ProjectReference>

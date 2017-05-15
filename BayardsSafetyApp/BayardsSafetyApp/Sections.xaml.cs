@@ -14,10 +14,13 @@ namespace BayardsSafetyApp
 
             InitializeComponent();
             IsLoading = false;
-            Title = "Contents";         
+            Title = "Contents";
+            
+            var command = new Command(async () => { await Navigation.PushModalAsync(new SearchPage(this)); });
+            ToolbarItems.Add(new ToolbarItem { Command = command, Text = "Search" });
 
         }
-
+        public ContentPage Found { get; set; }
         List<Section> _contents;
         public List<Section> Contents
         {
@@ -56,6 +59,12 @@ namespace BayardsSafetyApp
 
         private void Sections_OnAppearing(object sender, EventArgs e)
         {
+            if(Found != null)
+            {
+                Navigation.PushAsync(Found);
+                Found = null;
+            }
+                
             sectView.ItemsSource = _contents;
             sectView.SelectedItem = null;
         }

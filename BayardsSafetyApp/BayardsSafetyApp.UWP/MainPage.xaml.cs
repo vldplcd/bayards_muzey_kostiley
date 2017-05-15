@@ -21,11 +21,9 @@ namespace BayardsSafetyApp.UWP
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
     public sealed partial class MainPage
-    {
         public MainPage()
         {
             this.InitializeComponent();
-            LoadApplication(new BayardsSafetyApp.App());
         }
     }
 }
