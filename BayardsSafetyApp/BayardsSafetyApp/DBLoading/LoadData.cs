@@ -1,4 +1,5 @@
-﻿using BayardsSafetyApp.Entities;
+﻿using BayardsSafetyApp.DTO;
+using BayardsSafetyApp.Entities;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -73,9 +74,71 @@ namespace BayardsSafetyApp.DBLoading
             {
                 throw ex;
             }
-        } 
-        
+        }
         public async Task ToDatabase()
+        {
+            Process = 0;
+            OnProgressEvent?.Invoke(Process);
+            _risks = new List<Risk>();
+            _sections = new List<Section>();
+            _mediaList = new List<Media>();
+            var sectsAPI = new List<SectionAPI>();
+
+            foreach(var lang in _langs)
+            {
+                sectsAPI = await _api.GetAll(lang);
+                Process = 0.1 * (1/((double)_langs.Length));
+                OnProgressEvent?.Invoke(Process);
+                int n = sectsAPI.Count;
+                foreach (var sAPI in sectsAPI)
+                {
+                    DecompSectionAPI(lang, "null", sAPI, ref _sections, ref _risks, ref _mediaList);
+                    Process += (0.7 / (double)n) * (1 / ((double)_langs.Length));
+                    OnProgressEvent?.Invoke(Process);
+                }
+                    
+            }
+            UploadAll();
+                
+
+
+        }
+
+        public void DecompSectionAPI(string Lang, string ParentSect, SectionAPI sectAPI, ref List<Section> sects, ref List<Risk> risks, ref List<Media> mediaL)
+        {
+            sects.Add(new Section { Name = sectAPI.Name, Id_s = sectAPI.Id_s, Lang = Lang, Parent_s = ParentSect });
+
+            var temprisks = sectAPI.Risks == null ? new Risk[0] : sectAPI.Risks;
+            if(temprisks.Length != 0)
+            {
+                foreach (var r in sectAPI.Risks)
+                    risks.Add(new Risk
+                    {
+                        Id_r = r.Id_r,
+                        Lang = Lang,
+                        Name = r.Name,
+                        Content = r.Content,
+                        Parent_s = sectAPI.Id_s,
+                        Media = r.Media
+                    });
+            }
+            
+            foreach(var r in risks)
+            {
+
+                foreach (var m in r.Media)
+                    mediaL.Add(new Media { Lang = Lang, Id_r = r.Id_r, Url = m });
+            }
+            var subsects = sectAPI.Subsections == null ? new SectionAPI[0] : sectAPI.Subsections;
+            if (subsects.Length != 0)
+            {
+                foreach (var sAPI in sectAPI.Subsections)
+                    DecompSectionAPI(Lang, sectAPI.Id_s, sAPI, ref sects, ref risks, ref mediaL);
+            }
+            
+
+        }
+        public async Task ToDatabaseCoplexAPI()
         {
             Process = 0;
             OnProgressEvent?.Invoke(Process);

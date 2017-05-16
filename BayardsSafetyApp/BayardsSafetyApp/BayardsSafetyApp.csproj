@@ -42,6 +42,7 @@
     <Compile Include="AppResources\PlatformCulture.cs" />
     <Compile Include="DataBaseUOW.cs" />
     <Compile Include="DBLoading\LoadData.cs" />
+    <Compile Include="DTO\SectionAPI.cs" />
     <Compile Include="Entities\Utils.cs" />
     <Compile Include="IDbRepository.cs" />
     <Compile Include="DbRepository.cs" />

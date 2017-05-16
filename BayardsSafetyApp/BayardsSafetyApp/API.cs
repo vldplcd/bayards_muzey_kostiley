@@ -5,17 +5,30 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Globalization;
+using BayardsSafetyApp.DTO;
 
 namespace BayardsSafetyApp
 {
     //TODO: ОБЪЕДИНИТЬ В ОДИН МЕТОД ЗАПРОС
     public class API
     {
-
+        const string UriGetAll = "http://vhost29450.cpsite.ru/api/getAll?lang={0}";
         const string UriSectionsListTemplate = "http://vhost29450.cpsite.ru/api/allSections?lang={0}";
         const string UriSectionContent = "http://vhost29450.cpsite.ru/api/section?sectionid={0}&lang={1}";
         const string UriRiskContent = "http://vhost29450.cpsite.ru/api/risk?riskid={0}&lang={1}";
         const string UriUpdateTime = "http://vhost29450.cpsite.ru/api/getUpdateDate";
+
+        string[] _langs = new string[] { "eng", "nl" };
+        public string[] Langs
+        {
+            get { return _langs; }
+
+            set
+            {
+                if (value != null || value.Length != 0)
+                    _langs = value;
+            }
+        }
 
         //TODO: 
         //Добавить поисковые запросы в функционал API
@@ -169,6 +182,45 @@ namespace BayardsSafetyApp
             }
             return null;
         }
+
+        public async Task<List<SectionAPI>> GetAll(string lang)
+        {
+            var sections = new List<SectionAPI>();
+            int n = 0;
+            while (n < 4)
+            {
+                try
+                {
+                    using (HttpClient hc = new HttpClient())
+                    {
+                        var responseMsg = await hc.GetAsync(string.Format(UriGetAll, lang));
+                        if(responseMsg.IsSuccessStatusCode)
+                        {
+                            var resultStr = await responseMsg.Content.ReadAsStringAsync();
+                            var res = JsonConvert.DeserializeAnonymousType(resultStr,
+                                    new { Sections = new List<SectionAPI>() });
+                            sections.AddRange(res.Sections);
+                            if (sections.Count == 0 || sections[0].Id_s == null)
+                                throw new Exception("No info downloaded. Trying to retry");
+                        }
+                        else
+                        {
+                            throw new HttpRequestException("The server has thrown an error code: " + responseMsg.StatusCode);
+                        }
+                    }
+                    return sections;
+                }
+
+                catch (Exception ex)
+                {
+                    n++;
+                    if (n == 4)
+                        throw ex;
+                }
+            }
+            return sections;
+        }
+
         /// <summary>
         /// Method that gets checks internet connection
         /// </summary>
