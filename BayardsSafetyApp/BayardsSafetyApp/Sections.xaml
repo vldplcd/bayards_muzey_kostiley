@@ -21,13 +21,13 @@
             <ActivityIndicator
                            IsVisible= "{Binding IsLoading}"
                            IsRunning="{Binding IsLoading}" Grid.Row ="1" Grid.Column ="1" HorizontalOptions="StartAndExpand"/>
-            <ListView x:Name ="sectView" HasUnevenRows="True" 
+            <ListView x:Name ="sectView" HasUnevenRows="True" RowHeight="-1" SeparatorVisibility="None"
                        Grid.Row="1" Grid.Column="1" ItemSelected="SectionButton_Clicked">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black" LineBreakMode="WordWrap"></Label>
+                                <Label  MinimumHeightRequest="40" Text="{Binding Name}" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black" LineBreakMode="WordWrap"></Label>
                             </StackLayout>                            
                         </ViewCell>
                     </DataTemplate>

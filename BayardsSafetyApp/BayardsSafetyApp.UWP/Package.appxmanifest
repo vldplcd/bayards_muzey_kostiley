@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="5110b4cf-b43f-47de-bbdf-54fe69a19942"
+    Name="dee499a1-4f63-4ce4-b7a4-36b40beea8ff"
     Publisher="CN=Влад"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="5110b4cf-b43f-47de-bbdf-54fe69a19942" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="dee499a1-4f63-4ce4-b7a4-36b40beea8ff" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>BayardsSafetyApp.UWP</DisplayName>

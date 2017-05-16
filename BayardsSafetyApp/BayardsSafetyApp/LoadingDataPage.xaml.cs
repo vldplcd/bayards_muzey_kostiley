@@ -75,9 +75,11 @@ namespace BayardsSafetyApp
                             DisplayAlert("Error", "Loading exception: "+ex.Message, "OK");
                             TryAgain_Button.IsEnabled = true;
                             TryAgain_Button.IsVisible = true;
-                        });
-                        
+                            AInd.IsVisible = false;
+                            
+                        });                        
                     }
+                    
                 });
 
             }

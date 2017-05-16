@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BayardsSafetyApp.SearchPage">
+             x:Class="BayardsSafetyApp.SearchPage"
+             Appearing="ContentPage_Appearing">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -10,16 +11,26 @@
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="5*"/>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform x:TypeArguments="GridLength" iOS="1.3*"  Android="0" WinPhone="0" />
+                    </RowDefinition.Height>
+                </RowDefinition>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                
+            </Grid.ColumnDefinitions>
 
             <ActivityIndicator x:Name="AInd"
                            Grid.Row ="2" Color="Blue" HorizontalOptions="CenterAndExpand"/>
+
+
+            <SearchBar x:Name="searchcustomer" Placeholder="Search" SearchCommand="{Binding SearchCommand}"
+                       TextChanged="searchcustomer_TextChanged" Grid.Row="0"></SearchBar>
             
 
-            <SearchBar x:Name="searchcustomer" HorizontalOptions="StartAndExpand" Placeholder="Search" Text="{Binding SearchedText, Mode=TwoWay}" SearchCommand="{Binding SearchCommand}" TextChanged="searchcustomer_TextChanged" Grid.Row="0"/>
 
-
-            <Label Grid.Row="1">Subsections</Label>
+            <Label Grid.Row="1">Subtasks</Label>
             <ListView x:Name ="sectView" HasUnevenRows="True" 
                        Grid.Row="2" ItemSelected="sectView_ItemSelected">
                 <ListView.ItemTemplate>
@@ -45,6 +56,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button x:Name="Back_Button" Text="Back" Grid.Row="5" Clicked="Back_Button_Clicked"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

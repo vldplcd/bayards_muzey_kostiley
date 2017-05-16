@@ -22,7 +22,7 @@
                            IsVisible= "{Binding IsLoading}"
                            IsRunning="{Binding IsLoading}" Grid.Row ="1" Grid.Column ="1" HorizontalOptions="StartAndExpand"/>
             <Label Grid.Row="0" Grid.Column="1">Subsections</Label>
-            <ListView x:Name ="sectView" HasUnevenRows="True" 
+            <ListView x:Name ="sectView" HasUnevenRows="True" RowHeight="-1" SeparatorVisibility="None"
                        Grid.Row="1" Grid.Column="1" ItemSelected="sectView_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -35,7 +35,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Label Grid.Row="2" Grid.Column="1">Risks</Label>
-            <ListView x:Name ="riskView" HasUnevenRows="True" 
+            <ListView x:Name ="riskView" HasUnevenRows="True" RowHeight="-1" SeparatorVisibility="None"
                        Grid.Row="3" Grid.Column="1" ItemSelected="RiskButton_Clicked">
                 <ListView.ItemTemplate>
                     <DataTemplate>

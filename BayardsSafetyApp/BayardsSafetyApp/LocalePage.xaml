@@ -10,19 +10,22 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1.5*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="1*"/>
-                <ColumnDefinition  Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="LocaleLabel" Grid.Row ="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" FontSize ="Medium"/>
-            <Button x:Name="EnButton" HorizontalOptions="Center" Grid.Row="5" Grid.Column="0" Clicked="EnButton_Clicked" IsVisible="True" BackgroundColor="Green" FontAttributes="Bold" TextColor="White"/>
-            <Button x:Name="NlButton" HorizontalOptions="Center" Grid.Row="5" Grid.Column="1" Clicked="NlButton_Clicked" IsVisible="True" BackgroundColor="Green" FontAttributes="Bold" TextColor="White"/>
+            <Label x:Name="LocaleLabel" Grid.Row ="2" Grid.Column="0" Grid.ColumnSpan="6" HorizontalTextAlignment="Center" FontSize ="Medium"/>
+            <Button x:Name="EnButton" Margin="20" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Clicked="EnButton_Clicked" IsVisible="True" BackgroundColor="Green" FontAttributes="Bold" TextColor="White"/>
+            <Button x:Name="NlButton" Margin="20" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Clicked="NlButton_Clicked" IsVisible="True" BackgroundColor="Green" FontAttributes="Bold" TextColor="White"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

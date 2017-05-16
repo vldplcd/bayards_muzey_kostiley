@@ -127,7 +127,7 @@ namespace BayardsSafetyApp.DBLoading
             {
 
                 foreach (var m in r.Media)
-                    mediaL.Add(new Media { Lang = Lang, Id_r = r.Id_r, Url = m });
+                    mediaL.Add(new Media { Lang = Lang, Id_r = r.Id_r, Url = m.Url, Type = m.Type });
             }
             var subsects = sectAPI.Subsections == null ? new SectionAPI[0] : sectAPI.Subsections;
             if (subsects.Length != 0)
@@ -193,8 +193,8 @@ namespace BayardsSafetyApp.DBLoading
                     if (temp_risk != null)
                     {
                         temp_risks.Add(temp_risk);
-                        foreach (var url in temp_risk.Media)
-                            temp_mediaList.Add(new Media { Lang = lang, Url = url, Id_r = r.Id_r });
+                        foreach (var m in temp_risk.Media)
+                            temp_mediaList.Add(new Media { Lang = lang, Url = m.Url, Id_r = r.Id_r });
                     }
                         
                 }

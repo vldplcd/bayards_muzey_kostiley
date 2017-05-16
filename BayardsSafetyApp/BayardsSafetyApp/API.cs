@@ -164,7 +164,7 @@ namespace BayardsSafetyApp
                     {
                         var responseMsg = hc.GetAsync(requestUri).Result;
                         var resultStr = responseMsg.Content.ReadAsStringAsync().Result;
-                        var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Risk = new Risk(), Media = new List<string>() });
+                        var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Risk = new Risk(), Media = new List<Media>() });
                         res.Risk.Media = res.Media;
                         result = res.Risk;
                         if (result.Id_r == null)

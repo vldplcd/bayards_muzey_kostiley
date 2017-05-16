@@ -8,8 +8,8 @@
             <!-- DEFINE ANY CONSTANTS -->
             <!--<Color x:Key="SeparatorLineColor">#CCCCCC</Color>-->
             <Color x:Key="myAccentColor">#024924</Color>
-            <Color x:Key="myPrimaryColor">#024924</Color>
-            <Color x:Key="myDarkColor">#024924</Color>
+            <Color x:Key="myPrimaryColor">#203153</Color>
+            <Color x:Key="myDarkColor">#131e33</Color>
 
         </ResourceDictionary>
 

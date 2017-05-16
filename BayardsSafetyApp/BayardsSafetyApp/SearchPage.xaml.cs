@@ -74,13 +74,38 @@ namespace BayardsSafetyApp
 
         private void searchcustomer_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (e.NewTextValue == null)
+            {
+                foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppResources.LangResources.Language);
+                foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppResources.LangResources.Language);
+                sectView.ItemsSource = foundSections;
+                riskView.ItemsSource = foundRisks;
+            }
+            else
+            {
+                foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppResources.LangResources.Language);
+                foundRisks = foundRisks.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
+                foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppResources.LangResources.Language);
+                foundSections = foundSections.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
+                sectView.ItemsSource = foundSections;
+                riskView.ItemsSource = foundRisks;
+            }
+            
+        }
 
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
             foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppResources.LangResources.Language);
-            foundRisks = foundRisks.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
             foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppResources.LangResources.Language);
-            foundSections = foundSections.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
             sectView.ItemsSource = foundSections;
             riskView.ItemsSource = foundRisks;
+        }
+
+        private void Back_Button_Clicked(object sender, EventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(() => {
+                Navigation.PopModalAsync();
+            });
         }
     }
 }

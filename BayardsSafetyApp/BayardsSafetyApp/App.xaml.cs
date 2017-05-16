@@ -14,12 +14,14 @@ namespace BayardsSafetyApp
 
             if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
             {
-                var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-                LangResources.Culture = ci; // set the RESX for resource localization
-                DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
+                //var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+                //LangResources.Culture = ci; // set the RESX for resource localization
+                //DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
             }
-
-            MainPage = new NavigationPage(new MainPage());
+            var pageToStart = new NavigationPage(new MainPage());
+            pageToStart.BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"];
+            pageToStart.BarTextColor = Color.White;
+            MainPage = pageToStart;
         }
 
         protected override void OnStart()

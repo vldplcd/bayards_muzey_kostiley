@@ -13,7 +13,7 @@ namespace BayardsSafetyApp.Entities
         [Column("content")]
         public string Content { get; set; }
         [Ignore]
-        public List<string> Media { get; set; }
+        public List<Media> Media { get; set; }
         [Column("parent_s")]
         public string Parent_s { get; set; }
         [Column("name")]
