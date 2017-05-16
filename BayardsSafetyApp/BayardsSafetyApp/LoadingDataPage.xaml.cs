@@ -70,7 +70,13 @@ namespace BayardsSafetyApp
                     }
                     catch (Exception ex)
                     {
-                        DisplayAlert("Error", "A server does not respond", "OK");
+                        Device.BeginInvokeOnMainThread(() => 
+                        {
+                            DisplayAlert("Error", "Loading exception: "+ex.Message, "OK");
+                            TryAgain_Button.IsEnabled = true;
+                            TryAgain_Button.IsVisible = true;
+                        });
+                        
                     }
                 });
 
@@ -78,6 +84,8 @@ namespace BayardsSafetyApp
             catch (TaskCanceledException)
             {
                 DisplayAlert("Error", "A server does not respond", "OK");
+                TryAgain_Button.IsEnabled = true;
+                TryAgain_Button.IsVisible = true;
 
             }
             catch (Exception ex)
