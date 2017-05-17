@@ -9,7 +9,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1.7*"/>
                 <RowDefinition Height="3*"/>
@@ -32,8 +33,10 @@
             <ActivityIndicator x:Name="AInd"
                            Grid.Row ="2" Grid.Column="0" Grid.ColumnSpan="6" Color="Blue" HorizontalOptions="CenterAndExpand"/>
             <Label HorizontalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6">Password</Label>
-            <Entry x:Name="PasswordEntry" Grid.Column="1" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalOptions="Center" Margin="40,0" Placeholder="password" BackgroundColor="White" IsPassword="true"  Completed="PasswordEntry_Completed" Grid.Row="3"/>
-            <Button x:Name="ContinueButton" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" Grid.Row="4" Text="Continue" Clicked="ContinueButton_Clicked"/>
+            <Entry x:Name="PasswordEntry" Grid.Column="1" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalOptions="Center" Margin="40,0" 
+                   Placeholder="password" BackgroundColor="White" IsPassword="true"  Completed="PasswordEntry_Completed" Grid.Row="4"/>
+            <Button x:Name="ContinueButton" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalOptions="Fill" VerticalOptions="Fill" Margin="20" Grid.Row="5" Text="Continue" Clicked="ContinueButton_Clicked"
+                    BackgroundColor="White" TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderRadius="10"/>
 
         </Grid>
     </ContentPage.Content>

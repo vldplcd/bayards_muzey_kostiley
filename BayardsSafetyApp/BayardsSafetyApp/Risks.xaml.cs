@@ -65,8 +65,7 @@ namespace BayardsSafetyApp
                             //                                                                   m.Lang == AppResources.LangResources.Language).ToList().
                             //                                                                       Select(m => m.Url).ToList();
                             var med = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Id_r == r.Id_r &&
-                                                                                               m.Lang == AppResources.LangResources.Language).ToList().
-                                                                                                   Select(m => m.Url).ToList();
+                                                                                               m.Lang == AppResources.LangResources.Language).ToList();
                             rToDisp.Media = med;
                             _risks.Add(new RiskDetails(rToDisp));
                         }
