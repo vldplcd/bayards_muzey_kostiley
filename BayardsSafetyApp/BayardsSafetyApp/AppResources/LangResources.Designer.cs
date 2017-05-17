@@ -98,6 +98,24 @@ namespace BayardsSafetyApp.AppResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Hide Images.
+        /// </summary>
+        public static string HideImages {
+            get {
+                return ResourceManager.GetString("HideImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Hide Video.
+        /// </summary>
+        public static string HideVideo {
+            get {
+                return ResourceManager.GetString("HideVideo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на The password is incorrect.
         /// </summary>
         public static string IncPassword {
@@ -166,6 +184,24 @@ namespace BayardsSafetyApp.AppResources {
         public static string s {
             get {
                 return ResourceManager.GetString("s", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Show Images.
+        /// </summary>
+        public static string ShowImages {
+            get {
+                return ResourceManager.GetString("ShowImages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Show Video.
+        /// </summary>
+        public static string ShowVideo {
+            get {
+                return ResourceManager.GetString("ShowVideo", resourceCulture);
             }
         }
         

@@ -23,7 +23,7 @@
                     <Button Grid.Row="1" MinimumHeightRequest="40" x:Name="ContinueButton" HorizontalOptions="Center" 
                             Clicked="ContinueButton_Clicked" IsVisible="True" 
                             BackgroundColor="White" FontAttributes="Bold" TextColor="{StaticResource myAccentColor}"
-                            BorderColor="{StaticResource myAccentColor}" BorderWidth="5" BorderRadius="5"/>
+                            BorderColor="{StaticResource myAccentColor}" BorderWidth="1" BorderRadius="5"/>
                 </Grid>
             </ScrollView>
             

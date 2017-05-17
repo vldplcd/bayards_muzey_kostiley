@@ -18,7 +18,7 @@ namespace BayardsSafetyApp
             InitializeComponent();
             AgrmntLabel.Text = LangResources.AgrmntLabel;
             ContinueButton.Text = LangResources.ContinueButton;
-            AgrmntLabel.Text = LangResources.UserAgreementText;
+            UserAgrLabel.Text = LangResources.UserAgreementText;
         }
         protected override Boolean OnBackButtonPressed()
         {
