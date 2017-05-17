@@ -16,7 +16,7 @@ namespace BayardsSafetyApp
             Header.Text = risk.Name;
             RiskId = risk.Id_r;
             textDetails.Text = risk.Content;
-
+            pictView.ItemsSource = risk.Media.FindAll(m => m.Type == "image" && m.Lang == AppResources.LangResources.Language);
         }
         private void NextButton_Clicked(object sender, EventArgs e)
         {
