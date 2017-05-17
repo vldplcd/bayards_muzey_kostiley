@@ -4,19 +4,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BayardsSafetyApp.Sections"
              Appearing="Sections_OnAppearing" >
-
-
     <ContentPage.Content>
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="10*"/>
-
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="0.3*"/>
                 <ColumnDefinition Width="9*"/>
-                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="0.3*"/>
             </Grid.ColumnDefinitions>
             <ActivityIndicator
                            IsVisible= "{Binding IsLoading}"
@@ -26,9 +24,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                                <Label TextColor="{StaticResource myAccentColor}" MinimumHeightRequest="40" Text="{Binding Name}" VerticalOptions="CenterAndExpand" 
-                                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" LineBreakMode="WordWrap"></Label>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label TextColor="{StaticResource myPrimaryColor}" MinimumHeightRequest="40" Text="{Binding Name}" VerticalOptions="CenterAndExpand" 
+                                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" LineBreakMode="TailTruncation"></Label>
                             </StackLayout>                            
                         </ViewCell>
                     </DataTemplate>

@@ -147,7 +147,13 @@
   <data name="PasswLabel" xml:space="preserve">
     <value>Voer het wachtwoord in</value>
   </data>
+  <data name="Risk" xml:space="preserve">
+    <value>Risico's</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Instellingen</value>
+  </data>
+  <data name="Task" xml:space="preserve">
+    <value>Taken</value>
   </data>
 </root>

@@ -17,7 +17,26 @@
 
             <Label x:Name ="Header" Grid.Row ="0" HorizontalTextAlignment="Center" TextColor="Black" FontSize="Large"></Label>
             <ScrollView  Grid.Row ="2" Padding="10">
-                <Label x:Name="textDetails" TextColor="Black">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae justo et quam bibendum elementum non eget nibh. Nam elementum risus eget libero cursus cursus.</Label>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="textDetails" Grid.Row="0" TextColor="Black"></Label>
+
+                    <ListView x:Name ="pictView" SeparatorVisibility="None"
+                       Grid.Row="1" ItemSelected="SectionButton_Clicked">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                        <Image></Image>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </ScrollView>
             <Switch x:Name="swt" HorizontalOptions="Center" Grid.Row="4"  IsVisible="True"/>
 

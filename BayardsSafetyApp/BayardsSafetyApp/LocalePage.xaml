@@ -24,8 +24,14 @@
             </Grid.ColumnDefinitions>
 
             <Label x:Name="LocaleLabel" Grid.Row ="2" Grid.Column="0" Grid.ColumnSpan="6" HorizontalTextAlignment="Center" FontSize ="Medium"/>
-            <Button x:Name="EnButton" Margin="20" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="2" Clicked="EnButton_Clicked" IsVisible="True" BackgroundColor="Green" FontAttributes="Bold" TextColor="White"/>
-            <Button x:Name="NlButton" Margin="20" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Clicked="NlButton_Clicked" IsVisible="True" BackgroundColor="Green" FontAttributes="Bold" TextColor="White"/>
+            <Button x:Name="EnButton" Margin="20" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="4" Grid.Column="4" 
+                    Grid.ColumnSpan="2" Clicked="EnButton_Clicked" IsVisible="True" 
+                    BackgroundColor="White" FontAttributes="Bold" TextColor="{StaticResource myAccentColor}"
+                    BorderColor="{StaticResource myAccentColor}" BorderWidth="5" BorderRadius="5"/>
+            <Button x:Name="NlButton" Margin="20" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="4" Grid.Column="0" 
+                    Grid.ColumnSpan="2" Clicked="NlButton_Clicked" IsVisible="True" 
+                    BackgroundColor="White" FontAttributes="Bold" TextColor="{StaticResource myAccentColor}"
+                    BorderColor="{StaticResource myAccentColor}" BorderWidth="5" BorderRadius="5"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

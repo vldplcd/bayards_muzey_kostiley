@@ -41,5 +41,9 @@
 	<string></string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+  <key>UIViewControllerBasedStatusBarAppearance</key> 
+  <false/> 
+  <key>UIStatusBarStyle</key> 
+  <string>UIStatusBarStyleLightContent</string>
 </dict>
 </plist>

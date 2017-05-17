@@ -152,11 +152,42 @@ namespace BayardsSafetyApp.AppResources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Risks.
+        /// </summary>
+        public static string Risk {
+            get {
+                return ResourceManager.GetString("Risk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Settings.
         /// </summary>
-        public static string Settings {
+        public static string s {
             get {
-                return ResourceManager.GetString("Settings", resourceCulture);
+                return ResourceManager.GetString("s", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Tasks.
+        /// </summary>
+        public static string Task {
+            get {
+                return ResourceManager.GetString("Task", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae justo et quam bibendum elementum non eget nibh. Nam elementum risus eget libero cursus cursus. Morbi ut lacus non lacus auctor ultricies vitae sit amet urna. Sed vehicula facilisis lectus,
+        ///                        ut imperdiet nisl cursus sit amet. Quisque scelerisque 
+        ///                        pharetra blandit. Nulla at ante porttitor, molestie dolor et, 
+        ///                        placerat odio. Nulla auctor porttitor lacinia. Integer 
+        ///     [остаток строки не уместился]&quot;;.
+        /// </summary>
+        public static string UserAgreementText {
+            get {
+                return ResourceManager.GetString("UserAgreementText", resourceCulture);
             }
         }
     }

@@ -20,7 +20,7 @@ namespace BayardsSafetyApp
             ToolbarItems.Add(new ToolbarItem { Command = command, Text = "Search" });
 
         }
-        public ContentPage Found { get; set; }
+        public Page Found { get; set; }
         List<Section> _contents;
         public List<Section> Contents
         {
@@ -54,7 +54,7 @@ namespace BayardsSafetyApp
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-            Navigation.PushAsync(new Risks(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name));
+            Navigation.PushAsync(new SectionContentPage(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name));
         }
 
         private void Sections_OnAppearing(object sender, EventArgs e)

@@ -12,18 +12,17 @@ namespace BayardsSafetyApp
     {
         List<RiskDetails> _risks;
         string _sId;
-        public Risks(string sectionId, string sectionName)
+        public Risks()
         {
             InitializeComponent();
-            _sId = sectionId;
             IsLoading = false;
             BackgroundColor = Color.FromHex("#efefef");
-            Title = sectionName;
+            Title = AppResources.LangResources.Risk;
             
         }
 
-        SectionContents _contents = new SectionContents();
-        public SectionContents Contents
+        List<Risk> _contents = new List<Risk>();
+        public List<Risk> Contents
         {
             get { return _contents; }
             set
@@ -58,7 +57,7 @@ namespace BayardsSafetyApp
                 {
                     if (_risks.Count == 0)
                     {
-                        foreach (var r in _contents.Risks)
+                        foreach (var r in _contents)
                         {
                             var rToDisp = r;
                             //var med = App.Database.MediaDatabase.GetItems<Media>().ToList().FindAll(m => m.Id_r == r.Id_r && 
@@ -84,47 +83,8 @@ namespace BayardsSafetyApp
 
         private void Page_Appeared(object sender, EventArgs e)
         {
-            //API api = new API();
-            bool flag = false;
-            while(!flag)
-            {
-                try
-                {
-                    //Contents = api.getSectionContent(_sId, AppResources.LangResources.Language).Result;
-                    //var d_risks = App.Database.RiskDatabase.GetItems<Risk>().ToList().FindAll(r => r.Parent_s == _sId
-                    //                                                                    && r.Lang == AppResources.LangResources.Language).ToList();
-                    var d_risks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Parent_s == _sId
-                                                                                        && r.Lang == AppResources.LangResources.Language).ToList();
-                    if (d_risks != null)
-                        Contents.Risks = d_risks.OrderBy(r => r.Name).ToList();
-                        
-
-                    var d_sects = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Parent_s == _sId
-                                                                                        && s.Lang == AppResources.LangResources.Language).ToList();
-                    if (d_sects != null)
-                        Contents.Subsections = d_sects.OrderBy(r => r.Name).ToList();
-
-                    sectView.ItemsSource = Contents.Subsections;
-                    riskView.ItemsSource = Contents.Risks;
-
-                    flag = true;
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-            
-        }
-
-        private void sectView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            IsLoading = true;
-            if (e.SelectedItem == null)
-            {
-                return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
-            }
-            Navigation.PushAsync(new Risks(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name));
+            riskView.ItemsSource = _contents;
+            riskView.SelectedItem = null;
         }
     }
 }

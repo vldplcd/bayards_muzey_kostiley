@@ -12,6 +12,7 @@
                 <RowDefinition Height="2.5*"/>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="0.3*"/>
                 <RowDefinition Height="1.7*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
@@ -33,10 +34,16 @@
             <ActivityIndicator x:Name="AInd"
                            Grid.Row ="2" Grid.Column="0" Grid.ColumnSpan="6" Color="Blue" HorizontalOptions="CenterAndExpand"/>
             <Label HorizontalTextAlignment="Center" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6">Password</Label>
-            <Entry x:Name="PasswordEntry" Grid.Column="1" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalOptions="Center" Margin="40,0" 
+            <Entry x:Name="PasswordEntry" Grid.Column="1" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalOptions="Center"
                    Placeholder="password" BackgroundColor="White" IsPassword="true"  Completed="PasswordEntry_Completed" Grid.Row="4"/>
-            <Button x:Name="ContinueButton" Grid.Column="2" Grid.ColumnSpan="2"  HorizontalOptions="Fill" VerticalOptions="Fill" Margin="20" Grid.Row="5" Text="Continue" Clicked="ContinueButton_Clicked"
-                    BackgroundColor="White" TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderRadius="10"/>
+            <Button x:Name="ContinueButton" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="6" Text="Continue" Clicked="ContinueButton_Clicked"
+                     HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White" Margin="10"
+                    TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1">
+                <Button.BorderRadius>
+                    <!-- HACK: fixes a bug where border doesn't work without a radius. -->
+                    10
+                </Button.BorderRadius>
+            </Button>
 
         </Grid>
     </ContentPage.Content>

@@ -65,7 +65,7 @@ namespace BayardsSafetyApp
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-            found.Found = new Risks(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name);
+            found.Found = new SectionContentPage(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name);
             Device.BeginInvokeOnMainThread(() => {
                 Navigation.PopModalAsync();
             });
