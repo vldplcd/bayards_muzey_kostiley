@@ -31,13 +31,13 @@
                         <ColumnDefinition Width="0.2*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label x:Name="textDetails" Grid.Row="1" Grid.Column="0" TextColor="Black"></Label>
+                    <Label x:Name="textDetails" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" TextColor="Black"></Label>
                     
                     <Button x:Name="showImagesButton" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Clicked="ShowImagesButton_Clicked" Margin="10"
                      HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
                      TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1"/>
                     
-                    <ListView x:Name ="pictView" HasUnevenRows="True" HeightRequest="-1" SeparatorVisibility="None" 
+                    <ListView x:Name ="pictView" HasUnevenRows="True" HeightRequest="-1" SeparatorVisibility="None"
                        Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -54,7 +54,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <Button x:Name="showVideosButton" Grid.Row="4" Grid.Column="1" Clicked="ShowVideosButton_Clicked" Margin="10"
+                    <Button x:Name="showVideosButton" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Clicked="ShowVideosButton_Clicked" Margin="10"
                      HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
                      TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1"/>
 
@@ -63,7 +63,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" MinimumHeightRequest="50" HorizontalOptions="Fill">
+                                    <StackLayout Orientation="Horizontal" MinimumHeightRequest="50" HorizontalOptions="CenterAndExpand">
                                         <Button  Clicked="Button_Clicked" Margin="5" Text="{Binding Url}" CommandParameter="{Binding Url}"
                                         HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
                                         TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1"/>

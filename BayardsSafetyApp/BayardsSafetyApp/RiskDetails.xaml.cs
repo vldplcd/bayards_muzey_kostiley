@@ -17,6 +17,10 @@ namespace BayardsSafetyApp
         public RiskDetails(Risk risk)
         {
             InitializeComponent();
+
+            pictView.IsVisible = false;
+            videoView.IsVisible = false;
+
             BackgroundColor = Color.FromHex("#efefef");
             Header.Text = risk.Name;
             RiskId = risk.Id_r;
@@ -25,7 +29,12 @@ namespace BayardsSafetyApp
             showVideosButton.Text = AppResources.LangResources.ShowVideo;
             imagesList = risk.Media.FindAll(m => m.Type == "image" && m.Lang == AppResources.LangResources.Language);
             videosList = risk.Media.FindAll(m => m.Type == "image" && m.Lang == AppResources.LangResources.Language);
-
+            imagesList.Add(new Media { Url = "http://nakolenke.club/uploads/posts/2016-09/1473248821_kotiki04.jpg", Type = "image", Lang = AppResources.LangResources.Language });
+            imagesList.Add(new Media { Url = "http://nakolenke.club/uploads/posts/2016-09/1473248821_kotiki04.jpg", Type = "image", Lang = AppResources.LangResources.Language });
+            imagesList.Add(new Media { Url = "http://nakolenke.club/uploads/posts/2016-09/1473248821_kotiki04.jpg", Type = "image", Lang = AppResources.LangResources.Language });
+            videosList.Add(new Media { Url = "U47vs8RYbWA", Type = "video", Lang = AppResources.LangResources.Language });
+            videosList.Add(new Media { Url = "U47vs8RYbWA", Type = "video", Lang = AppResources.LangResources.Language });
+            videosList.Add(new Media { Url = "U47vs8RYbWA", Type = "video", Lang = AppResources.LangResources.Language });
             pictView.ItemsSource = imagesList;
             videoView.ItemsSource = videosList;
             riskGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
@@ -43,12 +52,14 @@ namespace BayardsSafetyApp
                     if (imagesList != null && imagesList.Count != 0)
                     {
                         riskGrid.RowDefinitions[3].Height = new GridLength(10, GridUnitType.Star);
+                        pictView.IsVisible = true;
                         showImagesButton.Text = AppResources.LangResources.HideImages;
                     }
                 }
                 else
                 {
                     riskGrid.RowDefinitions[3].Height = new GridLength(0, GridUnitType.Absolute);
+                    pictView.IsVisible = false;
                     showImagesButton.Text = AppResources.LangResources.ShowImages;
                 }
                 _isImagesListShown = value;
@@ -73,12 +84,14 @@ namespace BayardsSafetyApp
                     if(videoView.ItemsSource != null && videosList.Count != 0)
                     {
                         riskGrid.RowDefinitions[5].Height = new GridLength(10, GridUnitType.Star);
+                        videoView.IsVisible = true;
                         showVideosButton.Text = AppResources.LangResources.HideVideo;
                     }
                 }
                 else
                 {
                     riskGrid.RowDefinitions[5].Height = new GridLength(0, GridUnitType.Absolute);
+                    videoView.IsVisible = false;
                     showVideosButton.Text = AppResources.LangResources.ShowVideo;
                 }
                 _isVideosListShown = value;

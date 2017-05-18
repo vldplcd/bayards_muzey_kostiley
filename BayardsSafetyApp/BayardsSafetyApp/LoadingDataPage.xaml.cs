@@ -17,6 +17,7 @@ namespace BayardsSafetyApp
         public LoadingDataPage()
         {
             InitializeComponent();
+            TryAgain_Button.IsVisible = false;
             
         }
 
@@ -60,6 +61,7 @@ namespace BayardsSafetyApp
         }
         public void LoadData()
         {
+            TryAgain_Button.IsEnabled = false;
             try
             {
                 var load = Task.Run(() => {

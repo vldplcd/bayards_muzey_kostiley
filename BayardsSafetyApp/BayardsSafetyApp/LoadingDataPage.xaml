@@ -11,19 +11,19 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="1*"/>
-            </Grid.ColumnDefinitions>
+
             <Label Grid.Row ="1" HorizontalTextAlignment="Center" FontSize ="Medium">Loading Data</Label>
             <ActivityIndicator x:Name="AInd"
                                IsVisible="True"
                                IsRunning="True"
                            Grid.Row ="2" Color="Blue" HorizontalOptions="CenterAndExpand"/>
             <ProgressBar MinimumHeightRequest="5" x:Name="PrBar" Grid.Row="3"/>
-            <Button x:Name="TryAgain_Button" Text="Try again" Grid.Row="2" Margin="40" Clicked="TryAgain_Button_Clicked"/>
+            <Button x:Name="TryAgain_Button" Text="Try again" Grid.Row="4" Margin="20" Clicked="TryAgain_Button_Clicked"
+                    BackgroundColor="White" FontAttributes="Bold" TextColor="{StaticResource myAccentColor}"
+                    BorderColor="{StaticResource myAccentColor}" BorderWidth="1" BorderRadius="5"/>
         </Grid>
         
     </ContentPage.Content>

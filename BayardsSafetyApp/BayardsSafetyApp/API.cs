@@ -12,11 +12,24 @@ namespace BayardsSafetyApp
     //TODO: ОБЪЕДИНИТЬ В ОДИН МЕТОД ЗАПРОС
     public class API
     {
-        const string UriGetAll = "http://vhost29450.cpsite.ru/api/getAll?lang={0}";
-        const string UriSectionsListTemplate = "http://vhost29450.cpsite.ru/api/allSections?lang={0}";
-        const string UriSectionContent = "http://vhost29450.cpsite.ru/api/section?sectionid={0}&lang={1}";
-        const string UriRiskContent = "http://vhost29450.cpsite.ru/api/risk?riskid={0}&lang={1}";
-        const string UriUpdateTime = "http://vhost29450.cpsite.ru/api/getUpdateDate";
+        string host = "http://vhost29450.cpsite.ru";
+
+        public string Host
+        {
+            get
+            {
+                return host;
+            }
+            set
+            {
+                host = value;
+            }
+        }
+        const string UriGetAll = "{0}/api/getAll?lang={1}";
+        const string UriSectionsListTemplate = "{0}/api/allSections?lang={1}";
+        const string UriSectionContent = "{0}/api/section?sectionid={1}&lang={2}";
+        const string UriRiskContent = "{0}/api/risk?riskid={1}&lang={2}";
+        const string UriUpdateTime = "{0}/api/getUpdateDate";
 
         string[] _langs = new string[] { "eng", "nl" };
         public string[] Langs
@@ -39,7 +52,7 @@ namespace BayardsSafetyApp
         /// <returns>List of sections</returns>
         public async Task<List<Section>> getCompleteSectionsList(string language)
         {
-            string requestUri = String.Format(UriSectionsListTemplate, language);
+            string requestUri = String.Format(UriSectionsListTemplate, Host, language);
             List<Section> result;
             int n = 0;
             while (n < 4)
@@ -84,7 +97,7 @@ namespace BayardsSafetyApp
             DateTime current;
             using (HttpClient hc = new HttpClient())
             {
-                var responseMsg = hc.GetAsync(UriUpdateTime).Result;
+                var responseMsg = hc.GetAsync(string.Format(UriUpdateTime, Host)).Result;
                 var resultStr = await responseMsg.Content.ReadAsStringAsync();
                 var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Date = String.Empty });
                 if (res == null || res.Date == null || !DateTime.TryParseExact(res.Date, "yyyy-MM-dd HH:mm:ss", new CultureInfo("fr-FR"), DateTimeStyles.None, out current))
@@ -103,7 +116,7 @@ namespace BayardsSafetyApp
         public async Task<SectionContents> getSectionContent(string Id, string language)
         {
             SectionContents result;
-            string requestUri = String.Format(UriSectionContent, Id, language);
+            string requestUri = String.Format(UriSectionContent, Host, Id, language);
             int n = 0;
             while (n < 4)
             {
@@ -154,7 +167,7 @@ namespace BayardsSafetyApp
         public async Task<Risk> getRiskContent(string Id, string language)
         {
             Risk result;
-            string requestUri = string.Format(UriRiskContent, Id, language);
+            string requestUri = string.Format(UriRiskContent, Host, Id, language);
             int n = 0;
             while (n < 4)
             {
@@ -193,7 +206,7 @@ namespace BayardsSafetyApp
                 {
                     using (HttpClient hc = new HttpClient())
                     {
-                        var responseMsg = await hc.GetAsync(string.Format(UriGetAll, lang));
+                        var responseMsg = await hc.GetAsync(string.Format(UriGetAll, Host, lang));
                         if(responseMsg.IsSuccessStatusCode)
                         {
                             var resultStr = await responseMsg.Content.ReadAsStringAsync();
