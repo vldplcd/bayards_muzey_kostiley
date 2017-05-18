@@ -25,16 +25,12 @@ namespace BayardsSafetyApp
             Header.Text = risk.Name;
             RiskId = risk.Id_r;
             textDetails.Text = risk.Content;
-            showImagesButton.Text = AppResources.LangResources.ShowImages;
-            showVideosButton.Text = AppResources.LangResources.ShowVideo;
-            imagesList = risk.Media.FindAll(m => m.Type == "image" && m.Lang == AppResources.LangResources.Language);
-            videosList = risk.Media.FindAll(m => m.Type == "image" && m.Lang == AppResources.LangResources.Language);
-            imagesList.Add(new Media { Url = "http://nakolenke.club/uploads/posts/2016-09/1473248821_kotiki04.jpg", Type = "image", Lang = AppResources.LangResources.Language });
-            imagesList.Add(new Media { Url = "http://nakolenke.club/uploads/posts/2016-09/1473248821_kotiki04.jpg", Type = "image", Lang = AppResources.LangResources.Language });
-            imagesList.Add(new Media { Url = "http://nakolenke.club/uploads/posts/2016-09/1473248821_kotiki04.jpg", Type = "image", Lang = AppResources.LangResources.Language });
-            videosList.Add(new Media { Url = "U47vs8RYbWA", Type = "video", Lang = AppResources.LangResources.Language });
-            videosList.Add(new Media { Url = "U47vs8RYbWA", Type = "video", Lang = AppResources.LangResources.Language });
-            videosList.Add(new Media { Url = "U47vs8RYbWA", Type = "video", Lang = AppResources.LangResources.Language });
+            showImagesButton.Text = AppReses.LangResources.ShowImages;
+            showVideosButton.Text = AppReses.LangResources.ShowVideo;
+            var allMedia = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Id_r == risk.Id_r
+                                                                                       && m.Lang == AppReses.LangResources.Language);
+            imagesList = allMedia.FindAll(m => m.Type == "image");
+            videosList = allMedia.FindAll(m => m.Type == "video");
             pictView.ItemsSource = imagesList;
             videoView.ItemsSource = videosList;
             riskGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
@@ -53,14 +49,14 @@ namespace BayardsSafetyApp
                     {
                         riskGrid.RowDefinitions[3].Height = new GridLength(10, GridUnitType.Star);
                         pictView.IsVisible = true;
-                        showImagesButton.Text = AppResources.LangResources.HideImages;
+                        showImagesButton.Text = AppReses.LangResources.HideImages;
                     }
                 }
                 else
                 {
                     riskGrid.RowDefinitions[3].Height = new GridLength(0, GridUnitType.Absolute);
                     pictView.IsVisible = false;
-                    showImagesButton.Text = AppResources.LangResources.ShowImages;
+                    showImagesButton.Text = AppReses.LangResources.ShowImages;
                 }
                 _isImagesListShown = value;
             }
@@ -83,16 +79,16 @@ namespace BayardsSafetyApp
                 {
                     if(videoView.ItemsSource != null && videosList.Count != 0)
                     {
-                        riskGrid.RowDefinitions[5].Height = new GridLength(10, GridUnitType.Star);
+                        riskGrid.RowDefinitions[5].Height = new GridLength(10, GridUnitType.Auto);
                         videoView.IsVisible = true;
-                        showVideosButton.Text = AppResources.LangResources.HideVideo;
+                        showVideosButton.Text = AppReses.LangResources.HideVideo;
                     }
                 }
                 else
                 {
-                    riskGrid.RowDefinitions[5].Height = new GridLength(0, GridUnitType.Absolute);
+                    riskGrid.RowDefinitions[5].Height = new GridLength(0, GridUnitType.Auto);
                     videoView.IsVisible = false;
-                    showVideosButton.Text = AppResources.LangResources.ShowVideo;
+                    showVideosButton.Text = AppReses.LangResources.ShowVideo;
                 }
                 _isVideosListShown = value;
             }

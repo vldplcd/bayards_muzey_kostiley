@@ -43,10 +43,7 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal">
-                                        <Image Aspect="AspectFit" Margin="5">
-                                            <Image.Source>
-                                                <UriImageSource Uri="{Binding Url}" CachingEnabled="True" CacheValidity="1"/>
-                                            </Image.Source>
+                                        <Image Aspect="AspectFit" Margin="5" Source="{Binding Url}">
                                         </Image>
                                     </StackLayout>
                                 </ViewCell>

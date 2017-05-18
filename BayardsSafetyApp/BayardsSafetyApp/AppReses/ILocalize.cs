@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace BayardsSafetyApp.AppResources
+namespace BayardsSafetyApp.AppRes
 {
     public interface ILocalize
     {

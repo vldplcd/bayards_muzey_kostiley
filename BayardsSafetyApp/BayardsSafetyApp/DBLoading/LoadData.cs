@@ -1,9 +1,12 @@
 ﻿using BayardsSafetyApp.DTO;
 using BayardsSafetyApp.Entities;
+using PCLStorage;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -26,38 +29,6 @@ namespace BayardsSafetyApp.DBLoading
         {
             try
             {
-                //using (var context = App.Database.SectionDatabase)
-                //{
-                //    if (_sections.Count != 0)
-                //    {
-                ////        context.DeleteAll<Section>();
-                ////        context.InsertItems<Section>(_sections);
-                //    }
-                //}
-                //using (var context = App.Database.RiskDatabase)
-                //{
-                //    if (_risks.Count != 0)
-                //    {
-                //        context.DeleteAll<Risk>();
-                //        context.InsertItems<Risk>(_risks);
-                //    }
-                //}
-                //using (var context = App.Database.MediaDatabase)
-                //{
-                //    if (_mediaList.Count != 0)
-                //    {
-                //        context.DeleteAll<Media>();
-                //        context.InsertItems<Media>(_mediaList);
-                //    }
-
-                //}
-                //var context = App.Database;
-                //context.SectionDatabase.DeleteAll<Section>();
-                //context.RiskDatabase.DeleteAll<Risk>();
-                //context.MediaDatabase.DeleteAll<Media>();
-                //context.SectionDatabase.InsertItems<Section>(_sections);
-                //context.RiskDatabase.InsertItems<Risk>(_risks);
-                //context.MediaDatabase.InsertItems<Media>(_mediaList);
                 Application.Current.Properties["AllSections"] = Utils.SerializeToJson(_sections);
                 Application.Current.Properties["AllRisks"] = Utils.SerializeToJson(_risks);
                 Application.Current.Properties["AllMedia"] = Utils.SerializeToJson(_mediaList);
@@ -77,6 +48,7 @@ namespace BayardsSafetyApp.DBLoading
         }
         public async Task ToDatabase()
         {
+            
             Process = 0;
             OnProgressEvent?.Invoke(Process);
             _risks = new List<Risk>();
@@ -127,7 +99,16 @@ namespace BayardsSafetyApp.DBLoading
             {
 
                 foreach (var m in r.Media)
-                    mediaL.Add(new Media { Lang = Lang, Id_r = r.Id_r, Url = m.Url, Type = m.Type });
+                {
+                    string UrlToSave;
+                    if (m.Type == "image")
+                        UrlToSave = SaveImage(m.Url).Result;
+                    else
+                        UrlToSave = m.Url;
+
+                    mediaL.Add(new Media { Lang = Lang, Id_r = r.Id_r, Url = UrlToSave, Type = m.Type });                    
+                }
+                    
             }
             var subsects = sectAPI.Subsections == null ? new SectionAPI[0] : sectAPI.Subsections;
             if (subsects.Length != 0)
@@ -137,6 +118,33 @@ namespace BayardsSafetyApp.DBLoading
             }
             
 
+        }
+
+        private async Task<string> SaveImage(string fileName)
+        {
+            string filePath;
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    using (HttpResponseMessage response = await client.GetAsync(string.Format(_api.ImagePath, _api.Host, fileName), HttpCompletionOption.ResponseHeadersRead))
+                    { 
+                        IFile file = await FileSystem.Current.LocalStorage.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                        filePath = file.Path;
+                            using (Stream stream = await file.OpenAsync(FileAccess.ReadAndWrite))
+                            {
+                                var buffer = await response.Content.ReadAsByteArrayAsync();
+                                await stream.WriteAsync(buffer, 0, buffer.Length);
+                            }
+                    }
+                }
+                return filePath;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
         public async Task ToDatabaseCoplexAPI()
         {

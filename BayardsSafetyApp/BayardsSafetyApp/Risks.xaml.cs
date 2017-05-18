@@ -17,7 +17,7 @@ namespace BayardsSafetyApp
             InitializeComponent();
             IsLoading = false;
             BackgroundColor = Color.FromHex("#efefef");
-            Title = AppResources.LangResources.Risk;
+            Title = AppReses.LangResources.Risk;
             
         }
 
@@ -64,7 +64,7 @@ namespace BayardsSafetyApp
                             //                                                                   m.Lang == AppResources.LangResources.Language).ToList().
                             //                                                                       Select(m => m.Url).ToList();
                             var med = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Id_r == r.Id_r &&
-                                                                                               m.Lang == AppResources.LangResources.Language).ToList();
+                                                                                               m.Lang == AppReses.LangResources.Language).ToList();
                             rToDisp.Media = med;
                             _risks.Add(new RiskDetails(rToDisp));
                         }

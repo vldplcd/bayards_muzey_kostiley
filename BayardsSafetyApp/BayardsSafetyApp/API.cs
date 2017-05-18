@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using BayardsSafetyApp.Entities;
 using System.Net.Http;
@@ -30,6 +31,20 @@ namespace BayardsSafetyApp
         const string UriSectionContent = "{0}/api/section?sectionid={1}&lang={2}";
         const string UriRiskContent = "{0}/api/risk?riskid={1}&lang={2}";
         const string UriUpdateTime = "{0}/api/getUpdateDate";
+        const string UriCheckPassword = "{0}/api/checkPassword";
+        string UriImagePath = "{0}/ui/images/{1}";
+
+        public string ImagePath
+        {
+            get
+            {
+                return UriImagePath;
+            }
+            set
+            {
+                UriImagePath = value;
+            }
+        }
 
         string[] _langs = new string[] { "eng", "nl" };
         public string[] Langs
@@ -149,14 +164,24 @@ namespace BayardsSafetyApp
         /// </summary>
         /// <param name="password"></param>
         /// <returns>Returns true if password is correct, else returns false</returns>
-        public bool isPasswordCorrect(string password)
+        public async Task<bool> isPasswordCorrect(string password)
         {
-            if (password == "central") return true; //УДАЛИТЬ ПОСКОРЕЕЕЕЕ
+            int flag = 0;
             using (HttpClient hc = new HttpClient())
             {
-                //POST REQUEST
+                var values = new Dictionary<string, string>
+                {
+                   { "password", password}
+                };
+
+                var content = new FormUrlEncodedContent(values);
+                var response = hc.PostAsync(string.Format(UriCheckPassword, Host), content).Result;
+                var responseString = await response.Content.ReadAsStringAsync();
+                var res = JsonConvert.DeserializeAnonymousType(responseString, new { check = 0 });
+                flag = res.check;
             }
-            return false;
+
+            return flag == 1;
 
         }
         /// <summary>
@@ -178,7 +203,10 @@ namespace BayardsSafetyApp
                         var responseMsg = hc.GetAsync(requestUri).Result;
                         var resultStr = responseMsg.Content.ReadAsStringAsync().Result;
                         var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Risk = new Risk(), Media = new List<Media>() });
-                        res.Risk.Media = res.Media;
+                        var temp_media = new List<Media>();
+                        foreach (var m in res.Media)
+                            temp_media.Add(new Media { Id_r = m.Id_r, Lang = m.Lang, Type = m.Type, Url = string.Format(UriImagePath, Host, m.Url) });
+                        res.Risk.Media = temp_media;
                         result = res.Risk;
                         if (result.Id_r == null)
                             throw new Exception("No info downloaded. Trying to retry");

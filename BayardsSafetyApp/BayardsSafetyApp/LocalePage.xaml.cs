@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using BayardsSafetyApp.AppResources;
+using BayardsSafetyApp.AppReses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BayardsSafetyApp.AppResources
+namespace BayardsSafetyApp.AppReses
 {
     public class PlatformCulture
     {

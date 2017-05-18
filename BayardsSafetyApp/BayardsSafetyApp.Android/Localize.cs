@@ -1,13 +1,13 @@
 ﻿using System.Globalization;
 using System.Threading;
-using BayardsSafetyApp.AppResources;
+using BayardsSafetyApp.AppReses;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(BayardsSafetyApp.Droid.Localize))]
 
 namespace BayardsSafetyApp.Droid
 {
-    public class Localize : AppResources.ILocalize
+    public class Localize
     {
         public void SetLocale(CultureInfo ci)
         {
@@ -31,8 +31,8 @@ namespace BayardsSafetyApp.Droid
                 // fallback to first characters, in this case "en"
                 try
                 {
-                    var fallback = ToDotnetFallbackLanguage(new PlatformCulture(netLanguage));
-                    ci = new System.Globalization.CultureInfo(fallback);
+                    //var fallback = ToDotnetFallbackLanguage(new PlatformCulture(netLanguage));
+                    //ci = new System.Globalization.CultureInfo(fallback);
                 }
                 catch (CultureNotFoundException e2)
                 {
@@ -64,18 +64,18 @@ namespace BayardsSafetyApp.Droid
             }
             return netLanguage;
         }
-        string ToDotnetFallbackLanguage(PlatformCulture platCulture)
-        {
-            var netLanguage = platCulture.LanguageCode; // use the first part of the identifier (two chars, usually);
-            switch (platCulture.LanguageCode)
-            {
-                case "gsw":
-                    netLanguage = "de-CH"; // equivalent to German (Switzerland) for this app
-                    break;
-                // add more application-specific cases here (if required)
-                // ONLY use cultures that have been tested and known to work
-            }
-            return netLanguage;
-        }
+        //string ToDotnetFallbackLanguage(PlatformCulture platCulture)
+        //{
+        //    var netLanguage = platCulture.LanguageCode; // use the first part of the identifier (two chars, usually);
+        //    switch (platCulture.LanguageCode)
+        //    {
+        //        case "gsw":
+        //            netLanguage = "de-CH"; // equivalent to German (Switzerland) for this app
+        //            break;
+        //        // add more application-specific cases here (if required)
+        //        // ONLY use cultures that have been tested and known to work
+        //    }
+        //    return netLanguage;
+        //}
     }
 }

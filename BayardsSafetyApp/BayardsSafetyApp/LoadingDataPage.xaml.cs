@@ -36,7 +36,7 @@ namespace BayardsSafetyApp
                 Application.Current.Properties["UpdateTime"] = DateTime.Now;
                 Application.Current.SavePropertiesAsync().Wait();
                 Cont.Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                   FindAll(s => s.Parent_s == "null"&&s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                   FindAll(s => s.Parent_s == "null"&&s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList();
                 //Cont.Contents = App.Database.SectionDatabase.GetItems<Section>().ToList();
                 
             }
@@ -118,7 +118,7 @@ namespace BayardsSafetyApp
                 //                                                                        OrderBy(s => s.Name).ToList();
                 //}                    
                 Cont.Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == "null" && s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList();
                 Navigation.PushAsync(Cont);
                 return false;
             }

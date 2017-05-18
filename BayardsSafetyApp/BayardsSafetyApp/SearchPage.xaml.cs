@@ -51,7 +51,7 @@ namespace BayardsSafetyApp
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
             API api = new API();
-            var rToDisp = api.getRiskContent(((Risk)e.SelectedItem).Id_r, AppResources.LangResources.Language).Result;
+            var rToDisp = api.getRiskContent(((Risk)e.SelectedItem).Id_r, AppReses.LangResources.Language).Result;
             found.Found = new RiskDetails(rToDisp);
             Device.BeginInvokeOnMainThread(() => {
                 Navigation.PopModalAsync();
@@ -76,16 +76,16 @@ namespace BayardsSafetyApp
         {
             if (e.NewTextValue == null)
             {
-                foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppResources.LangResources.Language);
-                foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppResources.LangResources.Language);
+                foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppReses.LangResources.Language);
+                foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppReses.LangResources.Language);
                 sectView.ItemsSource = foundSections;
                 riskView.ItemsSource = foundRisks;
             }
             else
             {
-                foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppResources.LangResources.Language);
+                foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppReses.LangResources.Language);
                 foundRisks = foundRisks.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
-                foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppResources.LangResources.Language);
+                foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppReses.LangResources.Language);
                 foundSections = foundSections.FindAll(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
                 sectView.ItemsSource = foundSections;
                 riskView.ItemsSource = foundRisks;
@@ -95,8 +95,8 @@ namespace BayardsSafetyApp
 
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppResources.LangResources.Language);
-            foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppResources.LangResources.Language);
+            foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Lang == AppReses.LangResources.Language);
+            foundSections = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Lang == AppReses.LangResources.Language);
             sectView.ItemsSource = foundSections;
             riskView.ItemsSource = foundRisks;
         }

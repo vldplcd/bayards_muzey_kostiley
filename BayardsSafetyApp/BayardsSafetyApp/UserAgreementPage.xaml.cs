@@ -1,5 +1,4 @@
-﻿using BayardsSafetyApp.AppResources;
-using BayardsSafetyApp.Entities;
+﻿using BayardsSafetyApp.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +15,9 @@ namespace BayardsSafetyApp
         public UserAgreementPage()
         {
             InitializeComponent();
-            AgrmntLabel.Text = LangResources.AgrmntLabel;
-            ContinueButton.Text = LangResources.ContinueButton;
-            UserAgrLabel.Text = LangResources.UserAgreementText;
+            AgrmntLabel.Text = AppReses.LangResources.AgrmntLabel;
+            ContinueButton.Text = AppReses.LangResources.ContinueButton;
+            UserAgrLabel.Text = AppReses.LangResources.UserAgreementText;
         }
         protected override Boolean OnBackButtonPressed()
         {
@@ -84,7 +83,7 @@ namespace BayardsSafetyApp
             {
                 try
                 {
-                    contents = await api.getCompleteSectionsList(AppResources.LangResources.Language);
+                    contents = await api.getCompleteSectionsList(AppReses.LangResources.Language);
                     flag = true;
                 }
                 catch (Newtonsoft.Json.JsonReaderException)

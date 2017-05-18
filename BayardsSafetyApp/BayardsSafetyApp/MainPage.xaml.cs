@@ -45,8 +45,10 @@ namespace BayardsSafetyApp
                 {
                     await Task.Run(async () =>
                     {
-                        if (api.isPasswordCorrect(PasswordEntry.Text))
+                        var enc_password = MD5.GetMd5String(PasswordEntry.Text).Substring(0, 16);
+                        if (await api.isPasswordCorrect(enc_password))
                         {
+                            Application.Current.Properties["password"] = enc_password;
                             if (Application.Current.Properties.ContainsKey("LocAgr") && (bool)Application.Current.Properties["LocAgr"])
                             {
                                 AllSections.Contents = await LoadSections();
@@ -81,7 +83,7 @@ namespace BayardsSafetyApp
                         await Navigation.PushAsync(new LocalePage());
                     if (ex.Message.StartsWith("3"))
                         if (await DisplayAlert("Warning",
-                        AppResources.LangResources.DownloadWarn,
+                        AppReses.LangResources.DownloadWarn,
                         "OK", "Cancel"))
                             await Navigation.PushAsync(new LoadingDataPage());
                 }
@@ -117,7 +119,7 @@ namespace BayardsSafetyApp
                 //                                                                        && s.Lang == AppResources.LangResources.Language).
                 //                                                                        OrderBy(s => s.Name).ToList();
                 contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == "null" && s.Lang == AppResources.LangResources.Language).OrderBy(s => s.Name).ToList();
+                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList();
             }
 
             return contents;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BayardsSafetyApp.AppResources {
+namespace BayardsSafetyApp.AppReses {
     using System;
     using System.Reflection;
     
@@ -23,7 +23,7 @@ namespace BayardsSafetyApp.AppResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class LangResources {
+    internal class LangResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -37,10 +37,10 @@ namespace BayardsSafetyApp.AppResources {
         ///   Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BayardsSafetyApp.AppResources.LangResources", typeof(LangResources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BayardsSafetyApp.AppReses.LangResources", typeof(LangResources).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -52,7 +52,7 @@ namespace BayardsSafetyApp.AppResources {
         ///   обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -64,7 +64,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на User agreement.
         /// </summary>
-        public static string AgrmntLabel {
+        internal static string AgrmntLabel {
             get {
                 return ResourceManager.GetString("AgrmntLabel", resourceCulture);
             }
@@ -73,7 +73,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на I agree.
         /// </summary>
-        public static string ContinueButton {
+        internal static string ContinueButton {
             get {
                 return ResourceManager.GetString("ContinueButton", resourceCulture);
             }
@@ -82,7 +82,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на The information has been updated. Now the app will use the internet connection to download new data. Please be aware that there may be a charge for data transfer over the mobile network..
         /// </summary>
-        public static string DownloadWarn {
+        internal static string DownloadWarn {
             get {
                 return ResourceManager.GetString("DownloadWarn", resourceCulture);
             }
@@ -91,7 +91,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на English.
         /// </summary>
-        public static string EnButton {
+        internal static string EnButton {
             get {
                 return ResourceManager.GetString("EnButton", resourceCulture);
             }
@@ -100,7 +100,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Hide Images.
         /// </summary>
-        public static string HideImages {
+        internal static string HideImages {
             get {
                 return ResourceManager.GetString("HideImages", resourceCulture);
             }
@@ -109,7 +109,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Hide Video.
         /// </summary>
-        public static string HideVideo {
+        internal static string HideVideo {
             get {
                 return ResourceManager.GetString("HideVideo", resourceCulture);
             }
@@ -118,7 +118,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на The password is incorrect.
         /// </summary>
-        public static string IncPassword {
+        internal static string IncPassword {
             get {
                 return ResourceManager.GetString("IncPassword", resourceCulture);
             }
@@ -127,7 +127,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на eng.
         /// </summary>
-        public static string Language {
+        internal static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
             }
@@ -136,7 +136,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Please choose the language below.
         /// </summary>
-        public static string LocaleLabel {
+        internal static string LocaleLabel {
             get {
                 return ResourceManager.GetString("LocaleLabel", resourceCulture);
             }
@@ -145,7 +145,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Logout.
         /// </summary>
-        public static string Logout {
+        internal static string Logout {
             get {
                 return ResourceManager.GetString("Logout", resourceCulture);
             }
@@ -154,7 +154,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Dutch.
         /// </summary>
-        public static string NlButton {
+        internal static string NlButton {
             get {
                 return ResourceManager.GetString("NlButton", resourceCulture);
             }
@@ -163,7 +163,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Enter your password.
         /// </summary>
-        public static string PasswLabel {
+        internal static string PasswLabel {
             get {
                 return ResourceManager.GetString("PasswLabel", resourceCulture);
             }
@@ -172,7 +172,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Risks.
         /// </summary>
-        public static string Risk {
+        internal static string Risk {
             get {
                 return ResourceManager.GetString("Risk", resourceCulture);
             }
@@ -181,7 +181,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Settings.
         /// </summary>
-        public static string s {
+        internal static string s {
             get {
                 return ResourceManager.GetString("s", resourceCulture);
             }
@@ -190,7 +190,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Show Images.
         /// </summary>
-        public static string ShowImages {
+        internal static string ShowImages {
             get {
                 return ResourceManager.GetString("ShowImages", resourceCulture);
             }
@@ -199,7 +199,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Show Video.
         /// </summary>
-        public static string ShowVideo {
+        internal static string ShowVideo {
             get {
                 return ResourceManager.GetString("ShowVideo", resourceCulture);
             }
@@ -208,7 +208,7 @@ namespace BayardsSafetyApp.AppResources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Tasks.
         /// </summary>
-        public static string Task {
+        internal static string Task {
             get {
                 return ResourceManager.GetString("Task", resourceCulture);
             }
@@ -221,7 +221,7 @@ namespace BayardsSafetyApp.AppResources {
         ///                        placerat odio. Nulla auctor porttitor lacinia. Integer 
         ///     [остаток строки не уместился]&quot;;.
         /// </summary>
-        public static string UserAgreementText {
+        internal static string UserAgreementText {
             get {
                 return ResourceManager.GetString("UserAgreementText", resourceCulture);
             }
