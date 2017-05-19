@@ -37,12 +37,24 @@
             <Entry x:Name="PasswordEntry" Grid.Column="1" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalOptions="Center"
                    Placeholder="password" BackgroundColor="White" IsPassword="true"  Completed="PasswordEntry_Completed" Grid.Row="4"/>
             <Button x:Name="ContinueButton" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="6" Text="Continue" Clicked="ContinueButton_Clicked"
-                     HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White" Margin="10"
+                     HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
                     TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1">
                 <Button.BorderRadius>
-                    <!-- HACK: fixes a bug where border doesn't work without a radius. -->
                     10
                 </Button.BorderRadius>
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            10
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            0, 0, 0, 0
+                        </OnPlatform.Android>
+                        <OnPlatform.WinPhone>
+                            10
+                        </OnPlatform.WinPhone>
+                    </OnPlatform>
+                </Button.Margin>
             </Button>
 
         </Grid>

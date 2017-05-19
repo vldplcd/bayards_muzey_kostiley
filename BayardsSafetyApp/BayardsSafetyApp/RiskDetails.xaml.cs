@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Linq;
 
 namespace BayardsSafetyApp
 {
@@ -13,11 +14,11 @@ namespace BayardsSafetyApp
 
         private List<Media> imagesList;
         private List<Media> videosList;
-
+        double _width;
         public RiskDetails(Risk risk)
         {
             InitializeComponent();
-
+            _width = Application.Current.MainPage.Width * 0.95;
             pictView.IsVisible = false;
             videoView.IsVisible = false;
 
@@ -29,11 +30,13 @@ namespace BayardsSafetyApp
             showVideosButton.Text = AppReses.LangResources.ShowVideo;
             var allMedia = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Id_r == risk.Id_r
                                                                                        && m.Lang == AppReses.LangResources.Language);
-            imagesList = allMedia.FindAll(m => m.Type == "image");
+            var temp_imagesList = allMedia.FindAll(m => m.Type == "image");
+            imagesList = new List<Media>();
+            foreach (var im in temp_imagesList)
+                imagesList.Add(new Media { Id_r = im.Id_r, Lang = im.Lang, Type = im.Type, Url = im.Url, Width = _width });
             videosList = allMedia.FindAll(m => m.Type == "video");
             pictView.ItemsSource = imagesList;
             videoView.ItemsSource = videosList;
-            riskGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20, GridUnitType.Star) });
         }
         bool _isImagesListShown = false;
         private bool IsImagesListShown
@@ -47,7 +50,8 @@ namespace BayardsSafetyApp
                 {
                     if (imagesList != null && imagesList.Count != 0)
                     {
-                        riskGrid.RowDefinitions[3].Height = new GridLength(10, GridUnitType.Star);
+                        riskGrid.RowDefinitions[3].Height = new GridLength(10, GridUnitType.Auto);
+                        
                         pictView.IsVisible = true;
                         showImagesButton.Text = AppReses.LangResources.HideImages;
                     }
@@ -86,7 +90,7 @@ namespace BayardsSafetyApp
                 }
                 else
                 {
-                    riskGrid.RowDefinitions[5].Height = new GridLength(0, GridUnitType.Auto);
+                    riskGrid.RowDefinitions[5].Height = new GridLength(0, GridUnitType.Absolute);
                     videoView.IsVisible = false;
                     showVideosButton.Text = AppReses.LangResources.ShowVideo;
                 }

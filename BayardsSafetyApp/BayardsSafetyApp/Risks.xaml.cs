@@ -72,7 +72,7 @@ namespace BayardsSafetyApp
                     flag = true;
                     Navigation.PushAsync(new RisksCarousel(_risks, ((Risk)e.SelectedItem).Id_r, Title));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     //DisplayAlert("Error", ex.Message, "Ok");
                 }

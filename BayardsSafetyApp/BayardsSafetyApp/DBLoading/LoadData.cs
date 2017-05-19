@@ -48,7 +48,16 @@ namespace BayardsSafetyApp.DBLoading
         }
         public async Task ToDatabase()
         {
-            
+            try
+            {
+                if (Application.Current.Properties.ContainsKey("AllMedia"))
+                {
+                    var mediaToDelete = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Type == "image");
+                    foreach (var media in mediaToDelete)
+                        await FileSystem.Current.GetFileFromPathAsync(media.Url).Result.DeleteAsync();
+                }
+            }
+            catch { }
             Process = 0;
             OnProgressEvent?.Invoke(Process);
             _risks = new List<Risk>();
@@ -95,7 +104,7 @@ namespace BayardsSafetyApp.DBLoading
                     });
             }
             
-            foreach(var r in risks)
+            foreach(var r in temprisks)
             {
 
                 foreach (var m in r.Media)
@@ -125,19 +134,24 @@ namespace BayardsSafetyApp.DBLoading
             string filePath;
             try
             {
-                using (HttpClient client = new HttpClient())
+                if (await FileSystem.Current.LocalStorage.CheckExistsAsync(fileName) != ExistenceCheckResult.FileExists)
                 {
-                    using (HttpResponseMessage response = await client.GetAsync(string.Format(_api.ImagePath, _api.Host, fileName), HttpCompletionOption.ResponseHeadersRead))
-                    { 
-                        IFile file = await FileSystem.Current.LocalStorage.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-                        filePath = file.Path;
+                    using (HttpClient client = new HttpClient())
+                    {
+                        using (HttpResponseMessage response = await client.GetAsync(string.Format(_api.ImagePath, _api.Host, fileName), HttpCompletionOption.ResponseHeadersRead))
+                        {
+                            IFile file = await FileSystem.Current.LocalStorage.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                            filePath = file.Path;
                             using (Stream stream = await file.OpenAsync(FileAccess.ReadAndWrite))
                             {
                                 var buffer = await response.Content.ReadAsByteArrayAsync();
                                 await stream.WriteAsync(buffer, 0, buffer.Length);
                             }
+                        }
                     }
                 }
+                else
+                    filePath = (await FileSystem.Current.LocalStorage.GetFileAsync(fileName)).Path;
                 return filePath;
             }
             catch (Exception ex)
@@ -148,6 +162,12 @@ namespace BayardsSafetyApp.DBLoading
         }
         public async Task ToDatabaseCoplexAPI()
         {
+            if (Application.Current.Properties.ContainsKey("AllMedia"))
+            {
+                var mediaToDelete = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Type == "image");
+                foreach (var media in mediaToDelete)
+                    await FileSystem.Current.GetFileFromPathAsync(media.Url).Result.DeleteAsync();
+            }
             Process = 0;
             OnProgressEvent?.Invoke(Process);
             _risks = new List<Risk>();
