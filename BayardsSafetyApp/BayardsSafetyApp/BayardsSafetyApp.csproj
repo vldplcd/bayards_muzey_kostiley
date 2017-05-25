@@ -84,6 +84,9 @@
     <Compile Include="SectionContentPage.xaml.cs">
       <DependentUpon>SectionContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SideMenu.xaml.cs">
+      <DependentUpon>SideMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserAgreementPage.xaml.cs">
       <DependentUpon>UserAgreementPage.xaml</DependentUpon>
     </Compile>
@@ -227,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SectionContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SideMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

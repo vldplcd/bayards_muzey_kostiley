@@ -166,7 +166,7 @@ namespace BayardsSafetyApp
         /// <returns>Returns true if password is correct, else returns false</returns>
         public async Task<bool> isPasswordCorrect(string password)
         {
-            int flag = 0;
+            int? flag = 0;
             using (HttpClient hc = new HttpClient())
             {
                 var values = new Dictionary<string, string>
@@ -177,7 +177,7 @@ namespace BayardsSafetyApp
                 var content = new FormUrlEncodedContent(values);
                 var response = hc.PostAsync(string.Format(UriCheckPassword, Host), content).Result;
                 var responseString = await response.Content.ReadAsStringAsync();
-                var res = JsonConvert.DeserializeAnonymousType(responseString, new { check = 0 });
+                var res = JsonConvert.DeserializeAnonymousType(responseString, new { check = new int?() });
                 flag = res.check;
             }
 

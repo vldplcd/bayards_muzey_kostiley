@@ -16,6 +16,8 @@ namespace BayardsSafetyApp.Entities
         public string Name { get; set; }
         [Column("lang")]
         public string Lang { get; set; }
+        [Column("order")]
+        public int? Order { get; set; }
 
     }
 }

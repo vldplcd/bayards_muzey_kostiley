@@ -87,7 +87,7 @@ namespace BayardsSafetyApp.DBLoading
 
         public void DecompSectionAPI(string Lang, string ParentSect, SectionAPI sectAPI, ref List<Section> sects, ref List<Risk> risks, ref List<Media> mediaL)
         {
-            sects.Add(new Section { Name = sectAPI.Name, Id_s = sectAPI.Id_s, Lang = Lang, Parent_s = ParentSect });
+            sects.Add(new Section { Name = sectAPI.Name, Id_s = sectAPI.Id_s, Lang = Lang, Parent_s = ParentSect, Order = sectAPI.Order });
 
             var temprisks = sectAPI.Risks == null ? new Risk[0] : sectAPI.Risks;
             if(temprisks.Length != 0)
@@ -100,7 +100,8 @@ namespace BayardsSafetyApp.DBLoading
                         Name = r.Name,
                         Content = r.Content,
                         Parent_s = sectAPI.Id_s,
-                        Media = r.Media
+                        Media = r.Media,
+                        Order = r.Order
                     });
             }
             

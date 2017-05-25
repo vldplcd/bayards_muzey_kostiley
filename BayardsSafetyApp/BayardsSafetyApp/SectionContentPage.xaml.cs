@@ -57,13 +57,13 @@ namespace BayardsSafetyApp
                     var d_risks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Parent_s == _sId
                                                                                         && r.Lang == AppReses.LangResources.Language).ToList();
                     if (d_risks != null)
-                        Contents.Risks = d_risks.OrderBy(r => r.Name).ToList();
+                        Contents.Risks = d_risks.OrderBy(r => r.Order).ThenBy(r => r.Name).ToList();
 
 
                     var d_sects = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).FindAll(s => s.Parent_s == _sId
                                                                                         && s.Lang == AppReses.LangResources.Language).ToList();
                     if (d_sects != null)
-                        Contents.Subsections = d_sects.OrderBy(r => r.Name).ToList();
+                        Contents.Subsections = d_sects.OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
                     
                     
                     flag = true;

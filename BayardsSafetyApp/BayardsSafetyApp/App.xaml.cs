@@ -30,27 +30,43 @@ namespace BayardsSafetyApp
                         !(Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")) ||
                             api.isUpdataNeeded((DateTime)Application.Current.Properties["UpdateTime"]).Result)
                     {
-                        if(api.isPasswordCorrect((string)Current.Properties["password"]).Result)
+                        if (api.isPasswordCorrect((string)Current.Properties["password"]).Result)
                             pageToStart = new NavigationPage(new LoadingDataPage());
                         else
                             pageToStart = new NavigationPage(new MainPage());
                     }
                     else
                     {
-                        pageToStart = new NavigationPage(new Sections
+                        var mp = GetMasterPage();
+                        mp.Detail = new Sections
                         {
                             Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                                        FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList()
-                        });
+                                        FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList()
+                    };
+                        pageToStart = new NavigationPage(mp);
+                        //pageToStart = new NavigationPage(new Sections
+                        //{
+                        //    Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
+                        //                FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList()
+                        //});
                     }
 
                 }
-                else if((Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")))
-                    pageToStart = new NavigationPage(new Sections
+                else if ((Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")))
+                {
+                    var mp = GetMasterPage();
+                    mp.Detail = new Sections
                     {
-                        Contents = ((List<Entities.Section>)Current.Properties["AllSections"]).
-                                                        FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language)
-                    });
+                        Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
+                                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList()
+                };
+                    pageToStart = new NavigationPage(mp);
+                    //pageToStart = new NavigationPage(new Sections
+                    //{
+                    //    Contents = ((List<Entities.Section>)Current.Properties["AllSections"]).
+                    //                                   FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language)
+                    //});
+                }
                 else
                     pageToStart = new NavigationPage(new MainPage());
             }
@@ -61,7 +77,14 @@ namespace BayardsSafetyApp
             pageToStart.BarTextColor = Color.White;
             MainPage = pageToStart;
         }
-
+        private MasterDetailPage GetMasterPage()
+        {
+            var mp = new MasterDetailPage();
+            mp.Master = new SideMenu();
+            mp.IsPresented = false;
+            mp.MasterBehavior = MasterBehavior.Popover;
+            return mp;
+        }
         protected override void OnStart()
         {
             // Handle when your app starts

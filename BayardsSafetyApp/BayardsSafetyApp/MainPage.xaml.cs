@@ -78,7 +78,12 @@ namespace BayardsSafetyApp
                     if (ex.Message.StartsWith("Incorrect"))
                         await DisplayAlert("Warning", "The password is incorrect", "OK");
                     if (ex.Message.StartsWith("1"))
-                        await Navigation.PushAsync(AllSections);
+                    {
+                        var mp = GetMasterPage();
+                        mp.Detail = AllSections;
+                        await Navigation.PushAsync(mp);
+                    }
+                        
                     if (ex.Message.StartsWith("2"))
                         await Navigation.PushAsync(new LocalePage());
                     if (ex.Message.StartsWith("3"))
@@ -119,10 +124,18 @@ namespace BayardsSafetyApp
                 //                                                                        && s.Lang == AppResources.LangResources.Language).
                 //                                                                        OrderBy(s => s.Name).ToList();
                 contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList();
+                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
             }
 
             return contents;
+        }
+        private MasterDetailPage GetMasterPage()
+        {
+            var mp = new MasterDetailPage();
+            mp.Master = new SideMenu();
+            mp.IsPresented = false;
+            mp.MasterBehavior = MasterBehavior.Popover;
+            return mp;
         }
     }
 }

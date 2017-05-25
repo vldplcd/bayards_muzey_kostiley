@@ -116,13 +116,27 @@ namespace BayardsSafetyApp
                 //    Cont.Contents = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == "null"
                 //                                                                        && s.Lang == AppResources.LangResources.Language).
                 //                                                                        OrderBy(s => s.Name).ToList();
-                //}                    
+                //}
                 Cont.Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList();
-                Navigation.PushAsync(Cont);
+                                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
+                var mp = GetMasterPage();
+                mp.Detail = Cont;
+                try
+                {
+                    //var pageToPush = new NavigationPage(mp);
+                    Navigation.PushAsync(mp);
+                }
+                catch (Exception ex) { }
                 return false;
             }
             return true;
+        }
+        private MasterDetailPage GetMasterPage()
+        {
+            var mp = new MasterDetailPage();
+            mp.Master = new SideMenu();
+            //mp.IsPresented = false;
+            return mp;
         }
 
         private void TryAgain_Button_Clicked(object sender, EventArgs e)

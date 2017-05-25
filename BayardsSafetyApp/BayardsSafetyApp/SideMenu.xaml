@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BayardsSafetyApp.SideMenu">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand">
+            <ListView x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None" ItemSelected="listView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <Label TextColor="{StaticResource myPrimaryColor}" MinimumHeightRequest="40" Text="{Binding Title}" VerticalOptions="CenterAndExpand" 
+                                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" LineBreakMode="TailTruncation"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

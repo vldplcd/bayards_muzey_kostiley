@@ -42,11 +42,11 @@ namespace BayardsSafetyApp
             }
         }
 
-        protected override Boolean OnBackButtonPressed()
-        {
-            base.OnBackButtonPressed();
-            return true;
-        }
+        //protected override Boolean OnBackButtonPressed()
+        //{
+        //    base.OnBackButtonPressed();
+        //    return true;
+        //}
         private void SectionButton_Clicked(object sender, SelectedItemChangedEventArgs e)
         {
             IsLoading = true;

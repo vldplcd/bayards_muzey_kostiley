@@ -25,5 +25,7 @@ namespace BayardsSafetyApp.DTO
 
         [JsonProperty("subsections")]
         public SectionAPI[] Subsections { get; set; }
+        [JsonProperty("order")]
+        public int? Order { get; set; }
     }
 }
