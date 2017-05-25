@@ -40,9 +40,8 @@ namespace BayardsSafetyApp
                         var mp = GetMasterPage();
                         mp.Detail = new Sections
                         {
-                            Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                                        FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList()
-                    };
+                            ParentSection = "null"
+                        };
                         pageToStart = new NavigationPage(mp);
                         //pageToStart = new NavigationPage(new Sections
                         //{
@@ -57,9 +56,8 @@ namespace BayardsSafetyApp
                     var mp = GetMasterPage();
                     mp.Detail = new Sections
                     {
-                        Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList()
-                };
+                        ParentSection = "null"
+                    };
                     pageToStart = new NavigationPage(mp);
                     //pageToStart = new NavigationPage(new Sections
                     //{

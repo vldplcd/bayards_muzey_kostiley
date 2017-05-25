@@ -24,17 +24,17 @@ namespace BayardsSafetyApp
                 //IconSource = "contents.png",
                 TargetType = typeof(Sections)
             });
-            masterPageItems.Add(new MasterPageItem
-            {
-                Title = "Map of locations",
-                //IconSource = "map.png",
-                //TargetType = typeof(MapPage)
-            });
+            //masterPageItems.Add(new MasterPageItem
+            //{
+            //    Title = "Map of locations",
+            //    //IconSource = "map.png",
+            //    //TargetType = typeof(MapPage)
+            //});
             masterPageItems.Add(new MasterPageItem
             {
                 Title = "Settings",
                 //IconSource = "settings.png",
-                TargetType = typeof(Sections)
+                TargetType = typeof(SettingsPage)
             });
 
             listView.ItemsSource = masterPageItems;
@@ -76,11 +76,7 @@ namespace BayardsSafetyApp
 
                     //    break;
                     case "SettingsPage":
-                        ((MasterDetailPage)Parent).Detail = (new Sections
-                        {
-                            Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                        FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList()
-                        });
+                        ((MasterDetailPage)Parent).Detail = (new SettingsPage());
                         break;
                 }
                 listView.SelectedItem = null;

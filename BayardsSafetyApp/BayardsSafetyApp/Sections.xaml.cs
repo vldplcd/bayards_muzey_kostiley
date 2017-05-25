@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using BayardsSafetyApp.Entities;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Linq;
 
 namespace BayardsSafetyApp
 {
@@ -21,6 +22,7 @@ namespace BayardsSafetyApp
 
         }
         public Page Found { get; set; }
+        public string ParentSection { get; set; }
         List<Section> _contents;
         public List<Section> Contents
         {
@@ -64,7 +66,9 @@ namespace BayardsSafetyApp
                 Navigation.PushAsync(Found);
                 Found = null;
             }
-                
+            ParentSection = ParentSection == null ? "null" : ParentSection;
+            _contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
+                                    FindAll(s => s.Parent_s == ParentSection && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
             sectView.ItemsSource = _contents;
             sectView.SelectedItem = null;
         }

@@ -1,52 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             NavigationPage.HasBackButton="False"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BayardsSafetyApp.LocalePage">
-    
+             Title="Settings"
+             x:Class="BayardsSafetyApp.SettingsPage">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="1.7*"/>
                 <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="1.7*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2.7*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.1*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="LocaleLabel" Grid.Row ="2" Grid.Column="0" Grid.ColumnSpan="6" HorizontalTextAlignment="Center" FontSize ="Medium"/>
-            <Button x:Name="EnButton" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="3" Text="Continue" Clicked="EnButton_Clicked"
-                     HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
-                    TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1">
-                <Button.BorderRadius>
-                    10
-                </Button.BorderRadius>
-                <Button.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <OnPlatform.iOS>
-                            10
-                        </OnPlatform.iOS>
-                        <OnPlatform.Android>
-                            0, 0, 0, 0
-                        </OnPlatform.Android>
-                        <OnPlatform.WinPhone>
-                            10
-                        </OnPlatform.WinPhone>
-                    </OnPlatform>
-                </Button.Margin>
-            </Button>
+
+
+
+            <ActivityIndicator x:Name="AInd"
+                           Grid.Row ="7" Grid.Column="0" Grid.ColumnSpan="8" Color="Blue" HorizontalOptions="CenterAndExpand"/>
+            <Label HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6">Language</Label>
+            <Picker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" x:Name="langPicker" SelectedIndexChanged="langPicker_SelectedIndexChanged"></Picker>
             
-            <Button x:Name="NlButton" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="5" Text="Continue" Clicked="NlButton_Clicked"
+            <Button x:Name="checkUpdater_button" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="6" Text="Check Updates" CommandParameter="check" Clicked="checkUpdater_button_Clicked"
                      HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
                     TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1">
                 <Button.BorderRadius>
@@ -66,6 +55,7 @@
                     </OnPlatform>
                 </Button.Margin>
             </Button>
+            <Label x:Name="updMessage" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="6"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

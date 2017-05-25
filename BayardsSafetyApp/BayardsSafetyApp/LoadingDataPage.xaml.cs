@@ -117,8 +117,7 @@ namespace BayardsSafetyApp
                 //                                                                        && s.Lang == AppResources.LangResources.Language).
                 //                                                                        OrderBy(s => s.Name).ToList();
                 //}
-                Cont.Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                                    FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
+                Cont.ParentSection = "null";
                 var mp = GetMasterPage();
                 mp.Detail = Cont;
                 try
@@ -133,7 +132,7 @@ namespace BayardsSafetyApp
         }
         private MasterDetailPage GetMasterPage()
         {
-            var mp = new MasterDetailPage();
+           var mp = new MasterDetailPage();
             mp.Master = new SideMenu();
             //mp.IsPresented = false;
             return mp;

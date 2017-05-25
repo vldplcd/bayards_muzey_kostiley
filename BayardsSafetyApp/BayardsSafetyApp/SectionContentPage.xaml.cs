@@ -27,7 +27,7 @@ namespace BayardsSafetyApp
             riskPage.Contents = Contents.Risks;
             Children.Add(riskPage);
             var subtPage = new Sections();
-            subtPage.Contents = Contents.Subsections;
+            subtPage.ParentSection = _sId;
             subtPage.ToolbarItems.Clear();
             subtPage.Title = AppReses.LangResources.Task;
             Children.Add(subtPage);
