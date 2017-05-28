@@ -21,7 +21,8 @@ namespace BayardsSafetyApp
                 //LangResources.Culture = ci; // set the RESX for resource localization
                 //DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
             }
-            var pageToStart = new NavigationPage();
+            var isWithoutLoad = false;
+            var pageToStart = new Page();
             if (Current.Properties.ContainsKey("password"))
             {
                 if (api.CheckInternetConnection())
@@ -38,43 +39,54 @@ namespace BayardsSafetyApp
                     else
                     {
                         var mp = GetMasterPage();
-                        mp.Detail = new Sections
+                        
+                        mp.Detail = new NavigationPage(new Sections
                         {
                             ParentSection = "null"
+                        })
+                        {
+                            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+                            BarTextColor = Color.White
                         };
-                        pageToStart = new NavigationPage(mp);
-                        //pageToStart = new NavigationPage(new Sections
-                        //{
-                        //    Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                        //                FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList()
-                        //});
+                        isWithoutLoad = true;
+                        pageToStart = mp;
                     }
 
                 }
                 else if ((Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")))
                 {
                     var mp = GetMasterPage();
-                    mp.Detail = new Sections
+                    mp.Detail = new NavigationPage(new Sections
                     {
                         ParentSection = "null"
+                    })
+                    {
+                        BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+                        BarTextColor = Color.White
                     };
-                    pageToStart = new NavigationPage(mp);
-                    //pageToStart = new NavigationPage(new Sections
-                    //{
-                    //    Contents = ((List<Entities.Section>)Current.Properties["AllSections"]).
-                    //                                   FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language)
-                    //});
+                    
+                    isWithoutLoad = true;
+                    pageToStart = mp;
                 }
                 else
                     pageToStart = new NavigationPage(new MainPage());
             }
             else
                 pageToStart = new NavigationPage(new MainPage());
+            if (!isWithoutLoad)
+            {
+                ((NavigationPage)pageToStart).BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"];
+                ((NavigationPage)pageToStart).BarTextColor = Color.White;
+            }
             
-            pageToStart.BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"];
-            pageToStart.BarTextColor = Color.White;
             MainPage = pageToStart;
         }
+
+        public void ChangeMainPage(Page page)
+        {
+            MainPage = page;
+        }
+
         private MasterDetailPage GetMasterPage()
         {
             var mp = new MasterDetailPage();

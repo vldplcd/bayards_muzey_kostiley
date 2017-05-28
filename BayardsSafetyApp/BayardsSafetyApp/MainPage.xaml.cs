@@ -17,7 +17,7 @@ namespace BayardsSafetyApp
             AInd.IsRunning = false;
 
             BackgroundColor = Color.FromHex("#efefef");
-            
+
         }
 
         bool _isLoading;
@@ -80,17 +80,21 @@ namespace BayardsSafetyApp
                     if (ex.Message.StartsWith("1"))
                     {
                         var mp = GetMasterPage();
-                        mp.Detail = AllSections;
-                        await Navigation.PushAsync(mp);
+                        mp.Detail = new NavigationPage(AllSections);
+                        App.Current.MainPage = mp;
                     }
-                        
+
                     if (ex.Message.StartsWith("2"))
                         await Navigation.PushAsync(new LocalePage());
                     if (ex.Message.StartsWith("3"))
                         if (await DisplayAlert("Warning",
                         AppReses.LangResources.DownloadWarn,
                         "OK", "Cancel"))
+                        {
+                            //Navigation.PopAsync();
                             await Navigation.PushAsync(new LoadingDataPage());
+                        }
+
                 }
             }
             else
@@ -112,11 +116,11 @@ namespace BayardsSafetyApp
         {
             API api = new API();
             List<Section> contents = new List<Section>();
-            if (!Application.Current.Properties.ContainsKey("UpdateTime") || 
-                !(Application.Current.Properties.ContainsKey("AllSections")&& Application.Current.Properties.ContainsKey("AllRisks"))||
+            if (!Application.Current.Properties.ContainsKey("UpdateTime") ||
+                !(Application.Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")) ||
                 api.isUpdataNeeded((DateTime)Application.Current.Properties["UpdateTime"]).Result)
             {
-                    throw new Exception("3");
+                throw new Exception("3");
             }
             else
             {

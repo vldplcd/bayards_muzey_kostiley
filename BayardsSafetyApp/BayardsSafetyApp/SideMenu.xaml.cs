@@ -58,11 +58,11 @@ namespace BayardsSafetyApp
                 switch (a)
                 {
                     case "Sections":
-                        ((MasterDetailPage)Parent).Detail = (new Sections
+                        ((MasterDetailPage)Parent).Detail = new NavigationPage((new Sections
                         {
                             Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
                         FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList()
-                        });
+                        }));
                         break;
                     //case "MapPage":
                     //    try
@@ -76,7 +76,7 @@ namespace BayardsSafetyApp
 
                     //    break;
                     case "SettingsPage":
-                        ((MasterDetailPage)Parent).Detail = (new SettingsPage());
+                        ((MasterDetailPage)Parent).Detail = new NavigationPage((new SettingsPage()));
                         break;
                 }
                 listView.SelectedItem = null;

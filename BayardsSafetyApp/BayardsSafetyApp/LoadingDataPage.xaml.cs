@@ -110,20 +110,15 @@ namespace BayardsSafetyApp
             if(ld.Process == 1)
             {
                 Application.Current.Properties["UpdateTime"] = DateTime.Now;
-                //Application.Current.SavePropertiesAsync().Wait();
-                //using (var context = App.Database)
-                //{
-                //    Cont.Contents = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == "null"
-                //                                                                        && s.Lang == AppResources.LangResources.Language).
-                //                                                                        OrderBy(s => s.Name).ToList();
-                //}
                 Cont.ParentSection = "null";
                 var mp = GetMasterPage();
-                mp.Detail = Cont;
+                mp.Detail = new NavigationPage(Cont);
                 try
                 {
+                    App.Current.MainPage = mp;
                     //var pageToPush = new NavigationPage(mp);
-                    Navigation.PushAsync(mp);
+                    //ReplaceRoot(mp);
+                    //Navigation.PushAsync(mp);
                 }
                 catch (Exception ex) { }
                 return false;
@@ -132,8 +127,8 @@ namespace BayardsSafetyApp
         }
         private MasterDetailPage GetMasterPage()
         {
-           var mp = new MasterDetailPage();
-            mp.Master = new SideMenu();
+            var mp = new MasterDetailPage();
+            mp.Master =new SideMenu();
             //mp.IsPresented = false;
             return mp;
         }
@@ -144,5 +139,6 @@ namespace BayardsSafetyApp
             TryAgain_Button.IsVisible = true;
             LoadData();
         }
+
     }
 }

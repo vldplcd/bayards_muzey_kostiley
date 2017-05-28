@@ -47,7 +47,9 @@ namespace BayardsSafetyApp
         //protected override Boolean OnBackButtonPressed()
         //{
         //    base.OnBackButtonPressed();
-        //    return true;
+        //    if(ParentSection == "null")
+        //        return true;
+        //    return false;
         //}
         private void SectionButton_Clicked(object sender, SelectedItemChangedEventArgs e)
         {
@@ -67,6 +69,7 @@ namespace BayardsSafetyApp
                 Found = null;
             }
             ParentSection = ParentSection == null ? "null" : ParentSection;
+            
             _contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
                                     FindAll(s => s.Parent_s == ParentSection && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
             sectView.ItemsSource = _contents;
