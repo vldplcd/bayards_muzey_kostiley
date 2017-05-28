@@ -16,11 +16,11 @@ namespace BayardsSafetyApp
         public SideMenu()
         {
             InitializeComponent();
-            Title = "Menu";
+            Title = AppReses.LangResources.Menu;
             var masterPageItems = new List<MasterPageItem>();
             masterPageItems.Add(new MasterPageItem
             {
-                Title = "Contents",
+                Title = AppReses.LangResources.Contents,
                 //IconSource = "contents.png",
                 TargetType = typeof(Sections)
             });
@@ -32,7 +32,7 @@ namespace BayardsSafetyApp
             //});
             masterPageItems.Add(new MasterPageItem
             {
-                Title = "Settings",
+                Title = AppReses.LangResources.Settings,
                 //IconSource = "settings.png",
                 TargetType = typeof(SettingsPage)
             });

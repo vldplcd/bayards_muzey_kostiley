@@ -157,12 +157,7 @@
     <value>Tasks</value>
   </data>
   <data name="UserAgreementText" xml:space="preserve">
-    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae justo et quam bibendum elementum non eget nibh. Nam elementum risus eget libero cursus cursus. Morbi ut lacus non lacus auctor ultricies vitae sit amet urna. Sed vehicula facilisis lectus,
-                        ut imperdiet nisl cursus sit amet. Quisque scelerisque 
-                        pharetra blandit. Nulla at ante porttitor, molestie dolor et, 
-                        placerat odio. Nulla auctor porttitor lacinia. Integer 
-                        vulputate maximus lorem a feugiat. Nam vel volutpat felis. Nulla facilisi.
-                        Mauris tincidunt justo non elit porta maximus. Phasellus ac velit accumsan, ultricies risus vel, lacinia elit.Fusce rhoncus purus at quam ornare, imperdiet lacinia dui placerat. Etiam sit amet est cursus, dignissim libero sed, tincidunt nunc. Aliquam maximus, elit et lacinia viverra, sapien odio elementum tortor, a mattis diam diam sed risus. Proin rhoncus consequat est. Donec vel efficitur nisi. Nam tincidunt nunc lectus, et venenatis massa ullamcorper in. Morbi quis neque placerat urna gravida porta quis ac purus. Donec ac nibh non risus viverra semper. Nullam sapien sapien, commodo nec dolor vitae, congue aliquam sem. Morbi a metus nec turpis tristique vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam orci orci, interdum sed arcu vel, ornare vestibulum arcu. Praesent vehicula ligula nec libero tristique, ut interdum metus vestibulum. Pellentesque suscipit ornare erat sit amet ultrices. Aenean nisi eros, accumsan sed lectus et, bibendum vulputate massa. Nullam dignissim mi eros, eget varius diam consequat ut.</value>
+    <value>I</value>
   </data>
   <data name="HideImages" xml:space="preserve">
     <value>Hide Images</value>
@@ -175,5 +170,62 @@
   </data>
   <data name="ShowVideo" xml:space="preserve">
     <value>Show Video</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="Contents" xml:space="preserve">
+    <value>Contents</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="LangLabel" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LastUpd" xml:space="preserve">
+    <value>Last update</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoIntConn" xml:space="preserve">
+    <value>The app needs internet connection to check the password</value>
+  </data>
+  <data name="NoIntConnUpd" xml:space="preserve">
+    <value>The internet connection is needed to check updates</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OutdatedPassw" xml:space="preserve">
+    <value>Your password is out of date. You need to enter a new password to have updated information. Continue?</value>
+  </data>
+  <data name="ServerNoResp" xml:space="preserve">
+    <value>The server doesn't respond</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="UpdAvailable" xml:space="preserve">
+    <value>You can update the information</value>
+  </data>
+  <data name="UpdButton" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
   </data>
 </root>

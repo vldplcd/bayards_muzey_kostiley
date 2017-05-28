@@ -15,10 +15,10 @@ namespace BayardsSafetyApp
 
             InitializeComponent();
             IsLoading = false;
-            Title = "Contents";
+            Title = AppReses.LangResources.Contents;
             
             var command = new Command(async () => { await Navigation.PushModalAsync(new SearchPage(this)); });
-            ToolbarItems.Add(new ToolbarItem { Command = command, Text = "Search" });
+            ToolbarItems.Add(new ToolbarItem { Command = command, Text = AppReses.LangResources.Search });
 
         }
         public Page Found { get; set; }

@@ -67,7 +67,7 @@ namespace BayardsSafetyApp
                 }
                 catch (TaskCanceledException)
                 {
-                    await DisplayAlert("Warning", "The server doesn't respond", "OK");
+                    await DisplayAlert(AppReses.LangResources.Warning, AppReses.LangResources.ServerNoResp, AppReses.LangResources.OK);
                 }
                 catch (ArgumentException)
                 {
@@ -76,7 +76,7 @@ namespace BayardsSafetyApp
                 catch (Exception ex)
                 {
                     if (ex.Message.StartsWith("Incorrect"))
-                        await DisplayAlert("Warning", "The password is incorrect", "OK");
+                        await DisplayAlert(AppReses.LangResources.Warning, AppReses.LangResources.IncPassword, AppReses.LangResources.OK);
                     if (ex.Message.StartsWith("1"))
                     {
                         var mp = GetMasterPage();
@@ -87,9 +87,9 @@ namespace BayardsSafetyApp
                     if (ex.Message.StartsWith("2"))
                         await Navigation.PushAsync(new LocalePage());
                     if (ex.Message.StartsWith("3"))
-                        if (await DisplayAlert("Warning",
+                        if (await DisplayAlert(AppReses.LangResources.Warning,
                         AppReses.LangResources.DownloadWarn,
-                        "OK", "Cancel"))
+                        AppReses.LangResources.OK, AppReses.LangResources.Cancel))
                         {
                             //Navigation.PopAsync();
                             await Navigation.PushAsync(new LoadingDataPage());
@@ -99,7 +99,8 @@ namespace BayardsSafetyApp
             }
             else
             {
-                await DisplayAlert("Warning", "The app needs internet connection to check the password", "OK");
+                await DisplayAlert(AppReses.LangResources.Warning,
+                    AppReses.LangResources.NoIntConn, AppReses.LangResources.OK);
             }
             AInd.IsEnabled = false;
             AInd.IsRunning = false;

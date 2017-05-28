@@ -16,14 +16,14 @@ namespace BayardsSafetyApp
     {
         Dictionary<string, string> langsToPicker = new Dictionary<string, string>
         {
-            {"Dutch",  "nl"}, {"English", "en"}
+            {AppReses.LangResources.NlButton,  "nl"}, {AppReses.LangResources.EnButton, "en"}
         };
         public SettingsPage()
         {
             InitializeComponent();
-            langPicker.Title = "Choose language";
+            langPicker.Title = AppReses.LangResources.ChooseLang;
             langPicker.ItemsSource = langsToPicker.Keys.ToList();
-            updMessage.Text = $"Last update: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}.";
+            updMessage.Text = $"{AppReses.LangResources.LastUpd}: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}.";
         }
 
         private async void checkUpdater_button_Clicked(object sender, EventArgs e)
@@ -39,9 +39,9 @@ namespace BayardsSafetyApp
                     case "check":
                         if(api.isUpdataNeeded(((DateTime)Application.Current.Properties["UpdateTime"])).Result)
                         {
-                            checkUpdater_button.Text = "Update";
+                            checkUpdater_button.Text = AppReses.LangResources.UpdButton;
                             checkUpdater_button.CommandParameter = "update";
-                            updMessage.Text = "You can update the information";
+                            updMessage.Text = LangResources.UpdAvailable;
                         }
                         else
                         {
@@ -51,12 +51,14 @@ namespace BayardsSafetyApp
                     case "update":
                         if(api.isPasswordCorrect((string)Application.Current.Properties["password"]).Result)
                         {
-                            if (await DisplayAlert("Warning", LangResources.DownloadWarn, "OK", "Cancel"))
+                            if (await DisplayAlert(AppReses.LangResources.Warning, LangResources.DownloadWarn,
+                                AppReses.LangResources.OK, AppReses.LangResources.Cancel))
                                  await Navigation.PushAsync(new LoadingDataPage());
                         }
                         else
                         {
-                            if(await DisplayAlert("Warning", "Your password is out of date. You need to enter a new password to have updated information. Continue?", "Yes", "No"))
+                            if(await DisplayAlert(AppReses.LangResources.Warning, LangResources.OutdatedPassw,
+                                AppReses.LangResources.Yes, AppReses.LangResources.No))
                             {
                                 await Navigation.PushAsync(new MainPage());
                             }
@@ -68,7 +70,7 @@ namespace BayardsSafetyApp
             }
             else
             {
-                await DisplayAlert("Warning", "The internet connection is needed to check updates", "OK");
+                await DisplayAlert(AppReses.LangResources.Warning, AppReses.LangResources.NoIntConnUpd, AppReses.LangResources.OK);
             }
             AInd.IsEnabled = false;
             AInd.IsRunning = false;

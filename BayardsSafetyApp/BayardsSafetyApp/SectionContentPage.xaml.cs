@@ -23,7 +23,7 @@ namespace BayardsSafetyApp
             Title = sectionName;
 
             TabbedPage_Appearing();
-            var riskPage = new Risks();
+            var riskPage = new Risks() { ParentSection = sectionName };
             riskPage.Contents = Contents.Risks;
             Children.Add(riskPage);
             var subtPage = new Sections();

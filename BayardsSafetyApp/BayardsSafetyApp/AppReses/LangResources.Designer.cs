@@ -71,6 +71,33 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Choose language.
+        /// </summary>
+        internal static string ChooseLang {
+            get {
+                return ResourceManager.GetString("ChooseLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Contents.
+        /// </summary>
+        internal static string Contents {
+            get {
+                return ResourceManager.GetString("Contents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на I agree.
         /// </summary>
         internal static string ContinueButton {
@@ -94,6 +121,15 @@ namespace BayardsSafetyApp.AppReses {
         internal static string EnButton {
             get {
                 return ResourceManager.GetString("EnButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
             }
         }
         
@@ -125,11 +161,29 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Language.
+        /// </summary>
+        internal static string LangLabel {
+            get {
+                return ResourceManager.GetString("LangLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на eng.
         /// </summary>
         internal static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Last update.
+        /// </summary>
+        internal static string LastUpd {
+            get {
+                return ResourceManager.GetString("LastUpd", resourceCulture);
             }
         }
         
@@ -152,11 +206,65 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Menu.
+        /// </summary>
+        internal static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Dutch.
         /// </summary>
         internal static string NlButton {
             get {
                 return ResourceManager.GetString("NlButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The app needs internet connection to check the password.
+        /// </summary>
+        internal static string NoIntConn {
+            get {
+                return ResourceManager.GetString("NoIntConn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The internet connection is needed to check updates.
+        /// </summary>
+        internal static string NoIntConnUpd {
+            get {
+                return ResourceManager.GetString("NoIntConnUpd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на OK.
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Your password is out of date. You need to enter a new password to have updated information. Continue?.
+        /// </summary>
+        internal static string OutdatedPassw {
+            get {
+                return ResourceManager.GetString("OutdatedPassw", resourceCulture);
             }
         }
         
@@ -188,6 +296,33 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Search.
+        /// </summary>
+        internal static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The server doesn&apos;t respond.
+        /// </summary>
+        internal static string ServerNoResp {
+            get {
+                return ResourceManager.GetString("ServerNoResp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Show Images.
         /// </summary>
         internal static string ShowImages {
@@ -215,15 +350,47 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae justo et quam bibendum elementum non eget nibh. Nam elementum risus eget libero cursus cursus. Morbi ut lacus non lacus auctor ultricies vitae sit amet urna. Sed vehicula facilisis lectus,
-        ///                        ut imperdiet nisl cursus sit amet. Quisque scelerisque 
-        ///                        pharetra blandit. Nulla at ante porttitor, molestie dolor et, 
-        ///                        placerat odio. Nulla auctor porttitor lacinia. Integer 
-        ///     [остаток строки не уместился]&quot;;.
+        ///   Ищет локализованную строку, похожую на You can update the information.
+        /// </summary>
+        internal static string UpdAvailable {
+            get {
+                return ResourceManager.GetString("UpdAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Update.
+        /// </summary>
+        internal static string UpdButton {
+            get {
+                return ResourceManager.GetString("UpdButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на I.
         /// </summary>
         internal static string UserAgreementText {
             get {
                 return ResourceManager.GetString("UserAgreementText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Warning.
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

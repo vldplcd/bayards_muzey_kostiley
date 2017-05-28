@@ -74,7 +74,7 @@ namespace BayardsSafetyApp
                     {
                         Device.BeginInvokeOnMainThread(() => 
                         {
-                            DisplayAlert("Error", "Loading exception: "+ex.Message, "OK");
+                            DisplayAlert(AppReses.LangResources.Error, "Loading exception: "+ex.Message, AppReses.LangResources.OK);
                             TryAgain_Button.IsEnabled = true;
                             TryAgain_Button.IsVisible = true;
                             AInd.IsVisible = false;
@@ -87,7 +87,8 @@ namespace BayardsSafetyApp
             }
             catch (TaskCanceledException)
             {
-                DisplayAlert("Error", "A server does not respond", "OK");
+                DisplayAlert(AppReses.LangResources.Error, AppReses.LangResources.ServerNoResp,
+                    AppReses.LangResources.OK);
                 TryAgain_Button.IsEnabled = true;
                 TryAgain_Button.IsVisible = true;
 
@@ -97,7 +98,8 @@ namespace BayardsSafetyApp
                 switch (ex.Message)
                 {
                     default:
-                        DisplayAlert("Error", ex.Message, "OK");
+                        DisplayAlert(AppReses.LangResources.Error, 
+                            ex.Message, AppReses.LangResources.OK);
                         TryAgain_Button.IsEnabled = true;
                         TryAgain_Button.IsVisible = true;
                         break;

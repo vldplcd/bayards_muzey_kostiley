@@ -20,7 +20,7 @@ namespace BayardsSafetyApp
             Title = AppReses.LangResources.Risk;
             
         }
-
+        public string ParentSection { get; set; }
         List<Risk> _contents = new List<Risk>();
         public List<Risk> Contents
         {
@@ -70,7 +70,7 @@ namespace BayardsSafetyApp
                         }
                     }
                     flag = true;
-                    Navigation.PushAsync(new RisksCarousel(_risks, ((Risk)e.SelectedItem).Id_r, Title));
+                    Navigation.PushAsync(new RisksCarousel(_risks, ((Risk)e.SelectedItem).Id_r, ParentSection));
                 }
                 catch (Exception ex)
                 {
