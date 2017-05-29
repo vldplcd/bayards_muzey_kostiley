@@ -287,15 +287,6 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Settings.
-        /// </summary>
-        internal static string s {
-            get {
-                return ResourceManager.GetString("s", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Search.
         /// </summary>
         internal static string Search {

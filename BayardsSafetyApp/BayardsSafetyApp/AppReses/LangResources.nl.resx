@@ -120,29 +120,71 @@
   <data name="AgrmntLabel" xml:space="preserve">
     <value>Gebruikersovereenkomst</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuleer</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Kies taal</value>
+  </data>
+  <data name="Contents" xml:space="preserve">
+    <value>Inhoud</value>
+  </data>
   <data name="ContinueButton" xml:space="preserve">
     <value>Ik ben het eens</value>
   </data>
   <data name="DownloadWarn" xml:space="preserve">
-    <value>The information has been updated. Now the app will use the internet connection to download new data. Please be aware that there may be a charge for data transfer over the mobile network.</value>
+    <value>De informatie is geüpdatet. De applicatie zal verbinding maken met het internet om deze te downloaden. Let er op dat uw dataprovider geld kan vragen voor de download op het mobiele netwerk.</value>
   </data>
   <data name="EnButton" xml:space="preserve">
     <value>Engels</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Fout</value>
+  </data>
+  <data name="HideImages" xml:space="preserve">
+    <value>Laat geen plaatjes zijn</value>
+  </data>
+  <data name="HideVideo" xml:space="preserve">
+    <value>Laat geen video zien</value>
+  </data>
   <data name="IncPassword" xml:space="preserve">
-    <value>Het wachtwoord is incorrect</value>
+    <value>Wachtwoord klopt niet</value>
+  </data>
+  <data name="LangLabel" xml:space="preserve">
+    <value>Taal</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>nl</value>
   </data>
+  <data name="LastUpd" xml:space="preserve">
+    <value>Laatste update</value>
+  </data>
   <data name="LocaleLabel" xml:space="preserve">
-    <value>Kies hieronder de taal hieronder</value>
+    <value>Kies alstublieft een taal:</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Uitloggen</value>
+    <value>Log uit</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
   </data>
   <data name="NlButton" xml:space="preserve">
     <value>Nederlands</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="NoIntConn" xml:space="preserve">
+    <value>De applicatie heeft internet nodig om het wachtwoord te checken.</value>
+  </data>
+  <data name="NoIntConnUpd" xml:space="preserve">
+    <value>De applicatie heeft internet nodig om op updates te checken</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="OutdatedPassw" xml:space="preserve">
+    <value>Het password is te oud. U heeft een nieuw password nodig om de informatie te updaten. Doorgaan?</value>
   </data>
   <data name="PasswLabel" xml:space="preserve">
     <value>Voer het wachtwoord in</value>
@@ -150,10 +192,37 @@
   <data name="Risk" xml:space="preserve">
     <value>Risico's</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
+  <data name="ServerNoResp" xml:space="preserve">
+    <value>Server reageert niet</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Instellingen</value>
   </data>
+  <data name="ShowImages" xml:space="preserve">
+    <value>Laat plaatjes zien</value>
+  </data>
+  <data name="ShowVideo" xml:space="preserve">
+    <value>Laat video's zien</value>
+  </data>
   <data name="Task" xml:space="preserve">
     <value>Taken</value>
+  </data>
+  <data name="UpdAvailable" xml:space="preserve">
+    <value>U kunt de informatie updaten</value>
+  </data>
+  <data name="UpdButton" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UserAgreementText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Waarschuwing</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
   </data>
 </root>

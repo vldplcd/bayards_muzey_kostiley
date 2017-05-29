@@ -114,7 +114,10 @@ namespace BayardsSafetyApp
                 Application.Current.Properties["UpdateTime"] = DateTime.Now;
                 Cont.ParentSection = "null";
                 var mp = GetMasterPage();
-                mp.Detail = new NavigationPage(Cont);
+                mp.Detail = new NavigationPage(Cont) {
+                    BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+                    BarTextColor = Color.White
+                };
                 try
                 {
                     App.Current.MainPage = mp;

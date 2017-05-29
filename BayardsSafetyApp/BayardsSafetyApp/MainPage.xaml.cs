@@ -80,7 +80,10 @@ namespace BayardsSafetyApp
                     if (ex.Message.StartsWith("1"))
                     {
                         var mp = GetMasterPage();
-                        mp.Detail = new NavigationPage(AllSections);
+                        mp.Detail = new NavigationPage(AllSections) {
+                            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+                            BarTextColor = Color.White
+                        };
                         App.Current.MainPage = mp;
                     }
 
@@ -91,7 +94,6 @@ namespace BayardsSafetyApp
                         AppReses.LangResources.DownloadWarn,
                         AppReses.LangResources.OK, AppReses.LangResources.Cancel))
                         {
-                            //Navigation.PopAsync();
                             await Navigation.PushAsync(new LoadingDataPage());
                         }
 

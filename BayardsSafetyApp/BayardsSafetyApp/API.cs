@@ -10,10 +10,9 @@ using BayardsSafetyApp.DTO;
 
 namespace BayardsSafetyApp
 {
-    //TODO: ОБЪЕДИНИТЬ В ОДИН МЕТОД ЗАПРОС
     public class API
     {
-        string host = "http://vhost29450.cpsite.ru";
+        string host = "http://vhost29450.cpsite.ru"; //This is the host address. It should be equal to the one that is used by the company to run the server
 
         public string Host
         {
@@ -26,15 +25,17 @@ namespace BayardsSafetyApp
                 host = value;
             }
         }
-        const string UriGetAll = "{0}/api/getAll?lang={1}";
-        const string UriSectionsListTemplate = "{0}/api/allSections?lang={1}";
-        const string UriSectionContent = "{0}/api/section?sectionid={1}&lang={2}";
-        const string UriRiskContent = "{0}/api/risk?riskid={1}&lang={2}";
-        const string UriUpdateTime = "{0}/api/getUpdateDate";
-        const string UriCheckPassword = "{0}/api/checkPassword";
-        string UriImagePath = "{0}/ui/images/{1}";
+        //links to API methods
+        const string UriGetAll = "{0}/api/getAll?lang={1}"; //main method. It gets all the information from the server that is used inside the app. (GET)
+        const string UriSectionsListTemplate = "{0}/api/allSections?lang={1}"; // gets all the main sections (GET)
+        const string UriSectionContent = "{0}/api/section?sectionid={1}&lang={2}"; // gets section content (GET)
+        const string UriRiskContent = "{0}/api/risk?riskid={1}&lang={2}"; // gets risk content (GET)
+        const string UriUpdateTime = "{0}/api/getUpdateDate"; // gets the time when the server was updated (GET)
+        const string UriCheckPassword = "{0}/api/checkPassword"; //checks the password encoded in md5 (POST)
 
-        public string ImagePath
+        string UriImagePath = "{0}/ui/images/{1}"; //link to download image from database
+
+        public string ImagePath //property for UriImagePath
         {
             get
             {
@@ -57,9 +58,6 @@ namespace BayardsSafetyApp
                     _langs = value;
             }
         }
-
-        //TODO: 
-        //Добавить поисковые запросы в функционал API
 
         /// <summary>
         /// Method that gets the complete list of sections; language is specified with language variable
@@ -103,12 +101,6 @@ namespace BayardsSafetyApp
         /// <returns>Returns true if connection Update is needed else returns false</returns>
         public async Task<bool> isUpdataNeeded(DateTime lastupdate)
         {
-            using (var context = App.Database)
-            {
-                //var a = context.RiskDatabase.GetItems<Risk>();
-                //if (context.RiskDatabase.IsEmpty<Risk>() || context.SectionDatabase.IsEmpty<Section>())
-                //    return true;
-            }
             DateTime current;
             using (HttpClient hc = new HttpClient())
             {
@@ -223,7 +215,11 @@ namespace BayardsSafetyApp
             }
             return null;
         }
-
+        /// <summary>
+        /// Method that gets all data
+        /// </summary>
+        /// <param name="risk"></param>
+        /// <returns>List of SectionAPI type (DTO)</returns>
         public async Task<List<SectionAPI>> GetAll(string lang)
         {
             var sections = new List<SectionAPI>();
