@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace BayardsSafetyApp
 {
+    //This class is used to encode password in MD5
     
         public class MD5CryptoServiceProvider : MD5
         {

@@ -26,7 +26,7 @@ namespace BayardsSafetyApp
             }
         }
         //links to API methods
-        const string UriGetAll = "{0}/api/getAll?lang={1}"; //main method. It gets all the information from the server that is used inside the app. (GET)
+        const string UriGetAll = "{0}/api/getAll?apiKey={1}&lang={2}"; //main method. It gets all the information from the server that is used inside the app. (GET)
         const string UriSectionsListTemplate = "{0}/api/allSections?lang={1}"; // gets all the main sections (GET)
         const string UriSectionContent = "{0}/api/section?sectionid={1}&lang={2}"; // gets section content (GET)
         const string UriRiskContent = "{0}/api/risk?riskid={1}&lang={2}"; // gets risk content (GET)
@@ -230,10 +230,12 @@ namespace BayardsSafetyApp
                 {
                     using (HttpClient hc = new HttpClient())
                     {
-                        var responseMsg = await hc.GetAsync(string.Format(UriGetAll, Host, lang));
+                        var responseMsg = await hc.GetAsync(string.Format(UriGetAll, Host, App.Current.Properties["password"], lang));
                         if(responseMsg.IsSuccessStatusCode)
                         {
                             var resultStr = await responseMsg.Content.ReadAsStringAsync();
+                            if (resultStr.StartsWith("Error"))
+                                throw new HttpRequestException(resultStr);
                             var res = JsonConvert.DeserializeAnonymousType(resultStr,
                                     new { Sections = new List<SectionAPI>() });
                             sections.AddRange(res.Sections);

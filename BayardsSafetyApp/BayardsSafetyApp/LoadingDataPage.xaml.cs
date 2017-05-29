@@ -11,6 +11,8 @@ using Xamarin.Forms.Xaml;
 
 namespace BayardsSafetyApp
 {
+    //This page is viewed when the data is loading
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoadingDataPage : ContentPage
     {
@@ -23,43 +25,20 @@ namespace BayardsSafetyApp
 
         DBLoading.LoadData ld = new DBLoading.LoadData();
         Sections Cont = new Sections();
-        protected override Boolean OnBackButtonPressed()
+        protected override Boolean OnBackButtonPressed() //disable back button
         {
             base.OnBackButtonPressed();
             return true;
         }
-        private void SetProgress(double pr)
-        {
-            ProgressState = pr;
-            if(pr == 1)
-            {
-                Application.Current.Properties["UpdateTime"] = DateTime.Now;
-                Application.Current.SavePropertiesAsync().Wait();
-                Cont.Contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
-                   FindAll(s => s.Parent_s == "null"&&s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Name).ToList();
-                //Cont.Contents = App.Database.SectionDatabase.GetItems<Section>().ToList();
-                
-            }
-                
-        }
-        double _progressState;
-        public double ProgressState
-        {
-            get { return _progressState; }
-            set
-            {
-                _progressState = value;
-                OnPropertyChanged();
-            }
-        }
 
-        private void ContentPage_Appearing(object sender, EventArgs e)
+
+        private void ContentPage_Appearing(object sender, EventArgs e) //method on page appearing
         {
-            Device.StartTimer(new TimeSpan(0, 0, 1), OnTimerToComplete);
-            LoadData();
+            Device.StartTimer(new TimeSpan(0, 0, 1), OnTimerToComplete); //starts timer to check progress
+            LoadData(); //starts loading data method
             
         }
-        public void LoadData()
+        public void LoadData() //loading data method
         {
             TryAgain_Button.IsEnabled = false;
             try
@@ -70,7 +49,7 @@ namespace BayardsSafetyApp
                         ld.ToDatabase().Wait();
                         ld.Process = 1;
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) //on server errors exception behaviour
                     {
                         Device.BeginInvokeOnMainThread(() => 
                         {
@@ -78,14 +57,21 @@ namespace BayardsSafetyApp
                             TryAgain_Button.IsEnabled = true;
                             TryAgain_Button.IsVisible = true;
                             AInd.IsVisible = false;
-                            
-                        });                        
+                            if (ex.Message.Contains("api"))
+                            {
+                                DisplayAlert(AppReses.LangResources.Error, "Reenter password", AppReses.LangResources.OK);
+                                App.Current.MainPage = new MainPage();
+                            }
+                                
+
+                        });
+                        
                     }
                     
                 });
 
             }
-            catch (TaskCanceledException)
+            catch (TaskCanceledException)//or server errors exception behaviour
             {
                 DisplayAlert(AppReses.LangResources.Error, AppReses.LangResources.ServerNoResp,
                     AppReses.LangResources.OK);
@@ -93,7 +79,7 @@ namespace BayardsSafetyApp
                 TryAgain_Button.IsVisible = true;
 
             }
-            catch (Exception ex)
+            catch (Exception ex) //on any other exception behaviour
             {
                 switch (ex.Message)
                 {
@@ -106,10 +92,10 @@ namespace BayardsSafetyApp
                 }
             }
         }
-        private bool OnTimerToComplete()
+        private bool OnTimerToComplete() //method to check progress every 2 sec
         {
             PrBar.Progress = ld.Process;
-            if(ld.Process == 1)
+            if(ld.Process == 1) //if loading is done
             {
                 Application.Current.Properties["UpdateTime"] = DateTime.Now;
                 Cont.ParentSection = "null";
@@ -121,20 +107,16 @@ namespace BayardsSafetyApp
                 try
                 {
                     App.Current.MainPage = mp;
-                    //var pageToPush = new NavigationPage(mp);
-                    //ReplaceRoot(mp);
-                    //Navigation.PushAsync(mp);
                 }
                 catch (Exception ex) { }
                 return false;
             }
             return true;
         }
-        private MasterDetailPage GetMasterPage()
+        private MasterDetailPage GetMasterPage() //creating page with side menu
         {
             var mp = new MasterDetailPage();
             mp.Master =new SideMenu();
-            //mp.IsPresented = false;
             return mp;
         }
 

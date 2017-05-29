@@ -12,21 +12,21 @@ using Xamarin.Forms.Xaml;
 namespace BayardsSafetyApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
+    public partial class SettingsPage : ContentPage //Settings page
     {
         Dictionary<string, string> langsToPicker = new Dictionary<string, string>
         {
-            {AppReses.LangResources.NlButton,  "nl"}, {AppReses.LangResources.EnButton, "en"}
+            {AppReses.LangResources.NlButton,  "nl"}, {AppReses.LangResources.EnButton, "en"} //Setting language selector values
         };
         public SettingsPage()
         {
             InitializeComponent();
-            langPicker.Title = AppReses.LangResources.ChooseLang;
+            langPicker.Title = AppReses.LangResources.ChooseLang; //Setting language selector text
             langPicker.ItemsSource = langsToPicker.Keys.ToList();
-            updMessage.Text = $"{AppReses.LangResources.LastUpd}: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}.";
+            updMessage.Text = $"{AppReses.LangResources.LastUpd}: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}.";//Setting last update time
         }
 
-        private async void checkUpdater_button_Clicked(object sender, EventArgs e)
+        private async void checkUpdater_button_Clicked(object sender, EventArgs e) //behavior on check updates click
         {
             AInd.IsEnabled = true;
             AInd.IsRunning = true;
@@ -78,7 +78,7 @@ namespace BayardsSafetyApp
 
         }
 
-        private void langPicker_SelectedIndexChanged(object sender, EventArgs e)
+        private void langPicker_SelectedIndexChanged(object sender, EventArgs e) //behavior on changing language
         {
             if (langPicker.SelectedIndex == -1)
             {

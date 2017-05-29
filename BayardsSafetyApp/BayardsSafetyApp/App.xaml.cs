@@ -6,26 +6,21 @@ using Xamarin.Forms;
 
 namespace BayardsSafetyApp
 {
+    //This code is done when the app starts
     public partial class App : Application
     {
         private static DataBaseUOW _database;
         public static DataBaseUOW Database => _database ?? (_database = new DataBaseUOW());
-
+        
         public App()
         {
             InitializeComponent();
             API api = new API();
-            if (Device.RuntimePlatform == Device.Android || Device.RuntimePlatform == Device.iOS)
-            {
-                //var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
-                //LangResources.Culture = ci; // set the RESX for resource localization
-                //DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
-            }
             var isWithoutLoad = false;
             var pageToStart = new Page();
-            if (Current.Properties.ContainsKey("password"))
+            if (Current.Properties.ContainsKey("password")) //checking if the password has been entered
             {
-                if (api.CheckInternetConnection())
+                if (api.CheckInternetConnection()) //checking connection then loading page according to updates and password state
                 {
                     if (!Current.Properties.ContainsKey("UpdateTime") ||
                         !(Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")) ||
@@ -80,11 +75,6 @@ namespace BayardsSafetyApp
             }
             
             MainPage = pageToStart;
-        }
-
-        public void ChangeMainPage(Page page)
-        {
-            MainPage = page;
         }
 
         private MasterDetailPage GetMasterPage()
