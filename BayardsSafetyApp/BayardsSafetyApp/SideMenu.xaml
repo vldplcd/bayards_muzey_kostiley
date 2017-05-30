@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="300"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 

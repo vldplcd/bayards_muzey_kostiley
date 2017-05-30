@@ -71,7 +71,7 @@ namespace BayardsSafetyApp.DBLoading
                     {
                         Name = loc.Name,
                         Content = loc.Content,
-                        Lang = loc.Lang,
+                        Lang = lang,
                         Latitude = loc.Latitude,
                         Longitude = loc.Longitude,
                         Id_l = loc.Id_l

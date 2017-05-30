@@ -77,7 +77,7 @@ namespace BayardsSafetyApp
                     case "MapPage":
                         try
                         {
-                            ((MasterDetailPage)Parent).Detail = new MapPage();
+                            ((MasterDetailPage)Parent).Detail = baseMap;
                         }
                         catch (Exception ex)
                         {
