@@ -7,7 +7,7 @@ namespace BayardsSafetyApp
 {
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RisksCarousel : CarouselPage
+    public partial class RisksCarousel : CarouselPage //Page that allows to navigate through all risks of the task via swipes
     {
         List<RiskDetails> _risks;
         public RisksCarousel(List<RiskDetails> risks, string riskId, string title)

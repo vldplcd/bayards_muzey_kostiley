@@ -8,9 +8,9 @@ using System.Linq;
 namespace BayardsSafetyApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Sections : ContentPage
+    public partial class Sections : ContentPage //right tab in section contents page and also the first page after loading
     {
-        public Sections()
+        public Sections() 
         {
 
             InitializeComponent();
@@ -44,14 +44,7 @@ namespace BayardsSafetyApp
             }
         }
 
-        //protected override Boolean OnBackButtonPressed()
-        //{
-        //    base.OnBackButtonPressed();
-        //    if(ParentSection == "null")
-        //        return true;
-        //    return false;
-        //}
-        private void SectionButton_Clicked(object sender, SelectedItemChangedEventArgs e)
+        private void SectionButton_Clicked(object sender, SelectedItemChangedEventArgs e) //Navigating to Section Content Page
         {
             IsLoading = true;
             if (e.SelectedItem == null)
@@ -61,7 +54,7 @@ namespace BayardsSafetyApp
             Navigation.PushAsync(new SectionContentPage(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name));
         }
 
-        private void Sections_OnAppearing(object sender, EventArgs e)
+        private void Sections_OnAppearing(object sender, EventArgs e) //on appearing having section list.
         {
             if(Found != null)
             {

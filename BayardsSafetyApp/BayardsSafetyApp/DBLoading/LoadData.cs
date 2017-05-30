@@ -14,7 +14,7 @@ using Xamarin.Forms;
 namespace BayardsSafetyApp.DBLoading
 {
     public delegate void ProgressDelegate(double progr);
-    public class LoadData
+    public class LoadData //Class that loads data from server (using API)
     {
         public ProgressDelegate OnProgressEvent;
         private API _api = new API();
@@ -23,34 +23,28 @@ namespace BayardsSafetyApp.DBLoading
         List<Section> _sections;
         List<Media> _mediaList;
         string[] _langs = new string[] { "eng", "nl" };
-        //string databasePath = DependencyService.Get<ISQLite>().GetDatabasePath("bayards.db");
 
-        private void UploadAll()
+        private void UploadAll() //method to save loaded data
         {
             try
             {
                 Application.Current.Properties["AllSections"] = Utils.SerializeToJson(_sections);
                 Application.Current.Properties["AllRisks"] = Utils.SerializeToJson(_risks);
                 Application.Current.Properties["AllMedia"] = Utils.SerializeToJson(_mediaList);
-                try
-                {
-                    Application.Current.SavePropertiesAsync().Wait();
-                }
-                catch(Exception ex)
-                {
+                Application.Current.SavePropertiesAsync().Wait();
 
-                }
+
             }
             catch(Exception ex)
             {
                 throw ex;
             }
         }
-        public async Task ToDatabase()
+        public async Task ToDatabase() //method to load all data from server
         {
             try
             {
-                if (Application.Current.Properties.ContainsKey("AllMedia"))
+                if (Application.Current.Properties.ContainsKey("AllMedia")) //delete media if exists
                 {
                     var mediaToDelete = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Type == "image");
                     foreach (var media in mediaToDelete)
@@ -85,7 +79,7 @@ namespace BayardsSafetyApp.DBLoading
 
         }
 
-        public void DecompSectionAPI(string Lang, string ParentSect, SectionAPI sectAPI, ref List<Section> sects, ref List<Risk> risks, ref List<Media> mediaL)
+        public void DecompSectionAPI(string Lang, string ParentSect, SectionAPI sectAPI, ref List<Section> sects, ref List<Risk> risks, ref List<Media> mediaL) //retrieving data from SectionAPI to Section, Risk, Media (recursive) 
         {
             sects.Add(new Section { Name = sectAPI.Name, Id_s = sectAPI.Id_s, Lang = Lang, Parent_s = ParentSect, Order = sectAPI.Order });
 
@@ -130,7 +124,7 @@ namespace BayardsSafetyApp.DBLoading
 
         }
 
-        private async Task<string> SaveImage(string fileName)
+        private async Task<string> SaveImage(string fileName) //downloading images to device
         {
             string filePath;
             try

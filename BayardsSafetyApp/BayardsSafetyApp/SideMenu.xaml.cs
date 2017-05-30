@@ -40,12 +40,6 @@ namespace BayardsSafetyApp
             listView.ItemsSource = masterPageItems;
         }
 
-        protected override Boolean OnBackButtonPressed()
-        {
-            base.OnBackButtonPressed();
-            return true;
-        }
-
         private void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e) //Setting behavior on selection
         {
             if (e.SelectedItem == null)

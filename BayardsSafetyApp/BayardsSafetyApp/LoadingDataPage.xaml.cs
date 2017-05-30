@@ -108,7 +108,7 @@ namespace BayardsSafetyApp
                 {
                     App.Current.MainPage = mp;
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
                 return false;
             }
             return true;

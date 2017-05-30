@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace BayardsSafetyApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SectionContentPage : TabbedPage
+    public partial class SectionContentPage : TabbedPage //Section content page that has 2 tabs: risks and subsections. Presented when section/task is clicked
     {
         string _sId;
         public SectionContentPage(string sectionId, string sectionName)
@@ -44,16 +44,13 @@ namespace BayardsSafetyApp
                 OnPropertyChanged();
             }
         }
-        private void TabbedPage_Appearing()
+        private void TabbedPage_Appearing() //on appearing retrieving data about task (all subtasks an risks)
         {
             bool flag = false;
             while (!flag)
             {
                 try
                 {
-                    //Contents = api.getSectionContent(_sId, AppResources.LangResources.Language).Result;
-                    //var d_risks = App.Database.RiskDatabase.GetItems<Risk>().ToList().FindAll(r => r.Parent_s == _sId
-                    //                                                                    && r.Lang == AppResources.LangResources.Language).ToList();
                     var d_risks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(r => r.Parent_s == _sId
                                                                                         && r.Lang == AppReses.LangResources.Language).ToList();
                     if (d_risks != null)
@@ -68,7 +65,7 @@ namespace BayardsSafetyApp
                     
                     flag = true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

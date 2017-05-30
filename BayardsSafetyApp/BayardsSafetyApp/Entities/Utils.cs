@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BayardsSafetyApp.Entities
 {
-    public static class Utils
+    public static class Utils //useful common methods
     {
         public static string SerializeToJson(object obj)
         {
@@ -18,7 +18,7 @@ namespace BayardsSafetyApp.Entities
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -31,7 +31,7 @@ namespace BayardsSafetyApp.Entities
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
     }

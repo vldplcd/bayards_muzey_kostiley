@@ -8,10 +8,10 @@ using Xamarin.Forms.Xaml;
 namespace BayardsSafetyApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Risks : ContentPage
+    public partial class Risks : ContentPage //Risks page that is presented in section content (left tab)
     {
         List<RiskDetails> _risks;
-        string _sId;
+
         public Risks()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace BayardsSafetyApp
             }
         }
 
-        private void RiskButton_Clicked(object sender, SelectedItemChangedEventArgs e)
+        private void RiskButton_Clicked(object sender, SelectedItemChangedEventArgs e) //Navigating to clicked risk details page that will be in risk carousel page
         {
             IsLoading = true;
             bool flag = false;
@@ -60,9 +60,6 @@ namespace BayardsSafetyApp
                         foreach (var r in _contents)
                         {
                             var rToDisp = r;
-                            //var med = App.Database.MediaDatabase.GetItems<Media>().ToList().FindAll(m => m.Id_r == r.Id_r && 
-                            //                                                                   m.Lang == AppResources.LangResources.Language).ToList().
-                            //                                                                       Select(m => m.Url).ToList();
                             var med = Utils.DeserializeFromJson<List<Media>>((string)Application.Current.Properties["AllMedia"]).FindAll(m => m.Id_r == r.Id_r &&
                                                                                                m.Lang == AppReses.LangResources.Language).ToList();
                             rToDisp.Media = med;
@@ -72,9 +69,8 @@ namespace BayardsSafetyApp
                     flag = true;
                     Navigation.PushAsync(new RisksCarousel(_risks, ((Risk)e.SelectedItem).Id_r, ParentSection));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    //DisplayAlert("Error", ex.Message, "Ok");
                 }
             }
             

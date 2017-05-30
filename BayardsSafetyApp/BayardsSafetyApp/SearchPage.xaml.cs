@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace BayardsSafetyApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SearchPage : ContentPage
+    public partial class SearchPage : ContentPage //Search page
     {
         public SearchPage(Sections foundPage)
         {
@@ -44,7 +44,7 @@ namespace BayardsSafetyApp
             }
         }
 
-        private void RiskButton_Clicked(object sender, SelectedItemChangedEventArgs e)
+        private void RiskButton_Clicked(object sender, SelectedItemChangedEventArgs e) //Navigate to clicked risk
         {
             if (e.SelectedItem == null)
             {
@@ -55,10 +55,9 @@ namespace BayardsSafetyApp
             found.Found = new RiskDetails(rToDisp);
             Device.BeginInvokeOnMainThread(() => {
                 Navigation.PopModalAsync();
-                //Navigation.PushAsync(new Risks(((Section)e.SelectedItem).Id_s, ((Section)e.SelectedItem).Name));
             });
         }
-        private void sectView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void sectView_ItemSelected(object sender, SelectedItemChangedEventArgs e) //Navigate to clicked task
         {
             IsLoading = true;
             if (e.SelectedItem == null)
@@ -72,7 +71,7 @@ namespace BayardsSafetyApp
             
         }
 
-        private void searchcustomer_TextChanged(object sender, TextChangedEventArgs e)
+        private void searchcustomer_TextChanged(object sender, TextChangedEventArgs e) //search method that is executed when text is changed
         {
             if (e.NewTextValue == null)
             {
