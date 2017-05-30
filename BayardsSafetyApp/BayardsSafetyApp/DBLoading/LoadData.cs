@@ -83,9 +83,13 @@ namespace BayardsSafetyApp.DBLoading
                 int n = sectsAPI.Count;
                 foreach (var sAPI in sectsAPI)
                 {
-                    DecompSectionAPI(lang, "null", sAPI, ref _sections, ref _risks, ref _mediaList);
-                    Process += (0.7 / (double)n) * (1 / ((double)_langs.Length));
-                    OnProgressEvent?.Invoke(Process);
+                    if(!sAPI.Name.StartsWith("service"))
+                    {
+                        DecompSectionAPI(lang, "null", sAPI, ref _sections, ref _risks, ref _mediaList);
+                        Process += (0.7 / (double)n) * (1 / ((double)_langs.Length));
+                        OnProgressEvent?.Invoke(Process);
+                    }
+                    
                 }
                     
             }

@@ -76,5 +76,26 @@ namespace BayardsSafetyApp
                     throw new Exception("3");
             }
         }
+
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+            API api = new API();
+            try
+            {
+                if (api.CheckInternetConnection())
+                    UserAgrLabel.Text = api.GetUserAgreement(AppReses.LangResources.Language);
+                else
+                {
+                    DisplayAlert(AppReses.LangResources.Warning, "Cannot load user agreement. The internet connection is required.  Returning to the first screen", "OK");
+                    App.Current.MainPage = new MainPage();
+                }
+            }
+            catch(Exception ex)
+            {
+                DisplayAlert(AppReses.LangResources.Warning, "Error occured: " + ex.Message + " Returning to the first screen", "OK");
+                App.Current.MainPage = new MainPage();
+            }
+
+        }
     }
 }

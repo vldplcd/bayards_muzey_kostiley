@@ -12,9 +12,9 @@
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0*"/>
                 <ColumnDefinition Width="9*"/>
-                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0*"/>
             </Grid.ColumnDefinitions>
             <ActivityIndicator
                            IsVisible= "{Binding IsLoading}"

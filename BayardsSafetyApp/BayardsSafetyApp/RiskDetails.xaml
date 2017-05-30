@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BayardsSafetyApp.RiskDetails">
+             x:Class="BayardsSafetyApp.RiskDetails"
+             Appearing="ContentPage_Appearing">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -10,11 +11,15 @@
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
-            <Label x:Name ="Header" Grid.Row ="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+            <Label x:Name ="Header" Grid.Row ="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
                    TextColor="{StaticResource myPrimaryColor}" FontAttributes="Bold" FontSize="Large"></Label>
-            <ScrollView  Grid.Row ="2" Padding="10">
+            <ScrollView x:Name="scrView"  Grid.Row ="2" Padding="10" Grid.Column="0" Grid.ColumnSpan="4">
                 <Grid x:Name="riskGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -72,8 +77,10 @@
 
                 </Grid>
             </ScrollView>
-            <Switch x:Name="swt" HorizontalOptions="Center" Grid.Row="4"  IsVisible="True"/>
+            <Label x:Name="AgreeLabel" HorizontalOptions="Center" Grid.Row="4"  Grid.Column="1"/>
+            <Switch x:Name="swt" HorizontalOptions="Center" Grid.Row="4" IsVisible="True"  Grid.Column="2"/>
             
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -32,6 +32,7 @@ namespace BayardsSafetyApp
         const string UriRiskContent = "{0}/api/risk?riskid={1}&lang={2}"; // gets risk content (GET)
         const string UriUpdateTime = "{0}/api/getUpdateDate"; // gets the time when the server was updated (GET)
         const string UriCheckPassword = "{0}/api/checkPassword"; //checks the password encoded in md5 (POST)
+        const string UriGetUsrAgr = "{0}/api/getUserAgreement?apiKey={1}&lang={2}";
 
         string UriImagePath = "{0}/ui/images/{1}"; //link to download image from database
 
@@ -283,6 +284,21 @@ namespace BayardsSafetyApp
             {
                 return false;
             }
+        }
+
+        public string GetUserAgreement(string lang)
+        {
+            string agr;
+            using (HttpClient hc = new HttpClient())
+            {
+                var responseMsg = hc.GetAsync(string.Format(UriGetUsrAgr, Host, App.Current.Properties["password"], lang)).Result;
+                var resultStr = responseMsg.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Content = "" });
+                if (res == null || res.Content == null)
+                    throw new ArgumentException("No user agreement");
+                agr = res.Content;
+            }
+            return agr;
         }
     }
 }

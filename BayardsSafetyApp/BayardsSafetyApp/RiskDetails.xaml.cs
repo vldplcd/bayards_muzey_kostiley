@@ -18,10 +18,9 @@ namespace BayardsSafetyApp
         public RiskDetails(Risk risk)
         {
             InitializeComponent();
-            _width = Application.Current.MainPage.Width * 0.95;
             pictView.IsVisible = false;
             videoView.IsVisible = false;
-
+            AgreeLabel.Text = AppReses.LangResources.ContinueButton;
             BackgroundColor = Color.FromHex("#efefef");
             Header.Text = risk.Name;
             RiskId = risk.Id_r;
@@ -33,7 +32,7 @@ namespace BayardsSafetyApp
             var temp_imagesList = allMedia.FindAll(m => m.Type == "image");
             imagesList = new List<Media>();
             foreach (var im in temp_imagesList)
-                imagesList.Add(new Media { Id_r = im.Id_r, Lang = im.Lang, Type = im.Type, Url = im.Url, Width = _width });
+                imagesList.Add(new Media { Id_r = im.Id_r, Lang = im.Lang, Type = im.Type, Url = im.Url });
             videosList = allMedia.FindAll(m => m.Type == "video");
             pictView.ItemsSource = imagesList;
             videoView.ItemsSource = videosList;
@@ -51,7 +50,10 @@ namespace BayardsSafetyApp
                     if (imagesList != null && imagesList.Count != 0)
                     {
                         riskGrid.RowDefinitions[3].Height = new GridLength(10, GridUnitType.Auto);
-                        
+                        _width = scrView.Width * 0.9;
+                        foreach (var im in imagesList)
+                            im.Width = _width;
+                        pictView.ItemsSource = imagesList;
                         pictView.IsVisible = true;
                         showImagesButton.Text = AppReses.LangResources.HideImages;
                     }
@@ -105,6 +107,10 @@ namespace BayardsSafetyApp
         private void Button_Clicked(object sender, EventArgs e)
         {
             Device.OpenUri(new Uri("https://www.youtube.com/embed/" + (string)((Button)sender).CommandParameter));
+        }
+
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
         }
     }
 }
