@@ -50,7 +50,7 @@ namespace BayardsSafetyApp
                     if (imagesList != null && imagesList.Count != 0)
                     {
                         riskGrid.RowDefinitions[3].Height = new GridLength(10, GridUnitType.Auto);
-                        _width = scrView.Width * 0.9;
+                        _width = scrView.Width * 0.7;
                         foreach (var im in imagesList)
                             im.Width = _width;
                         pictView.ItemsSource = imagesList;
@@ -111,6 +111,11 @@ namespace BayardsSafetyApp
 
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
+        }
+
+        private void pictView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            pictView.SelectedItem = null;
         }
     }
 }

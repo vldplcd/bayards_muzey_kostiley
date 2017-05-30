@@ -14,15 +14,19 @@ namespace BayardsSafetyApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage //Settings page
     {
-        Dictionary<string, string> langsToPicker = new Dictionary<string, string>
-        {
-            {AppReses.LangResources.NlButton,  "nl"}, {AppReses.LangResources.EnButton, "en"} //Setting language selector values
-        };
+        Dictionary<string, string> langsToPicker;
+        public List<string> PickerContent { get; set; }
         public SettingsPage()
         {
             InitializeComponent();
-            langPicker.Title = AppReses.LangResources.ChooseLang; //Setting language selector text
+            Title = LangResources.Settings;
+            langsToPicker = new Dictionary<string, string>
+                    {
+                        {AppReses.LangResources.NlButton,  "nl"}, {AppReses.LangResources.EnButton, "en"} //Setting language selector values
+                    };
             langPicker.ItemsSource = langsToPicker.Keys.ToList();
+            checkUpdater_button.Text = LangResources.CheckUpd;
+            langPicker.Title = AppReses.LangResources.ChooseLang; //Setting language selector text
             updMessage.Text = $"{AppReses.LangResources.LastUpd}: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}.";//Setting last update time
         }
 
@@ -88,7 +92,25 @@ namespace BayardsSafetyApp
             {
                 string selectedLang = langPicker.Items[langPicker.SelectedIndex];
                 LangResources.Culture = new CultureInfo(langsToPicker[selectedLang]);
+                if (Parent.Parent != null && Parent.Parent.GetType() == typeof(MasterDetailPage))
+                {
+                    ((SideMenu)((MasterDetailPage)Parent.Parent).Master).ChangeLang();
+                }
+                Title = LangResources.Settings;
+                checkUpdater_button.Text = LangResources.CheckUpd;
+                checkUpdater_button.CommandParameter = "check";
+                updMessage.Text = $"{AppReses.LangResources.LastUpd}: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}.";//Setting last update time
             }
+        }
+
+        private void ResetPicker()
+        {
+            
+        }
+
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+
         }
     }
 }

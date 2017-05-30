@@ -225,4 +225,7 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="CheckUpd" xml:space="preserve">
+    <value>Check update</value>
+  </data>
 </root>

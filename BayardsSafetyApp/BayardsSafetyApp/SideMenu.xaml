@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              BackgroundColor="#e8e8e8"
-             x:Class="BayardsSafetyApp.SideMenu">
+             x:Class="BayardsSafetyApp.SideMenu"
+             Appearing="ContentPage_Appearing">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="300"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -15,9 +16,9 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                    <Label TextColor="{StaticResource myPrimaryColor}" MinimumHeightRequest="40" Text="{Binding Title}" VerticalOptions="CenterAndExpand" 
-                                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium" LineBreakMode="TailTruncation"></Label>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10">
+                                    <Label TextColor="{StaticResource myPrimaryColor}" HorizontalOptions="Fill" MinimumHeightRequest="40" Text="{Binding Title}" VerticalOptions="CenterAndExpand" 
+                                       VerticalTextAlignment="Center" HorizontalTextAlignment="Start" FontSize="Medium" LineBreakMode="TailTruncation"></Label>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

@@ -80,6 +80,15 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Check update.
+        /// </summary>
+        internal static string CheckUpd {
+            get {
+                return ResourceManager.GetString("CheckUpd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Choose language.
         /// </summary>
         internal static string ChooseLang {

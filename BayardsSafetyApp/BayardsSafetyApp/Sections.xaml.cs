@@ -10,6 +10,7 @@ namespace BayardsSafetyApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Sections : ContentPage //right tab in section contents page and also the first page after loading
     {
+        ToolbarItem searchToolbar;
         public Sections() 
         {
 
@@ -18,7 +19,8 @@ namespace BayardsSafetyApp
             Title = AppReses.LangResources.Contents;
             
             var command = new Command(async () => { await Navigation.PushModalAsync(new SearchPage(this)); });
-            ToolbarItems.Add(new ToolbarItem { Command = command, Text = AppReses.LangResources.Search });
+            searchToolbar = new ToolbarItem { Command = command, Text = AppReses.LangResources.Search };
+            ToolbarItems.Add(searchToolbar);
 
         }
         public Page Found { get; set; }
@@ -56,7 +58,9 @@ namespace BayardsSafetyApp
 
         private void Sections_OnAppearing(object sender, EventArgs e) //on appearing having section list.
         {
-            if(Found != null)
+            searchToolbar.Text = AppReses.LangResources.Search;
+            Title = AppReses.LangResources.Contents;
+            if (Found != null)
             {
                 Navigation.PushAsync(Found);
                 Found = null;

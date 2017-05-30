@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title="Settings"
-             x:Class="BayardsSafetyApp.SettingsPage">
+             x:Class="BayardsSafetyApp.SettingsPage"
+             Appearing="ContentPage_Appearing">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -33,7 +34,7 @@
             <ActivityIndicator x:Name="AInd"
                            Grid.Row ="7" Grid.Column="0" Grid.ColumnSpan="8" Color="Blue" HorizontalOptions="CenterAndExpand"/>
             <Label HorizontalTextAlignment="Start" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="6">Language</Label>
-            <Picker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" x:Name="langPicker" SelectedIndexChanged="langPicker_SelectedIndexChanged"></Picker>
+            <Picker Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="6" ItemsSource="{Binding PickerContent}" x:Name="langPicker" SelectedIndexChanged="langPicker_SelectedIndexChanged"></Picker>
             
             <Button x:Name="checkUpdater_button" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="6" Text="Check Updates" CommandParameter="check" Clicked="checkUpdater_button_Clicked"
                      HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"

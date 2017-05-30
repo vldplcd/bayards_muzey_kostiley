@@ -26,11 +26,7 @@ namespace BayardsSafetyApp
             var riskPage = new Risks() { ParentSection = sectionName };
             riskPage.Contents = Contents.Risks;
             Children.Add(riskPage);
-            var subtPage = new Sections();
-            subtPage.ParentSection = _sId;
-            subtPage.ToolbarItems.Clear();
-            subtPage.Title = AppReses.LangResources.Task;
-            Children.Add(subtPage);
+            
             
             
         }
@@ -61,7 +57,15 @@ namespace BayardsSafetyApp
                                                                                         && s.Lang == AppReses.LangResources.Language).ToList();
                     if (d_sects != null)
                         Contents.Subsections = d_sects.OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
-                    
+
+                    if(Contents.Subsections != null && Contents.Subsections.Count != 0)
+                    {
+                        var subtPage = new Sections();
+                        subtPage.ParentSection = _sId;
+                        subtPage.ToolbarItems.Clear();
+                        subtPage.Title = AppReses.LangResources.Task;
+                        Children.Add(subtPage);
+                    }
                     
                     flag = true;
                 }

@@ -35,29 +35,7 @@ namespace BayardsSafetyApp
         {
             InitializeComponent();
             Title = AppReses.LangResources.Menu;
-            var masterPageItems = new List<MasterPageItem>();
-            
-            masterPageItems.Add(new MasterPageItem //Setting elements
-            {
-                Title = AppReses.LangResources.Contents,
-                //IconSource = "contents.png",
-                TargetType = typeof(Sections)
-            });
-            if(Device.RuntimePlatform == Device.iOS)
-                masterPageItems.Add(new MasterPageItem
-                {
-                    Title = "Map of locations",
-                    //IconSource = "map.png",
-                    TargetType = typeof(MapPage)
-                });
-            masterPageItems.Add(new MasterPageItem
-            {
-                Title = AppReses.LangResources.Settings,
-                //IconSource = "settings.png",
-                TargetType = typeof(SettingsPage)
-            });
 
-            listView.ItemsSource = masterPageItems;
         }
 
         private void listView_ItemSelected(object sender, SelectedItemChangedEventArgs e) //Setting behavior on selection
@@ -86,13 +64,69 @@ namespace BayardsSafetyApp
 
                         break;
                     case "SettingsPage":
-                        ((MasterDetailPage)Parent).Detail = baseSettings;
+                        
+                        ((MasterDetailPage)Parent).Detail = new NavigationPage((new SettingsPage()))
+                        {
+                            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+                            BarTextColor = Color.White
+                        };
                         break;
                 }
                 listView.SelectedItem = null;
                 if (Device.RuntimePlatform != Device.Windows)
                     ((MasterDetailPage)Parent).IsPresented = false;
             }
+        }
+        public void ChangeLang()
+        {
+            var masterPageItems = new List<MasterPageItem>();
+
+            masterPageItems.Add(new MasterPageItem //Setting elements
+            {
+                Title = AppReses.LangResources.Contents,
+                IconSource = "Icons/ic_home_bayards.png",
+                TargetType = typeof(Sections)
+            });
+            if (Device.RuntimePlatform == Device.iOS)
+                masterPageItems.Add(new MasterPageItem
+                {
+                    Title = "Locations",
+                    //IconSource = "map.png",
+                    TargetType = typeof(MapPage)
+                });
+            masterPageItems.Add(new MasterPageItem
+            {
+                Title = AppReses.LangResources.Settings,
+                //IconSource = "settings.png",
+                TargetType = typeof(SettingsPage)
+            });
+
+            listView.ItemsSource = masterPageItems;
+        }
+        private void ContentPage_Appearing(object sender, EventArgs e)
+        {
+            var masterPageItems = new List<MasterPageItem>();
+            masterPageItems.Add(new MasterPageItem //Setting elements
+            {
+                Title = AppReses.LangResources.Contents,
+                //IconSource = ImageSource.FromResource("BayardsSafetyApp.Icons.ic_home_bayards.png").GetValue(UriImageSource.UriProperty).ToString(),
+            TargetType = typeof(Sections)
+            });
+            if (Device.RuntimePlatform == Device.iOS)
+                masterPageItems.Add(new MasterPageItem
+                {
+                    Title = "Locations",
+                    //IconSource = "map.png",
+                    TargetType = typeof(MapPage)
+                });
+            masterPageItems.Add(new MasterPageItem
+            {
+                Title = AppReses.LangResources.Settings,
+                //IconSource = "settings.png",
+                TargetType = typeof(SettingsPage)
+            });
+
+            listView.ItemsSource = masterPageItems;
         }
     }
     public class MasterPageItem //Class to describe the element in the side menu

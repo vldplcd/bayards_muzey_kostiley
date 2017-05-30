@@ -123,6 +123,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Annuleer</value>
   </data>
+  <data name="CheckUpd" xml:space="preserve">
+    <value>Zoek naar update</value>
+  </data>
   <data name="ChooseLang" xml:space="preserve">
     <value>Kies taal</value>
   </data>

@@ -43,7 +43,7 @@
                      TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1"/>
                     
                     <ListView x:Name ="pictView" HasUnevenRows="True" HeightRequest="-1" SeparatorVisibility="None"
-                       Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+                       Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" ItemSelected="pictView_ItemSelected">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>

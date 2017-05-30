@@ -6,11 +6,9 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="5*"/>
+                <RowDefinition Height="11*"/>
                 <RowDefinition>
                     <RowDefinition.Height>
                         <OnPlatform x:TypeArguments="GridLength" iOS="1.3*"  Android="0" WinPhone="1.3*"/>
@@ -27,25 +25,9 @@
 
             <SearchBar x:Name="searchcustomer" Placeholder="Search" SearchCommand="{Binding SearchCommand}"
                        TextChanged="searchcustomer_TextChanged" Grid.Row="0"></SearchBar>
-            
-
-
-            <Label Grid.Row="1">Subtasks</Label>
-            <ListView x:Name ="sectView" HasUnevenRows="True" SeparatorVisibility="None"
-                       Grid.Row="2" ItemSelected="sectView_ItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="5">
-                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black"></Label>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Label Grid.Row="3">Risks</Label>
+            <Label x:Name="risksLabel" Grid.Row="1"></Label>
             <ListView x:Name ="riskView" HasUnevenRows="True" SeparatorVisibility="None"
-                       Grid.Row="4"  ItemSelected="RiskButton_Clicked">
+                       Grid.Row="2"  ItemSelected="RiskButton_Clicked">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -56,7 +38,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="Back_Button" Text="Back" Grid.Row="5" Clicked="Back_Button_Clicked" BackgroundColor="White"
+            <Button x:Name="Back_Button" Text="Back" Grid.Row="3" Clicked="Back_Button_Clicked" BackgroundColor="White"
                     TextColor="{StaticResource myPrimaryColor}"/>
         </Grid>
     </ContentPage.Content>
