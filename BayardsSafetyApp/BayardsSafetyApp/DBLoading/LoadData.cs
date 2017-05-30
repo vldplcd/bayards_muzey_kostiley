@@ -22,6 +22,7 @@ namespace BayardsSafetyApp.DBLoading
         List<Risk> _risks;
         List<Section> _sections;
         List<Media> _mediaList;
+        List<Location> _locations;
         string[] _langs = new string[] { "eng", "nl" };
 
         private void UploadAll() //method to save loaded data
@@ -31,6 +32,7 @@ namespace BayardsSafetyApp.DBLoading
                 Application.Current.Properties["AllSections"] = Utils.SerializeToJson(_sections);
                 Application.Current.Properties["AllRisks"] = Utils.SerializeToJson(_risks);
                 Application.Current.Properties["AllMedia"] = Utils.SerializeToJson(_mediaList);
+                Application.Current.Properties["AllLocations"] = Utils.SerializeToJson(_locations);
                 Application.Current.SavePropertiesAsync().Wait();
 
 
@@ -57,11 +59,25 @@ namespace BayardsSafetyApp.DBLoading
             _risks = new List<Risk>();
             _sections = new List<Section>();
             _mediaList = new List<Media>();
+            _locations = new List<Location>();
             var sectsAPI = new List<SectionAPI>();
-
+            List<Location> temp_locs;
             foreach(var lang in _langs)
             {
-                sectsAPI = await _api.GetAll(lang);
+                temp_locs = (await _api.GetAll(lang)).Locations;
+                foreach (var loc in temp_locs)
+                {
+                    _locations.Add(new Location
+                    {
+                        Name = loc.Name,
+                        Content = loc.Content,
+                        Lang = loc.Lang,
+                        Latitude = loc.Latitude,
+                        Longitude = loc.Longitude,
+                        Id_l = loc.Id_l
+                    });
+                }
+                sectsAPI = (await _api.GetAll(lang)).Sections;
                 Process = 0.1 * (1/((double)_langs.Length));
                 OnProgressEvent?.Invoke(Process);
                 int n = sectsAPI.Count;

@@ -15,17 +15,7 @@
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
-    <Entry 
-      Text="Seattle,WA"
-      Placeholder="Enter location"
-      x:Name="EntryLocation"
-      Margin="10"/>
-    <Button 
-      Grid.Column="1" 
-      Text="Go To" 
-      x:Name="ButtonGoTo" 
-      Clicked="OnGoToClicked"
-      Margin="10"/>
+    
     <maps:Map 
       Grid.ColumnSpan="2"
       Grid.Row="1"
@@ -48,7 +38,6 @@
       <Button x:Name="ButtonStreet" Text="Street" Clicked="OnStreetClicked"/>
       <Button x:Name="ButtonHybrid" Text="Hybrid" Clicked="OnHybridClicked"/>
       <Button x:Name="ButtonSatellite" Text="Satellite" Clicked="OnSatelliteClicked"/>
-      <Button x:Name="ButtonAddPin" Text="Add Pin" Clicked="OnAddPinClicked"/>
-    </StackLayout>
+        </StackLayout>
   </Grid>
 </ContentPage>

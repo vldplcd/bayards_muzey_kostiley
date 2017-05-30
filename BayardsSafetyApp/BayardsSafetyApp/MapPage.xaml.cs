@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BayardsSafetyApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,27 @@ namespace BayardsSafetyApp
     public partial class MapPage : ContentPage
     {
         Geocoder geoCoder;
+        List<Location> _locations;
         public MapPage()
         {
 
             InitializeComponent();
             geoCoder = new Geocoder();
+            _locations = Utils.DeserializeFromJson<List<Location>>((string)Application.Current.Properties["AllLocations"]).
+                                    FindAll(l => l.Lang == AppReses.LangResources.Language).ToList();
+            foreach (var loc in _locations)
+            {
+                MyMap.Pins.Add(new Pin
+                {
+                    Label = loc.Name,
+                    Position = new Position(loc.Latitude, loc.Longitude),
+                    Type = PinType.Generic
+                });
+            }
+            var zoomLevel = SliderZoom.Value; // between 1 and 18
+            var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
+            if (_locations.Count != 0)
+                MyMap.MoveToRegion(new MapSpan(new Position(_locations[0].Latitude, _locations[0].Longitude), latlongdegrees, latlongdegrees));
         }
 
         private async void OnAddPinClicked(object sender, EventArgs e)
@@ -44,20 +61,6 @@ namespace BayardsSafetyApp
 
         private void OnSatelliteClicked(object sender, EventArgs e) =>
             MyMap.MapType = MapType.Satellite;
-
-        private async void OnGoToClicked(object sender, EventArgs e)
-        {
-            var item = (await geoCoder.GetPositionsForAddressAsync(EntryLocation.Text)).FirstOrDefault();
-            if (item == null)
-            {
-                await DisplayAlert("Error", "Unable to decode position", "OK");
-                return;
-            }
-
-            var zoomLevel = SliderZoom.Value; // between 1 and 18
-            var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
-            MyMap.MoveToRegion(new MapSpan(item, latlongdegrees, latlongdegrees));
-        }
 
         private void OnSliderChanged(object sender, ValueChangedEventArgs e)
         {

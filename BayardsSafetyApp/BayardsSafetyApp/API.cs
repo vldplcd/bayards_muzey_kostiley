@@ -220,9 +220,10 @@ namespace BayardsSafetyApp
         /// </summary>
         /// <param name="risk"></param>
         /// <returns>List of SectionAPI type (DTO)</returns>
-        public async Task<List<SectionAPI>> GetAll(string lang)
+        public async Task<ShellRequest> GetAll(string lang)
         {
             var sections = new List<SectionAPI>();
+            var data = new ShellRequest();
             int n = 0;
             while (n < 4)
             {
@@ -236,10 +237,12 @@ namespace BayardsSafetyApp
                             var resultStr = await responseMsg.Content.ReadAsStringAsync();
                             if (resultStr.StartsWith("Error"))
                                 throw new HttpRequestException(resultStr);
-                            var res = JsonConvert.DeserializeAnonymousType(resultStr,
-                                    new { Sections = new List<SectionAPI>() });
-                            sections.AddRange(res.Sections);
-                            if (sections.Count == 0 || sections[0].Id_s == null)
+                            var res = JsonConvert.DeserializeObject<ShellRequest>(resultStr);
+                            //var res = JsonConvert.DeserializeAnonymousType(resultStr,
+                            //        new { Sections = new List<SectionAPI>() });
+                            //sections.AddRange(res.Sections);
+                            data = res;
+                            if (data.Sections.Count == 0 || data.Sections[0].Id_s == null)
                                 throw new Exception("No info downloaded. Trying to retry");
                         }
                         else
@@ -247,7 +250,7 @@ namespace BayardsSafetyApp
                             throw new HttpRequestException("The server has thrown an error code: " + responseMsg.StatusCode);
                         }
                     }
-                    return sections;
+                    return data;
                 }
 
                 catch (Exception ex)
@@ -257,7 +260,7 @@ namespace BayardsSafetyApp
                         throw ex;
                 }
             }
-            return sections;
+            return data;
         }
 
         /// <summary>

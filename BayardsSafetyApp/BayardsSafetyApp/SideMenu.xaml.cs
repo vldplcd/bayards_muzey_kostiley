@@ -26,6 +26,11 @@ namespace BayardsSafetyApp
             BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
             BarTextColor = Color.White
         };
+        public NavigationPage baseMap = new NavigationPage((new MapPage()))
+        {
+            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+            BarTextColor = Color.White
+        };
         public SideMenu() //Side menu page
         {
             InitializeComponent();
@@ -69,17 +74,17 @@ namespace BayardsSafetyApp
                     case "Sections":
                         ((MasterDetailPage)Parent).Detail = baseSections;
                         break;
-                    //case "MapPage":
-                    //    try
-                    //    {
-                    //        ((MasterDetailPage)Parent).Detail = new MapPage();
-                    //    }
-                    //    catch(Exception ex)
-                    //    {
-                    //        DisplayAlert("Cannot show a map", ex.Message, "OK");
-                    //    }
+                    case "MapPage":
+                        try
+                        {
+                            ((MasterDetailPage)Parent).Detail = new MapPage();
+                        }
+                        catch (Exception ex)
+                        {
+                            DisplayAlert("Cannot show a map", ex.Message, "OK");
+                        }
 
-                    //    break;
+                        break;
                     case "SettingsPage":
                         ((MasterDetailPage)Parent).Detail = baseSettings;
                         break;
