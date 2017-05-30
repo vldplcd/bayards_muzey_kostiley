@@ -113,6 +113,7 @@ namespace BayardsSafetyApp
         private void PasswordEntry_Completed(object sender, EventArgs e)
         {
             password = ((Entry)sender).Text;
+            ContinueButton_Clicked(sender, e);
         }
 
         private async Task<List<Section>> LoadSections()
