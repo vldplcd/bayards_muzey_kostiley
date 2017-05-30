@@ -13,23 +13,38 @@ namespace BayardsSafetyApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SideMenu : ContentPage
     {
+        public NavigationPage baseSections = new NavigationPage((new Sections
+                        {
+                           ParentSection = "null"
+                        }))
+                        {
+                            BarBackgroundColor = (Color) Application.Current.Resources["myPrimaryColor"],
+                            BarTextColor = Color.White
+                        };
+        public NavigationPage baseSettings = new NavigationPage((new SettingsPage()))
+        {
+            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+            BarTextColor = Color.White
+        };
         public SideMenu() //Side menu page
         {
             InitializeComponent();
             Title = AppReses.LangResources.Menu;
             var masterPageItems = new List<MasterPageItem>();
+            
             masterPageItems.Add(new MasterPageItem //Setting elements
             {
                 Title = AppReses.LangResources.Contents,
                 //IconSource = "contents.png",
                 TargetType = typeof(Sections)
             });
-            //masterPageItems.Add(new MasterPageItem
-            //{
-            //    Title = "Map of locations",
-            //    //IconSource = "map.png",
-            //    //TargetType = typeof(MapPage)
-            //});
+            if(Device.RuntimePlatform == Device.iOS)
+                masterPageItems.Add(new MasterPageItem
+                {
+                    Title = "Map of locations",
+                    //IconSource = "map.png",
+                    TargetType = typeof(MapPage)
+                });
             masterPageItems.Add(new MasterPageItem
             {
                 Title = AppReses.LangResources.Settings,
@@ -52,14 +67,7 @@ namespace BayardsSafetyApp
                 switch (a)
                 {
                     case "Sections":
-                        ((MasterDetailPage)Parent).Detail = new NavigationPage((new Sections
-                        {
-                           ParentSection = "null"
-                        }))
-                        {
-                            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
-                            BarTextColor = Color.White
-                        };
+                        ((MasterDetailPage)Parent).Detail = baseSections;
                         break;
                     //case "MapPage":
                     //    try
@@ -73,11 +81,7 @@ namespace BayardsSafetyApp
 
                     //    break;
                     case "SettingsPage":
-                        ((MasterDetailPage)Parent).Detail = new NavigationPage((new SettingsPage()))
-                        {
-                            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
-                            BarTextColor = Color.White
-                        };
+                        ((MasterDetailPage)Parent).Detail = baseSettings;
                         break;
                 }
                 listView.SelectedItem = null;

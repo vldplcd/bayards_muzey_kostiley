@@ -51,14 +51,7 @@ namespace BayardsSafetyApp
                 else if ((Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")))
                 {
                     var mp = GetMasterPage();
-                    mp.Detail = new NavigationPage(new Sections
-                    {
-                        ParentSection = "null"
-                    })
-                    {
-                        BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
-                        BarTextColor = Color.White
-                    };
+                    mp.Detail = ((SideMenu)mp.Master).baseSections;
                     
                     isWithoutLoad = true;
                     pageToStart = mp;
