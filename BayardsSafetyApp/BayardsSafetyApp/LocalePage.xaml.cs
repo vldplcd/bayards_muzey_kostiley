@@ -26,12 +26,14 @@ namespace BayardsSafetyApp
         private void EnButton_Clicked(object sender, EventArgs e)
         {
             LangResources.Culture = new CultureInfo("en");
+            App.Current.Properties["lang"] = "en";
             Navigation.PushAsync(new UserAgreementPage());
         }
 
         private void NlButton_Clicked(object sender, EventArgs e)
         {
             LangResources.Culture = new CultureInfo("nl");
+            App.Current.Properties["lang"] = "en";
             Navigation.PushAsync(new UserAgreementPage());
         }
     }

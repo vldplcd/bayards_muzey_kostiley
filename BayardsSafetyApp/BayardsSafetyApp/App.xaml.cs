@@ -1,6 +1,7 @@
 ﻿using BayardsSafetyApp.Entities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -15,6 +16,8 @@ namespace BayardsSafetyApp
         public App()
         {
             InitializeComponent();
+            if(App.Current.Properties.ContainsKey("lang"))
+                AppReses.LangResources.Culture = new CultureInfo((string)App.Current.Properties["lang"]);
             API api = new API();
             var isWithoutLoad = false;
             var pageToStart = new Page();

@@ -111,6 +111,7 @@ namespace BayardsSafetyApp
             {
                 string selectedLang = langPicker.Items[langPicker.SelectedIndex];
                 LangResources.Culture = new CultureInfo(langsToPicker[selectedLang]);
+                App.Current.Properties["lang"] = langsToPicker[selectedLang];
                 if (Parent.Parent != null && Parent.Parent.GetType() == typeof(MasterDetailPage))
                 {
                     ((SideMenu)((MasterDetailPage)Parent.Parent).Master).ChangeLang();
