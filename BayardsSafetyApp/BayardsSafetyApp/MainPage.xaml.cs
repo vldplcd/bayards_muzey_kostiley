@@ -67,7 +67,7 @@ namespace BayardsSafetyApp
                         }
                         catch(Exception ex)
                         {
-                            if (ex.Message == "1" || ex.Message == "2" || ex.Message == "Incorrect")
+                            if (ex.Message == "1" || ex.Message == "2" || ex.Message == "3" || ex.Message == "Incorrect")
                                 throw ex;
                             else
                                 Device.BeginInvokeOnMainThread(() => { DisplayAlert(AppReses.LangResources.Warning, "The server is currently unavailable. " + ex.Message, "OK"); });
