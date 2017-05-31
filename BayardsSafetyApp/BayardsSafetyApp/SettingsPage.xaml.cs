@@ -47,13 +47,19 @@ namespace BayardsSafetyApp
                             case "check":
                                 if (api.isUpdataNeeded(((DateTime)Application.Current.Properties["UpdateTime"])).Result)
                                 {
-                                    checkUpdater_button.Text = AppReses.LangResources.UpdButton;
-                                    checkUpdater_button.CommandParameter = "update";
-                                    updMessage.Text = LangResources.UpdAvailable;
+                                    Device.BeginInvokeOnMainThread(() =>
+                                    {
+                                        checkUpdater_button.Text = AppReses.LangResources.UpdButton;
+                                        checkUpdater_button.CommandParameter = "update";
+                                        updMessage.Text = LangResources.UpdAvailable;
+                                    });
                                 }
                                 else
                                 {
-                                    updMessage.Text = $"Last update: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}. No new updates found";
+                                    Device.BeginInvokeOnMainThread(() =>
+                                    {
+                                        updMessage.Text = $"Last update: {((DateTime)Application.Current.Properties["UpdateTime"]).ToString()}. No new updates found";
+                                    });
                                 }
                                 break;
                             case "update":
