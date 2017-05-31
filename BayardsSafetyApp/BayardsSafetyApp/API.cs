@@ -12,7 +12,7 @@ namespace BayardsSafetyApp
 {
     public class API
     {
-        string host = "http://vhost29450.cpsite.ru"; //This is the host address. It should be equal to the one that is used by the company to run the server
+        string host = (string)App.Current.Properties["host"]; //This is the host address. It should be equal to the one that is used by the company to run the server
 
         public string Host
         {

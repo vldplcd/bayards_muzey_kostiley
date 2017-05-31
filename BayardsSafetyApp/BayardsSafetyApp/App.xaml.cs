@@ -16,6 +16,9 @@ namespace BayardsSafetyApp
         public App()
         {
             InitializeComponent();
+            //.............................ENTER THE SERVER ADDRESS HERE..................................
+            Current.Properties["host"] = "http://vhost29450.cpsite.ru";
+            //............................................................................................
             if(App.Current.Properties.ContainsKey("lang"))
                 AppReses.LangResources.Culture = new CultureInfo((string)App.Current.Properties["lang"]);
             API api = new API();
