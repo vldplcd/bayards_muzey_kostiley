@@ -32,7 +32,7 @@ namespace BayardsSafetyApp
             var temp_imagesList = allMedia.FindAll(m => m.Type == "image");
             imagesList = new List<Media>();
             foreach (var im in temp_imagesList)
-                imagesList.Add(new Media { Id_r = im.Id_r, Lang = im.Lang, Type = im.Type, Url = im.Url });
+                imagesList.Add(new Media { Id_r = im.Id_r, Lang = im.Lang, Type = im.Type, Url = im.Url, Width = 200 });
             videosList = allMedia.FindAll(m => m.Type == "video");
             pictView.ItemsSource = imagesList;
             videoView.ItemsSource = videosList;

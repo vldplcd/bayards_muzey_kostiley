@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionName="1.95" package="BSA.BSA" android:versionCode="29">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:installLocation="auto" android:versionName="1.951" package="BSA.BSA" android:versionCode="31">
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="19" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBmMiTHeYjwp-cSZmx3dpQNEAzpSfOuxOM" />
 	<application android:label="Bayards Pocket Manual" android:icon="@drawable/icon"></application>
 </manifest>

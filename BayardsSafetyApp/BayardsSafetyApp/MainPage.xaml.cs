@@ -46,21 +46,28 @@ namespace BayardsSafetyApp
                     await Task.Run(async () =>
                     {
                         var enc_password = MD5.GetMd5String(PasswordEntry.Text).Substring(0, 16);
-                        if (await api.isPasswordCorrect(enc_password))
+                        try
                         {
-                            Application.Current.Properties["password"] = enc_password;
-                            if (Application.Current.Properties.ContainsKey("LocAgr") && (bool)Application.Current.Properties["LocAgr"])
+                            if (await api.isPasswordCorrect(enc_password))
                             {
-                                AllSections.Contents = await LoadSections();
-                                throw new Exception("1");
-                            }
+                                Application.Current.Properties["password"] = enc_password;
+                                if (Application.Current.Properties.ContainsKey("LocAgr") && (bool)Application.Current.Properties["LocAgr"])
+                                {
+                                    AllSections.Contents = await LoadSections();
+                                    throw new Exception("1");
+                                }
 
+                                else
+                                    throw new Exception("2");
+                            }
                             else
-                                throw new Exception("2");
+                            {
+                                throw new Exception("Incorrect");
+                            }
                         }
-                        else
+                        catch(Exception ex)
                         {
-                            throw new Exception("Incorrect");
+                            Device.BeginInvokeOnMainThread(() => { DisplayAlert(AppReses.LangResources.Warning, "The server is currently unavailable. " + ex.Message, "OK"); });
                         }
                     });
 

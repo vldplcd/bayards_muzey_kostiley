@@ -16,7 +16,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Padding="10">
                                     <Label TextColor="{StaticResource myPrimaryColor}" HorizontalOptions="Fill" MinimumHeightRequest="40" Text="{Binding Title}" VerticalOptions="CenterAndExpand" 
                                        VerticalTextAlignment="Center" HorizontalTextAlignment="Start" FontSize="Medium" LineBreakMode="TailTruncation"></Label>
                                 </StackLayout>

@@ -87,7 +87,7 @@ namespace BayardsSafetyApp
                 IconSource = "Icons/ic_home_bayards.png",
                 TargetType = typeof(Sections)
             });
-            if (Device.RuntimePlatform == Device.iOS)
+            if (Device.RuntimePlatform == Device.iOS) //|| Device.RuntimePlatform == Device.Android)
                 masterPageItems.Add(new MasterPageItem
                 {
                     Title = "Locations",
@@ -112,7 +112,7 @@ namespace BayardsSafetyApp
                 //IconSource = ImageSource.FromResource("BayardsSafetyApp.Icons.ic_home_bayards.png").GetValue(UriImageSource.UriProperty).ToString(),
             TargetType = typeof(Sections)
             });
-            if (Device.RuntimePlatform == Device.iOS)
+            if (Device.RuntimePlatform == Device.iOS) //|| Device.RuntimePlatform == Device.Android)
                 masterPageItems.Add(new MasterPageItem
                 {
                     Title = "Locations",

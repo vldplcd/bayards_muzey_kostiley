@@ -22,19 +22,37 @@ namespace BayardsSafetyApp
             {
                 if (api.CheckInternetConnection()) //checking connection then loading page according to updates and password state
                 {
-                    if (!Current.Properties.ContainsKey("UpdateTime") ||
+                    try
+                    {
+                        if (!Current.Properties.ContainsKey("UpdateTime") ||
                         !(Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")) ||
                             api.isUpdataNeeded((DateTime)Application.Current.Properties["UpdateTime"]).Result)
-                    {
-                        if (api.isPasswordCorrect((string)Current.Properties["password"]).Result)
-                            pageToStart = new NavigationPage(new LoadingDataPage());
+                        {
+                            if (api.isPasswordCorrect((string)Current.Properties["password"]).Result)
+                                pageToStart = new NavigationPage(new LoadingDataPage());
+                            else
+                                pageToStart = new NavigationPage(new MainPage());
+                        }
                         else
-                            pageToStart = new NavigationPage(new MainPage());
+                        {
+                            var mp = GetMasterPage();
+
+                            mp.Detail = new NavigationPage(new Sections
+                            {
+                                ParentSection = "null"
+                            })
+                            {
+                                BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+                                BarTextColor = Color.White
+                            };
+                            isWithoutLoad = true;
+                            pageToStart = mp;
+                        }
                     }
-                    else
+                    catch(Exception ex)
                     {
                         var mp = GetMasterPage();
-                        
+
                         mp.Detail = new NavigationPage(new Sections
                         {
                             ParentSection = "null"
@@ -46,6 +64,7 @@ namespace BayardsSafetyApp
                         isWithoutLoad = true;
                         pageToStart = mp;
                     }
+                    
 
                 }
                 else if ((Current.Properties.ContainsKey("AllSections") && Application.Current.Properties.ContainsKey("AllRisks")))
