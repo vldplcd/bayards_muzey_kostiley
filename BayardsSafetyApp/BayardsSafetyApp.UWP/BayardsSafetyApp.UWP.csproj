@@ -107,6 +107,10 @@
     <None Include="BayardsSafetyApp.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ic_exit_to_bayards.png" />
+    <Content Include="ic_home_bayards.png" />
+    <Content Include="ic_map_bayards.png" />
+    <Content Include="ic_settings_bayards.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -131,7 +135,7 @@
       <Version>1.1.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.2.3</Version>
+      <Version>5.3.3</Version>
     </PackageReference>
     <PackageReference Include="PCLStorage">
       <Version>1.0.2</Version>

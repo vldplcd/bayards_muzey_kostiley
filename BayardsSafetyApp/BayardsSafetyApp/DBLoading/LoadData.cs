@@ -1,13 +1,10 @@
 ﻿using BayardsSafetyApp.DTO;
 using BayardsSafetyApp.Entities;
 using PCLStorage;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -191,7 +188,7 @@ namespace BayardsSafetyApp.DBLoading
             var sectIds = new List<string>();
             foreach (var lang in _langs)
             {
-                var temp_s = _api.getCompleteSectionsList(lang).Result;
+                var temp_s = _api.getCompleteSectionsList(lang);
                 if (temp_s.Count != 0)
                 {
                     foreach (var s in temp_s)
@@ -222,7 +219,7 @@ namespace BayardsSafetyApp.DBLoading
 
         private async Task AllSectionContent(string sectId)
         {
-            var temp_sc = await _api.getSectionContent(sectId, "eng");
+            var temp_sc = _api.getSectionContent(sectId, "eng");
             var sectIds = new List<string>();
             var temp_risks = new List<Risk>();
             var temp_risk = new Risk();
@@ -232,7 +229,7 @@ namespace BayardsSafetyApp.DBLoading
                 foreach (var lang in _langs)
                 {
                     temp_risk = new Risk();
-                    temp_risk = await GetRisk(r.Id_r, lang, sectId);
+                    temp_risk = GetRisk(r.Id_r, lang, sectId);
                     if (temp_risk != null)
                     {
                         temp_risks.Add(temp_risk);
@@ -246,7 +243,7 @@ namespace BayardsSafetyApp.DBLoading
 
             foreach (var lang in _langs)
             {
-                var temp_subs = (await _api.getSectionContent(sectId, lang)).Subsections;
+                var temp_subs = (_api.getSectionContent(sectId, lang)).Subsections;
                 if (temp_subs.Count != 0)
                 {
                     foreach (var s in temp_subs)
@@ -268,10 +265,10 @@ namespace BayardsSafetyApp.DBLoading
 
         }
 
-        private async Task<Risk> GetRisk(string rId, string lang, string sectId)
+        private Risk GetRisk(string rId, string lang, string sectId)
         {
-            
-            var temp_risk = await _api.getRiskContent(rId, lang);
+
+            var temp_risk = _api.getRiskContent(rId, lang);
             if (temp_risk != null)
             {
                 temp_risk.Lang = lang;

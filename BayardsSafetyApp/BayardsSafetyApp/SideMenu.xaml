@@ -15,12 +15,9 @@
                 <ListView x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None" ItemSelected="listView_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Padding="10">
-                                    <Label TextColor="{StaticResource myPrimaryColor}" HorizontalOptions="Fill" MinimumHeightRequest="40" Text="{Binding Title}" VerticalOptions="CenterAndExpand" 
-                                       VerticalTextAlignment="Center" HorizontalTextAlignment="Start" FontSize="Medium" LineBreakMode="TailTruncation"></Label>
-                                </StackLayout>
-                            </ViewCell>
+
+                            <ImageCell Text="{Binding Title}" TextColor="{StaticResource myPrimaryColor}" ImageSource="{Binding IconSource}" />
+
                         </DataTemplate>
                     </ListView.ItemTemplate>,
                 </ListView>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using BayardsSafetyApp.Entities;
 using System.Net.Http;
@@ -64,7 +63,7 @@ namespace BayardsSafetyApp
         /// Method that gets the complete list of sections; language is specified with language variable
         /// </summary>
         /// <returns>List of sections</returns>
-        public async Task<List<Section>> getCompleteSectionsList(string language)
+        public List<Section> getCompleteSectionsList(string language)
         {
             string requestUri = String.Format(UriSectionsListTemplate, Host, language);
             List<Section> result;
@@ -121,7 +120,7 @@ namespace BayardsSafetyApp
         /// </summary>
         /// <param name="section"></param>
         /// <returns></returns> 
-        public async Task<SectionContents> getSectionContent(string Id, string language)
+        public SectionContents getSectionContent(string Id, string language)
         {
             SectionContents result;
             string requestUri = String.Format(UriSectionContent, Host, Id, language);
@@ -182,7 +181,7 @@ namespace BayardsSafetyApp
         /// </summary>
         /// <param name="risk"></param>
         /// <returns>List of all links with risk data</returns>
-        public async Task<Risk> getRiskContent(string Id, string language)
+        public Risk getRiskContent(string Id, string language)
         {
             Risk result;
             string requestUri = string.Format(UriRiskContent, Host, Id, language);

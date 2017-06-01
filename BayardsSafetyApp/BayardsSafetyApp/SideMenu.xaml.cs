@@ -1,9 +1,5 @@
-﻿using BayardsSafetyApp.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +9,7 @@ namespace BayardsSafetyApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SideMenu : ContentPage
     {
+
         public NavigationPage baseSections = new NavigationPage((new Sections
                         {
                            ParentSection = "null"
@@ -84,20 +81,20 @@ namespace BayardsSafetyApp
             masterPageItems.Add(new MasterPageItem //Setting elements
             {
                 Title = AppReses.LangResources.Contents,
-                IconSource = "Icons/ic_home_bayards.png",
+                IconSource = "ic_home_bayards.png",
                 TargetType = typeof(Sections)
-            });
+            });         
             if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
                 masterPageItems.Add(new MasterPageItem
                 {
-                    Title = "Locations",
-                    //IconSource = "map.png",
+                    Title = AppReses.LangResources.Locations,
+                    IconSource = "ic_map_bayards.png",
                     TargetType = typeof(MapPage)
                 });
             masterPageItems.Add(new MasterPageItem
             {
                 Title = AppReses.LangResources.Settings,
-                //IconSource = "settings.png",
+                IconSource = "ic_settings_bayards.png",
                 TargetType = typeof(SettingsPage)
             });
 
@@ -106,23 +103,24 @@ namespace BayardsSafetyApp
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
             var masterPageItems = new List<MasterPageItem>();
+
             masterPageItems.Add(new MasterPageItem //Setting elements
             {
                 Title = AppReses.LangResources.Contents,
-                //IconSource = ImageSource.FromResource("BayardsSafetyApp.Icons.ic_home_bayards.png").GetValue(UriImageSource.UriProperty).ToString(),
-            TargetType = typeof(Sections)
+                IconSource = "ic_home_bayards.png",
+                TargetType = typeof(Sections)
             });
             if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android)
                 masterPageItems.Add(new MasterPageItem
                 {
-                    Title = "Locations",
-                    //IconSource = "map.png",
+                    Title = AppReses.LangResources.Locations,
+                    IconSource = "ic_map_bayards.png",
                     TargetType = typeof(MapPage)
                 });
             masterPageItems.Add(new MasterPageItem
             {
                 Title = AppReses.LangResources.Settings,
-                //IconSource = "settings.png",
+                IconSource = "ic_settings_bayards.png",
                 TargetType = typeof(SettingsPage)
             });
 

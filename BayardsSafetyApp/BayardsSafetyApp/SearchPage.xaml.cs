@@ -26,7 +26,7 @@ namespace BayardsSafetyApp
             set { _searchedText = value; SearchCommandExecute(); }
         }
         List<Risk> foundRisks;
-        List<Section> foundSections;
+        //List<Section> foundSections;
         private void SearchCommandExecute()
         {
             foundRisks = Utils.DeserializeFromJson<List<Risk>>((string)Application.Current.Properties["AllRisks"]).FindAll(i => i.Name.ToLower().Contains(SearchedText.ToLower()));
@@ -50,7 +50,7 @@ namespace BayardsSafetyApp
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
             API api = new API();
-            var rToDisp = api.getRiskContent(((Risk)e.SelectedItem).Id_r, AppReses.LangResources.Language).Result;
+            var rToDisp = api.getRiskContent(((Risk)e.SelectedItem).Id_r, AppReses.LangResources.Language);
             found.Found = new RiskDetails(rToDisp);
             Device.BeginInvokeOnMainThread(() => {
                 Navigation.PopModalAsync();

@@ -165,6 +165,9 @@
   <data name="LocaleLabel" xml:space="preserve">
     <value>Kies alstublieft een taal:</value>
   </data>
+  <data name="Locations" xml:space="preserve">
+    <value>locaties</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Log uit</value>
   </data>

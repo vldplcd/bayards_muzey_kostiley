@@ -1,7 +1,6 @@
 ﻿using BayardsSafetyApp.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 //using Android.Media;
 using Xamarin.Forms;
@@ -34,11 +33,11 @@ namespace BayardsSafetyApp
             var AllSections = new Sections();
             try
             {
-                await Task.Run(async () =>
+                await Task.Run(() =>
                 {
 
                     var api = new API();
-                    AllSections.Contents = await LoadSections();
+                    AllSections.Contents = LoadSections();
                     throw new Exception("1");
                 });
 
@@ -62,18 +61,18 @@ namespace BayardsSafetyApp
             ContinueButton.IsEnabled = true;
         }
 
-        private async Task<List<Section>> LoadSections()
+        private List<Section> LoadSections()
         {
             List<Section> contents = new List<Section>();
             if (!Application.Current.Properties.ContainsKey("UpdateTime") || (Application.Current.Properties.ContainsKey("UpdateTime") &&
                 (DateTime)Application.Current.Properties["UpdateTime"] < DateTime.MaxValue))
             {
-                
-                    throw new Exception("3");
+
+                throw new Exception("3");
             }
             else
             {
-                    throw new Exception("3");
+                throw new Exception("3");
             }
         }
 

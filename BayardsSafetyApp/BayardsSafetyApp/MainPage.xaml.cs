@@ -53,7 +53,7 @@ namespace BayardsSafetyApp
                                 Application.Current.Properties["password"] = enc_password;
                                 if (Application.Current.Properties.ContainsKey("LocAgr") && (bool)Application.Current.Properties["LocAgr"])
                                 {
-                                    AllSections.Contents = await LoadSections();
+                                    AllSections.Contents = LoadSections();
                                     throw new Exception("1");
                                 }
 
@@ -126,7 +126,7 @@ namespace BayardsSafetyApp
             ContinueButton_Clicked(sender, e);
         }
 
-        private async Task<List<Section>> LoadSections()
+        private List<Section> LoadSections()
         {
             API api = new API();
             List<Section> contents = new List<Section>();
@@ -138,9 +138,6 @@ namespace BayardsSafetyApp
             }
             else
             {
-                //contents = App.Database.SectionDatabase.GetItems<Section>().ToList().FindAll(s => s.Parent_s == "null"
-                //                                                                        && s.Lang == AppResources.LangResources.Language).
-                //                                                                        OrderBy(s => s.Name).ToList();
                 contents = Utils.DeserializeFromJson<List<Section>>((string)Application.Current.Properties["AllSections"]).
                     FindAll(s => s.Parent_s == "null" && s.Lang == AppReses.LangResources.Language).OrderBy(s => s.Order).ThenBy(s => s.Name).ToList();
             }

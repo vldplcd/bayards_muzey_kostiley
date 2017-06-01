@@ -1,8 +1,5 @@
-﻿using BayardsSafetyApp.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace BayardsSafetyApp
@@ -10,9 +7,6 @@ namespace BayardsSafetyApp
     //This code is done when the app starts
     public partial class App : Application
     {
-        private static DataBaseUOW _database;
-        public static DataBaseUOW Database => _database ?? (_database = new DataBaseUOW());
-        
         public App()
         {
             InitializeComponent();
@@ -55,7 +49,7 @@ namespace BayardsSafetyApp
                             pageToStart = mp;
                         }
                     }
-                    catch(Exception ex)
+                    catch(Exception)
                     {
                         var mp = GetMasterPage();
 

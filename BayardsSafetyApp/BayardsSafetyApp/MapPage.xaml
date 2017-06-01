@@ -36,9 +36,66 @@
                  Spacing="10"
                  Padding="10"
                  HorizontalOptions="Center">
-      <Button x:Name="ButtonStreet" Text="Street" Clicked="OnStreetClicked"/>
-      <Button x:Name="ButtonHybrid" Text="Hybrid" Clicked="OnHybridClicked"/>
-      <Button x:Name="ButtonSatellite" Text="Satellite" Clicked="OnSatelliteClicked"/>
+      <Button x:Name="ButtonStreet" Text="Street" Clicked="OnStreetClicked"
+              HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
+              TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1">
+                <Button.BorderRadius>
+                    10
+                </Button.BorderRadius>
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            10
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            0, 0, 0, 0
+                        </OnPlatform.Android>
+                        <OnPlatform.WinPhone>
+                            10
+                        </OnPlatform.WinPhone>
+                    </OnPlatform>
+                </Button.Margin>
+            </Button>
+            <Button x:Name="ButtonHybrid" Text="Hybrid" Clicked="OnHybridClicked"
+              HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
+              TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1">
+                <Button.BorderRadius>
+                    10
+                </Button.BorderRadius>
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            10
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            0, 0, 0, 0
+                        </OnPlatform.Android>
+                        <OnPlatform.WinPhone>
+                            10
+                        </OnPlatform.WinPhone>
+                    </OnPlatform>
+                </Button.Margin>
+            </Button>
+      <Button x:Name="ButtonSatellite" Text="Satellite" Clicked="OnSatelliteClicked"
+              HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
+              TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1">
+                <Button.BorderRadius>
+                    10
+                </Button.BorderRadius>
+                <Button.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.iOS>
+                            10
+                        </OnPlatform.iOS>
+                        <OnPlatform.Android>
+                            0, 0, 0, 0
+                        </OnPlatform.Android>
+                        <OnPlatform.WinPhone>
+                            10
+                        </OnPlatform.WinPhone>
+                    </OnPlatform>
+                </Button.Margin>
+            </Button>
         </StackLayout>
   </Grid>
 </ContentPage>

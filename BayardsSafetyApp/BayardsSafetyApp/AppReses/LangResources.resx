@@ -228,4 +228,7 @@
   <data name="CheckUpd" xml:space="preserve">
     <value>Check update</value>
   </data>
+  <data name="Locations" xml:space="preserve">
+    <value>Locations</value>
+  </data>
 </root>

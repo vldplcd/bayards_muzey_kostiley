@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BayardsSafetyApp
 {
     //This class is used to encode password in MD5
-    
-        public class MD5CryptoServiceProvider : MD5
+
+    public class MD5CryptoServiceProvider : MD5
         {
             public MD5CryptoServiceProvider()
                 : base()
