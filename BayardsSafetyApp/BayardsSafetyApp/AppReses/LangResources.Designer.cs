@@ -377,7 +377,7 @@ namespace BayardsSafetyApp.AppReses {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на I.
+        ///   Ищет локализованную строку, похожую на Cannot load data.
         /// </summary>
         internal static string UserAgreementText {
             get {

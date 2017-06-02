@@ -86,7 +86,7 @@ namespace BayardsSafetyApp
                 else
                 {
                     DisplayAlert(AppReses.LangResources.Warning, "Cannot load user agreement. The internet connection is required.  Returning to the first screen", "OK");
-                    App.Current.MainPage = new MainPage();
+                    //App.Current.MainPage = new MainPage();
                 }
             }
             catch(Exception ex)

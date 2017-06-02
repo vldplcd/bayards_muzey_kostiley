@@ -26,9 +26,6 @@ namespace BayardsSafetyApp
         }
         //links to API methods
         const string UriGetAll = "{0}/api/getAll?apiKey={1}&lang={2}"; //main method. It gets all the information from the server that is used inside the app. (GET)
-        const string UriSectionsListTemplate = "{0}/api/allSections?lang={1}"; // gets all the main sections (GET)
-        const string UriSectionContent = "{0}/api/section?sectionid={1}&lang={2}"; // gets section content (GET)
-        const string UriRiskContent = "{0}/api/risk?riskid={1}&lang={2}"; // gets risk content (GET)
         const string UriUpdateTime = "{0}/api/getUpdateDate"; // gets the time when the server was updated (GET)
         const string UriCheckPassword = "{0}/api/checkPassword"; //checks the password encoded in md5 (POST)
         const string UriGetUsrAgr = "{0}/api/getUserAgreement?apiKey={1}&lang={2}";
@@ -60,42 +57,6 @@ namespace BayardsSafetyApp
         }
 
         /// <summary>
-        /// Method that gets the complete list of sections; language is specified with language variable
-        /// </summary>
-        /// <returns>List of sections</returns>
-        public List<Section> getCompleteSectionsList(string language)
-        {
-            string requestUri = String.Format(UriSectionsListTemplate, Host, language);
-            List<Section> result;
-            int n = 0;
-            while (n < 4)
-            {
-                try
-                {
-
-                    using (HttpClient hc = new HttpClient() { Timeout = new TimeSpan(0, 0, 10) })
-                    {
-                        var responseMsg = hc.GetAsync(requestUri).Result;
-                        var resultStr = responseMsg.Content.ReadAsStringAsync().Result;
-                        var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Sections = new List<Section>() });
-                        //result = JsonConvert.DeserializeObject<ShellRequest<Section>>(resultStr).Data;
-                        result = res.Sections;
-                        if (result.Count == 0 || result[0].Id_s == null)
-                            throw new Exception("No info downloaded.");
-                    }
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    n++;
-                    if (n == 4)
-                        throw ex;
-                }
-            }
-            return null;
-
-        }
-        /// <summary>
         /// Method that checks if it is needed to download data
         /// </summary>
         /// <returns>Returns true if connection Update is needed else returns false</returns>
@@ -114,42 +75,6 @@ namespace BayardsSafetyApp
                 return true;
             return false;
         }
-
-        /// <summary>
-        /// Method that gets the list of all risks and subsections from specified section by id and language
-        /// </summary>
-        /// <param name="section"></param>
-        /// <returns></returns> 
-        public SectionContents getSectionContent(string Id, string language)
-        {
-            SectionContents result;
-            string requestUri = String.Format(UriSectionContent, Host, Id, language);
-            int n = 0;
-            while (n < 4)
-            {
-                try
-                {
-                    using (HttpClient hc = new HttpClient())
-                    {
-                        var responseMsg = hc.GetAsync(requestUri).Result;
-                        var resultStr = responseMsg.Content.ReadAsStringAsync().Result;
-                        result = JsonConvert.DeserializeObject<SectionContents>(resultStr);
-                        if (result.Section == null)
-                            throw new Exception("No info downloaded. Trying to retry");
-                    }
-                    return result;
-                }
-
-                catch (Exception ex)
-                {
-                    n++;
-                    if (n == 4)
-                        throw ex;
-                }
-            }
-            return null;
-        }
-
 
         /// <summary>
         /// Method that sends password to the server
@@ -176,45 +101,7 @@ namespace BayardsSafetyApp
             return flag == 1;
 
         }
-        /// <summary>
-        /// Method that gets all data to the specified risk by id and lang
-        /// </summary>
-        /// <param name="risk"></param>
-        /// <returns>List of all links with risk data</returns>
-        public Risk getRiskContent(string Id, string language)
-        {
-            Risk result;
-            string requestUri = string.Format(UriRiskContent, Host, Id, language);
-            int n = 0;
-            while (n < 4)
-            {
-                try
-                {
-                    using (HttpClient hc = new HttpClient())
-                    {
-                        var responseMsg = hc.GetAsync(requestUri).Result;
-                        var resultStr = responseMsg.Content.ReadAsStringAsync().Result;
-                        var res = JsonConvert.DeserializeAnonymousType(resultStr, new { Risk = new Risk(), Media = new List<Media>() });
-                        var temp_media = new List<Media>();
-                        foreach (var m in res.Media)
-                            temp_media.Add(new Media { Id_r = m.Id_r, Lang = m.Lang, Type = m.Type, Url = string.Format(UriImagePath, Host, m.Url) });
-                        res.Risk.Media = temp_media;
-                        result = res.Risk;
-                        if (result.Id_r == null)
-                            throw new Exception("No info downloaded. Trying to retry");
-                    }
-                    return result;
-                }
 
-                catch (Exception ex)
-                {
-                    n++;
-                    if (n == 4)
-                        throw ex;
-                }
-            }
-            return null;
-        }
         /// <summary>
         /// Method that gets all data
         /// </summary>
