@@ -45,7 +45,7 @@ namespace BayardsSafetyApp
                 {
                     await Task.Run(async () =>
                     {
-                        var enc_password = MD5.GetMd5String(PasswordEntry.Text).Substring(0, 16);
+                        var enc_password = MD5.GetMd5String(PasswordEntry.Text).Substring(0, 32);
                         try
                         {
                             if (await api.isPasswordCorrect(enc_password))

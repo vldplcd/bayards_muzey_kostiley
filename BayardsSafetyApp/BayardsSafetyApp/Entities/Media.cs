@@ -11,6 +11,7 @@ namespace BayardsSafetyApp.Entities
         public string Type { get; set; }
         public string Lang { get; set; }
         public string Id_r { get; set; }
+        public string Text { get; set; }
         public double Width { get; set; }
     }
 }

@@ -126,8 +126,9 @@ namespace BayardsSafetyApp.DBLoading
                         UrlToSave = SaveImage(m.Url).Result;
                     else
                         UrlToSave = m.Url;
+                    
 
-                    mediaL.Add(new Media { Lang = Lang, Id_r = r.Id_r, Url = UrlToSave, Type = m.Type });                    
+                    mediaL.Add(new Media { Lang = Lang, Id_r = r.Id_r, Url = UrlToSave, Type = m.Type, Text = m.Text });                    
                 }
                     
             }

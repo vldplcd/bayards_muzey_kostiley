@@ -47,10 +47,15 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                                        <Image Aspect="AspectFit" Margin="5" Source="{Binding Url}" WidthRequest="{Binding Width}">
-                                        </Image>
-                                    </StackLayout>
+                                    <Grid>
+                                      <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                      </Grid.RowDefinitions>
+                                      <Image Grid.Row="0" Aspect="AspectFit" Margin="5" Source="{Binding Url}" HorizontalOptions="CenterAndExpand" WidthRequest="{Binding Width}">
+                                      </Image>
+                                      <Label Grid.Row="1" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="{Binding Text}"/>
+                                    </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -66,7 +71,7 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal" MinimumHeightRequest="50" HorizontalOptions="CenterAndExpand">
-                                        <Button  Clicked="Button_Clicked" Margin="5" Text="{Binding Url}" CommandParameter="{Binding Url}"
+                                        <Button  Clicked="Button_Clicked" Margin="5" Text="{Binding Text}" CommandParameter="{Binding Url}"
                                         HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="White"
                                         TextColor="{StaticResource myPrimaryColor}" BorderColor="{StaticResource myPrimaryColor}" BorderWidth="1"/>
                                     </StackLayout>
