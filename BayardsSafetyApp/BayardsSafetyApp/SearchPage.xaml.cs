@@ -49,8 +49,7 @@ namespace BayardsSafetyApp
             {
                 return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
             }
-            API api = new API();
-            var rToDisp = api.getRiskContent(((Risk)e.SelectedItem).Id_r, AppReses.LangResources.Language);
+            var rToDisp = (Risk)e.SelectedItem;
             found.Found = new RiskDetails(rToDisp);
             Device.BeginInvokeOnMainThread(() => {
                 Navigation.PopModalAsync();
