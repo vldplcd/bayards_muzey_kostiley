@@ -13,7 +13,7 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
       <RowDefinition Height="*"/>
-      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="0"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
     
@@ -23,13 +23,6 @@
       x:Name="MyMap"
       IsShowingUser="true"
       MapType="Street"/>
-    <Slider x:Name="SliderZoom" 
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Maximum="18.0" 
-            Minimum="1.0" 
-            Value="1.0"
-            ValueChanged="OnSliderChanged" />
     <StackLayout Grid.Row="3"
                  Grid.ColumnSpan="2"
                  Orientation="Horizontal" 

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BayardsSafetyApp.LocationsPage"
+             Appearing="ContentPage_Appearing"
+             BackgroundColor="#c7cedb">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <ActivityIndicator
+                           IsVisible= "{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}" Grid.Row ="1" Grid.Column ="1" HorizontalOptions="StartAndExpand"/>
+            <ListView x:Name ="locView"  HasUnevenRows="True" HeightRequest="-1" BackgroundColor="Transparent" SeparatorVisibility="None"
+                       Grid.Row="1" Grid.Column="1" ItemSelected="SectionButton_Clicked">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                                <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="White" Spacing="20" >
+                                    <Label BackgroundColor="White" TextColor="{StaticResource myPrimaryColor}" Text="{Binding Name}" VerticalOptions="FillAndExpand"
+                                    HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"></Label>
+                                    <Label BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" Text="{Binding Content}"/>
+                                    <BoxView Color="White" HeightRequest="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                                </StackLayout>                               
+                                <BoxView Color="Transparent" HeightRequest="30" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                            <!--<Grid BackgroundColor="White" Margin="5" Padding="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" TextColor="{StaticResource myPrimaryColor}" Text="{Binding Name}" VerticalOptions="CenterAndExpand" 
+                                       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"></Label>
+                                <Label Grid.Row="1" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="{Binding Content}"/>
+                            </Grid>-->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

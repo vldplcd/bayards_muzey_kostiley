@@ -23,15 +23,12 @@ namespace BayardsSafetyApp
             BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
             BarTextColor = Color.White
         };
-        public NavigationPage baseMap = new NavigationPage((new MapPage()))
-        {
-            BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
-            BarTextColor = Color.White
-        };
+        public NavigationPage baseMap;
         public SideMenu() //Side menu page
         {
             InitializeComponent();
             Title = AppReses.LangResources.Menu;
+            baseMap = TabbedMapPage();
 
         }
 
@@ -125,6 +122,18 @@ namespace BayardsSafetyApp
             });
 
             listView.ItemsSource = masterPageItems;
+        }
+
+        private NavigationPage TabbedMapPage()
+        {
+            var locTabPage = new TabbedPage() { Title = "" };
+            locTabPage.Children.Add(new MapPage());
+            locTabPage.Children.Add(new LocationsPage());
+            return new NavigationPage(locTabPage)
+            {
+                BarBackgroundColor = (Color)Application.Current.Resources["myPrimaryColor"],
+                BarTextColor = Color.White
+            };
         }
     }
     public class MasterPageItem //Class to describe the element in the side menu

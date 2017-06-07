@@ -31,7 +31,7 @@ namespace BayardsSafetyApp
                     Type = PinType.Generic
                 });
             }
-            var zoomLevel = SliderZoom.Value; // between 1 and 18
+            var zoomLevel = 0; // between 1 and 18
             var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
             if (_locations.Count != 0)
                 MyMap.MoveToRegion(new MapSpan(new Position(_locations[0].Latitude, _locations[0].Longitude), latlongdegrees, latlongdegrees));
@@ -66,7 +66,12 @@ namespace BayardsSafetyApp
             var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
             MyMap.MoveToRegion(new MapSpan(MyMap.VisibleRegion.Center, latlongdegrees, latlongdegrees));
         }
-
+        public void FocusOn(Location loc)
+        {
+            var zoomLevel = 9; // between 1 and 18
+            var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
+            MyMap.MoveToRegion(new MapSpan(new Position(loc.Latitude, loc.Longitude), latlongdegrees, latlongdegrees));
+        }
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
             foreach (var loc in _locations)
@@ -78,10 +83,6 @@ namespace BayardsSafetyApp
                     Type = PinType.Generic
                 });
             }
-            var zoomLevel = SliderZoom.Value; // between 1 and 18
-            var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
-            if (_locations.Count != 0)
-                MyMap.MoveToRegion(new MapSpan(new Position(_locations[0].Latitude, _locations[0].Longitude), latlongdegrees, latlongdegrees));
         }
     }
 }
