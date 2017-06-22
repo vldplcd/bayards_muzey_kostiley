@@ -32,7 +32,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black"></Label>
+                                <Label Text="{Binding Name}" HeightRequest="40" VerticalOptions="CenterAndExpand" FontSize="Medium" TextColor="Black" LineBreakMode="TailTruncation"></Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
